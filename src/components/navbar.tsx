@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { Button } from "./ui/button";
+import { Button } from "@/components/ui/button";
 
 const NavBar = () => (
   <header className="w-full fixed top-0 z-10">
@@ -18,7 +18,7 @@ const NavBar = () => (
               />
             </div>
           </Link>
-          <Button>Login</Button>
+          <Button size="lg">Login</Button>
         </div>
       </div>
     </nav>
