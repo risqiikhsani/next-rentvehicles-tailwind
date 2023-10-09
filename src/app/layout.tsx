@@ -22,7 +22,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <Navbar />
-        <main className="container mx-auto mt-16 p-4 flex">
+        <main className="container mx-auto mt-16 flex">
           {children}
         </main>
         <Footer />
