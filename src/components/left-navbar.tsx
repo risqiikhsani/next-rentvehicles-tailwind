@@ -1,22 +1,26 @@
 import Link from "next/link";
 import React from "react";
 import { StarIcon } from '@heroicons/react/24/solid';
+import { HomeIcon } from "@heroicons/react/24/solid";
+import { ShoppingCartIcon } from "@heroicons/react/24/solid";
+import { DocumentCheckIcon } from "@heroicons/react/24/solid";
+import { Separator } from "./ui/separator";
 
 const basic_urls = [
   {
     text: "Home",
     url: "/",
-    icon: StarIcon, // Specify the Heroicon component
+    icon: HomeIcon, // Specify the Heroicon component
   },
   {
     text: "My Rents History",
     url: "/rents",
-    icon: StarIcon, // Specify the Heroicon component
+    icon: ShoppingCartIcon, // Specify the Heroicon component
   },
   {
     text: "My Bookings History",
     url: "/bookings",
-    icon: StarIcon, // Specify the Heroicon component
+    icon: DocumentCheckIcon, // Specify the Heroicon component
   },
   {
     text: "Favorite",
@@ -27,18 +31,21 @@ const basic_urls = [
 
 const LeftNavBar = () => {
   return (
-    <nav className="top-20 left-0 bg-gray-800 w-64 text-white sticky h-screen">
+    <nav className="top-20 left-0 bg-slate-200 w-64 sticky h-screen">
       <ul className="py-4">
         {basic_urls.map((a) => {
           const Icon = a.icon; // Extract the icon component
           return (
+            <>
             <li
               key={a.text}
-              className="px-4 py-2 hover:bg-gray-700 m-4 rounded-lg hover:cursor-pointer flex items-center"
+              className="px-4 py-2 hover:bg-cyan-500 m-4 rounded-lg hover:cursor-pointer flex items-center"
             >
               {Icon && <Icon className="w-5 h-5 mr-2" />} {/* Render the icon if available */}
               <Link href={a.url}>{a.text}</Link>
             </li>
+            <Separator className="w-40 mx-auto bg-slate-800"/>
+            </>
           );
         })}
       </ul>
