@@ -18,7 +18,7 @@ const NavBar = () => (
               />
             </div>
           </Link>
-          <Button size="lg">Login</Button>
+          <Button size="lg" asChild><Link href="/auth/login">Login</Link></Button>
         </div>
       </div>
     </nav>
