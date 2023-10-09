@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 
 const NavBar = () => (
   <header className="w-full fixed top-0 z-10">
-    <nav className="w-full bg-cyan-500">
+    <nav className="w-full bg-white bg-opacity-90">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         <div className="flex justify-between items-center py-4">
           <Link href="/">

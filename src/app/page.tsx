@@ -5,8 +5,11 @@ import Link from 'next/link'
 
 export default function Home() {
   return (
-    <div className='overflow-hidden p-5'>
-      <h2>testtesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttest</h2>
+    <div>
+      <p>kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing 
+      kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing 
+      kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing 
+      </p>
       <Button size="sm">Kucing</Button>
       <Link href="/homepage" className={buttonVariants({ variant: "outline" })}>Click here</Link>
       <Badge variant="outline">Badge</Badge>
