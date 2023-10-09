@@ -128,7 +128,42 @@
   @apply absolute xl:-top-24 xl:-right-1/2 -right-1/4 bg-repeat-round -z-10 w-full xl:h-screen h-[590px] overflow-hidden;
   background-image: url('/hero-bg.png')
 }
+
 /* END: Hero styles */
+
+/* START: Hero styles */
+.hero2 {
+  @apply flex xl:flex-row-reverse flex-col gap-5 relative z-0 max-w-[1440px] mx-auto;
+  /* Use xl:flex-row-reverse to reverse the order of columns on extra-large screens */
+}
+
+.hero__title2 {
+  @apply 2xl:text-[72px] sm:text-[64px] text-[50px] font-extrabold;
+  /* Keep the title styles as they are */
+}
+
+.hero__subtitle2 {
+  @apply text-[27px] text-black font-light mt-5;
+  /* Keep the subtitle styles as they are */
+}
+
+.hero__image-container2 {
+  @apply xl:flex-[1.5] flex justify-start items-end w-full xl:h-screen;
+  /* Use justify-start to align the image to the left on extra-large screens */
+}
+
+.hero__image2 {
+  @apply relative xl:w-full w-[90%] xl:h-full h-[590px] z-0;
+  /* Keep the image styles as they are */
+}
+
+.hero__image-overlay2 {
+  @apply absolute xl:-top-24 xl:-left-1/2 -left-1/4 bg-repeat-round -z-10 w-full xl:h-screen h-[590px] overflow-hidden;
+  background-image: url('/hero-bg2.png');
+  /* Use xl:-left-1/2 to adjust the position of the overlay on extra-large screens */
+}
+/* END: Hero styles */
+
 
 
 /* START: Home styles */
