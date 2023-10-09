@@ -20,6 +20,7 @@ import {
 } from "@/components/ui/select"
 import { Separator } from "@radix-ui/react-select"
 import Image from "next/image"
+import { HeartIcon } from "@heroicons/react/24/solid"
 
 export function CarCard() {
     return (
@@ -49,7 +50,9 @@ export function CarCard() {
                 <Image src="/car1.png" width={920} height={360} alt="car" />
             </CardContent>
             <CardFooter className="flex justify-between">
-                <Button variant="outline">Favorite</Button>
+                <Button variant="outline">
+                    <HeartIcon className="mr-2 h-4 w-4"/>
+                    Favorite</Button>
                 <Button>See Detail</Button>
             </CardFooter>
         </Card>

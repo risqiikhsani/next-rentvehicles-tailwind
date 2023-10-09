@@ -6,7 +6,7 @@
 /* Firefox */
 * {
   scrollbar-width: thin;
-  scrollbar-color: white cornflowerblue;
+  scrollbar-color: cornflowerblue white ;
   scrollbar-gutter: stable both-edges;
 }
 
