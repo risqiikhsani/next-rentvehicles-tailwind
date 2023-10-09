@@ -1,6 +1,6 @@
 import Link from "next/link";
 import React from "react";
-import { StarIcon } from '@heroicons/react/24/solid';
+import { StarIcon } from "@heroicons/react/24/solid";
 import { HomeIcon } from "@heroicons/react/24/solid";
 import { ShoppingCartIcon } from "@heroicons/react/24/solid";
 import { DocumentCheckIcon } from "@heroicons/react/24/solid";
@@ -33,19 +33,19 @@ const LeftNavBar = () => {
   return (
     <nav className="top-20 left-0 bg-slate-200 w-64 sticky h-screen">
       <ul className="py-4">
-        {basic_urls.map((a) => {
+        {basic_urls.map((a, index) => {
           const Icon = a.icon; // Extract the icon component
           return (
-            <>
             <li
               key={a.text}
               className="px-4 py-2 hover:bg-cyan-500 m-4 rounded-lg hover:cursor-pointer flex items-center"
             >
-              {Icon && <Icon className="w-5 h-5 mr-2" />} {/* Render the icon if available */}
-              <Link href={a.url}>{a.text}</Link>
+              {Icon && <Icon className="w-5 h-5 mr-2" />}{" "}
+              {/* Render the icon if available */}
+              <Link href={a.url} key={index}>
+                {a.text}
+              </Link>
             </li>
-            <Separator className="w-40 mx-auto bg-slate-800"/>
-            </>
           );
         })}
       </ul>
