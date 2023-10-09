@@ -1,7 +1,10 @@
-// export default function Layout({children}:{children:React.ReactNode}){
-//     return(
-//         <main>
+import LeftNavBar from "@/components/left-navbar";
 
-//         </main>
-//     )
-// }
+export default function Layout({children}:{children:React.ReactNode}){
+    return(
+        <>
+        <LeftNavBar />
+        {children}
+        </>
+    )
+}

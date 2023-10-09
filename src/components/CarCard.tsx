@@ -20,7 +20,7 @@ import {
 } from "@/components/ui/select"
 import { Separator } from "@radix-ui/react-select"
 import Image from "next/image"
-import { HeartIcon } from "@heroicons/react/24/solid"
+import { ArrowRightIcon, HeartIcon } from "@heroicons/react/24/solid"
 
 export function CarCard() {
     return (
@@ -34,15 +34,15 @@ export function CarCard() {
                         <CardDescription className="font-medium text-black">Sport</CardDescription>
                     </div>
                     <div className="flex flex-col justify-end">
-                    <div className="rounded-md my-1 p-1 bg-emerald-400">
-                        $50 / day
-                    </div>
-                    <div className="rounded-md my-1 p-1 bg-emerald-400">
-                        $300 / week
-                    </div>
-                    <div className="rounded-md my-1 p-1 bg-emerald-400">
-                        $1100 / month
-                    </div>
+                        <div className="rounded-md my-1 p-1 bg-emerald-400">
+                            $50 / day
+                        </div>
+                        <div className="rounded-md my-1 p-1 bg-emerald-400">
+                            $300 / week
+                        </div>
+                        <div className="rounded-md my-1 p-1 bg-emerald-400">
+                            $1100 / month
+                        </div>
                     </div>
                 </div>
             </CardHeader>
@@ -51,9 +51,11 @@ export function CarCard() {
             </CardContent>
             <CardFooter className="flex justify-between">
                 <Button variant="outline">
-                    <HeartIcon className="mr-2 h-4 w-4"/>
+                    <HeartIcon className="mr-2 h-4 w-4" />
                     Favorite</Button>
-                <Button>See Detail</Button>
+                <Button>
+                    See Detail
+                    <ArrowRightIcon className="ml-2 h-4 w-4" /></Button>
             </CardFooter>
         </Card>
     )
