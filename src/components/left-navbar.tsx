@@ -27,28 +27,31 @@ const basic_urls = [
     url: "/favorite",
     icon: StarIcon, // Specify the Heroicon component
   },
+
 ];
 
 const LeftNavBar = () => {
   return (
-    <nav className="top-20 left-0 bg-slate-200 w-64 sticky h-screen">
-      <ul className="py-4">
-        {basic_urls.map((a, index) => {
-          const Icon = a.icon; // Extract the icon component
-          return (
-            <li
-              key={a.text}
-              className="px-4 py-2 hover:bg-cyan-500 m-4 rounded-lg hover:cursor-pointer flex items-center"
-            >
-              {Icon && <Icon className="w-5 h-5 mr-2" />}{" "}
-              {/* Render the icon if available */}
-              <Link href={a.url} key={index}>
-                {a.text}
-              </Link>
-            </li>
-          );
-        })}
-      </ul>
+    <nav className="top-20 left-0 w-64 sticky h-screen">
+      <div className="overflow-y-auto h-screen">
+        <ul className="py-4">
+          {basic_urls.map((a, index) => {
+            const Icon = a.icon; // Extract the icon component
+            return (
+              <li
+                key={a.text}
+                className="px-4 py-2 hover:bg-cyan-500 m-4 rounded-md hover:cursor-pointer flex items-center"
+              >
+                {Icon && <Icon className="w-5 h-5 mr-2" />}{" "}
+                {/* Render the icon if available */}
+                <Link href={a.url} key={index}>
+                  {a.text}
+                </Link>
+              </li>
+            );
+          })}
+        </ul>
+      </div>
     </nav>
   );
 };

@@ -1,117 +1,81 @@
+import { CarCard } from '@/components/CarCard'
 import LeftNavBar from '@/components/left-navbar'
 import { Badge } from '@/components/ui/badge'
 import { Button, buttonVariants } from '@/components/ui/button'
 import Image from 'next/image'
 import Link from 'next/link'
+import { Input } from "@/components/ui/input"
+import { Label } from '@/components/ui/label'
+import { AdjustmentsHorizontalIcon } from '@heroicons/react/24/solid'
+
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
+import { Separator } from '@/components/ui/separator'
+
+
 
 export default function Home() {
   return (
     <>
-      <LeftNavBar/>
+      <LeftNavBar />
       <div className='flex-1 p-4'>
-      <p>kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing 
-      kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing 
-      kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing 
-      </p>
-      <p>kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing 
-      kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing 
-      kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing 
-      </p>
-      <p>kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing 
-      kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing 
-      kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing 
-      </p>
-      <p>kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing 
-      kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing 
-      kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing 
-      </p>
-      <p>kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing 
-      kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing 
-      kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing 
-      </p>
-      <p>kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing 
-      kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing 
-      kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing 
-      </p>
-      <p>kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing 
-      kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing 
-      kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing 
-      </p>
-      <p>kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing 
-      kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing 
-      kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing 
-      </p>
-      <p>kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing 
-      kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing 
-      kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing 
-      </p>
-      <p>kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing 
-      kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing 
-      kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing 
-      </p>
-      <p>kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing 
-      kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing 
-      kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing 
-      </p>
-      <p>kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing 
-      kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing 
-      kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing 
-      </p>
-      <p>kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing 
-      kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing 
-      kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing 
-      </p>
-      <p>kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing 
-      kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing 
-      kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing 
-      </p>
-      <p>kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing 
-      kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing 
-      kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing 
-      </p>
-      <p>kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing 
-      kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing 
-      kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing 
-      </p>
-      <p>kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing 
-      kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing 
-      kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing 
-      </p>
-      <p>kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing 
-      kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing 
-      kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing 
-      </p>
-      <p>kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing 
-      kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing 
-      kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing 
-      </p>
-      <p>kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing 
-      kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing 
-      kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing 
-      </p>
-      <p>kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing 
-      kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing 
-      kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing 
-      </p>
-      <p>kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing 
-      kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing 
-      kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing 
-      </p>
-      <p>kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing 
-      kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing 
-      kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing 
-      </p>
-      <p>kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing 
-      kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing 
-      kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing 
-      </p>
-      <p>kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing 
-      kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing 
-      kucing kucing kucing kucing kucing kucing kucing kucing kucing kucing 
-      </p>
-      <Button size="sm">Kucing</Button>
-      <Link href="/homepage" className={buttonVariants({ variant: "outline" })}>Click here</Link>
-      <Badge variant="outline">Badge</Badge>
+        <div className='flex justify-around items-center my-5'>
+          <div>
+            <Label htmlFor="search">Search</Label>
+            <div className='flex gap-4'>
+              <Input id="search" type="text" />
+              <Button>Search</Button>
+            </div>
+
+          </div>
+
+          <div>
+          <Label htmlFor="filter">Filter</Label><br />
+          <Button id='filter' className='rounded-3xl'>
+            <AdjustmentsHorizontalIcon className="mr-2 h-4 w-4"/>
+            Filter
+          </Button>
+          </div>
+          
+          <div>
+          <Label htmlFor="sort">Sort</Label>
+          <Select>
+            <SelectTrigger className="w-[100px]" id="sort">
+              <SelectValue placeholder="Theme" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="light">Light</SelectItem>
+              <SelectItem value="dark">Dark</SelectItem>
+              <SelectItem value="system">System</SelectItem>
+            </SelectContent>
+          </Select>
+          </div>
+
+        </div>
+
+        <Separator className='my-6'/>
+
+        <div className='flex flex-wrap gap-4 justify-center'>
+          <CarCard />
+          <CarCard />
+          <CarCard />
+          <CarCard />
+          <CarCard />
+          <CarCard />
+          <CarCard />
+          <CarCard />
+          <CarCard />
+          <CarCard />
+          <CarCard />
+          <CarCard />
+          <CarCard />
+          <CarCard />
+        </div>
       </div>
     </>
   )
