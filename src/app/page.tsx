@@ -25,28 +25,28 @@ export default function Home() {
       <LeftNavBar />
       <div className='flex-1 p-4'>
         <div className='flex justify-around items-center my-5'>
-          <div>
-            <Label htmlFor="search">Search</Label>
+          
+
             <div className='flex gap-4'>
-              <Input id="search" type="text" />
+              <Input id="search" type="text" placeholder='search'/>
               <Button>Search</Button>
             </div>
 
-          </div>
+          
 
-          <div>
-          <Label htmlFor="filter">Filter</Label><br />
+          
+   
           <Button id='filter' className='rounded-3xl'>
             <AdjustmentsHorizontalIcon className="mr-2 h-4 w-4"/>
             Filter
           </Button>
-          </div>
+         
           
-          <div>
-          <Label htmlFor="sort">Sort</Label>
+         
+
           <Select>
             <SelectTrigger className="w-[100px]" id="sort">
-              <SelectValue placeholder="Theme" />
+              <SelectValue placeholder="Sort" />
             </SelectTrigger>
             <SelectContent>
               <SelectItem value="light">Light</SelectItem>
@@ -54,7 +54,7 @@ export default function Home() {
               <SelectItem value="system">System</SelectItem>
             </SelectContent>
           </Select>
-          </div>
+          
 
         </div>
 
