@@ -24,6 +24,9 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import Review from "@/components/review";
+
+
 
 export default function Home() {
   return (

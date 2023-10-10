@@ -24,8 +24,7 @@ import { ArrowRightIcon, HeartIcon } from "@heroicons/react/24/solid"
 
 export function CarCard() {
     return (
-        <Card className="w-[300px]">
-
+        <Card className="w-[300px] hover:border-solid hover:border-2 hover:border-indigo-600">
             <CardHeader>
                 <div className="flex">
                     <div className="flex-grow">

@@ -44,13 +44,14 @@ function Review({ user, review_stars, review_title, review_text }: ReviewProps) 
                         <AvatarFallback>CN</AvatarFallback>
                     </Avatar>
 
+
                     <div className="ml-4">
                         <p className="text-sm">{user.name}</p>
                         <p className="text-sm">{user.address}</p>
                     </div>
                 </div>
 
-                <Separator className='my-2'/>
+                <Separator className='my-2' />
 
                 <p className="text-lg font-semibold">{review_title}</p>
                 <div className="flex items-center">
