@@ -23,14 +23,14 @@ export default function Page() {
         <TableCaption>A list of your recent invoices.</TableCaption>
         <TableHeader>
           <TableRow>
-            <TableHead className="w-[100px]">Invoice</TableHead>
+            <TableHead className="w-[100px]">Book ID</TableHead>
             <TableHead>Post</TableHead>
-            <TableHead>Rent By</TableHead>
-            <TableHead>Rent Date</TableHead>
-            <TableHead>Rent Time</TableHead>
-            <TableHead>Status</TableHead>
+            <TableHead>Customer</TableHead>
+            <TableHead>Booking Date</TableHead>
+            <TableHead>Booking Time</TableHead>
             <TableHead>Days Left</TableHead>
             <TableHead>Amount</TableHead>
+            <TableHead>Status</TableHead>
             <TableHead className="text-right">Action</TableHead>
           </TableRow>
         </TableHeader>
@@ -41,9 +41,9 @@ export default function Page() {
             <TableCell>Kevin</TableCell>
             <TableCell>13 june 2023 - 14 june 2023</TableCell>
             <TableCell>1 day</TableCell>
-            <TableCell>Paid</TableCell>
             <TableCell>3</TableCell>
             <TableCell>$250.00</TableCell>
+            <TableCell>Paid</TableCell>
             <TableCell className="text-right">
               <Button>
                 <ChevronDownIcon className="h-4 w-4" />
