@@ -1,14 +1,9 @@
+import Title from "@/components/typography/Title";
+
 export default function Page(){
     return(
         <>
-            <h2>settings</h2>
-            <p>settingssettings settingssettings settingssettings settingssettings settingssettings
-            settingssettings settingssettings settingssettings 
-            settingssettings settingssettings settingssettings settingssettings settingssettings
-            settingssettings settingssettings settingssettings settingssettings
-            settingssettings settingssettings settingssettings settingssettings
-            settingssettings settingssettings settingssettings settingssettings
-            </p>
+            <Title title="Settings"/>
         </>
     )
 }

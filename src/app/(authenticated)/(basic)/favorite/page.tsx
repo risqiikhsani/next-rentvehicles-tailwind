@@ -25,13 +25,15 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import Review from "@/components/review";
+import Title from "@/components/typography/Title";
 
 
 
 export default function Favorite() {
   return (
     <>
-      <div className="flex justify-around items-center my-5">
+    <Title title="Favorite" text="List all of your favorite items"/>
+      <div className="flex justify-between items-center my-5">
         <div className="flex gap-4">
           <Input id="search" type="text" placeholder="search" />
           <Button>Search</Button>

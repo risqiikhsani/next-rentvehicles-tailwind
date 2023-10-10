@@ -21,21 +21,19 @@ import {
 import { Separator } from "@/components/ui/separator";
 import { PlusIcon } from "@heroicons/react/24/solid";
 import Link from "next/link";
+import Title from "@/components/typography/Title";
 
 
 export default function Home() {
     return (
         <>
+            <Title title="My Posts" text="List all of my posts" />
             <div className="flex justify-between items-center my-5">
-                <h2 className="text-2xl font-bold">My Posts</h2>
-
                 <Button variant="outline" asChild>
                     <Link href="/create-post">
                         <PlusIcon className="h-4 w-4 mr-2" />
                         Create Post    </Link>
                 </Button>
-
-
             </div>
 
             <div className="flex justify-between items-center my-5">
@@ -48,10 +46,6 @@ export default function Home() {
 
                 <Dialog>
                     <DialogTrigger className="px-2 py-1 border-solid border-2 flex rounded-md border-slate-200">
-                        {/* <Button id="filter" className="rounded-3xl">
-              <AdjustmentsHorizontalIcon className="mr-2 h-4 w-4" />
-              Filter
-            </Button> */}
                         <AdjustmentsHorizontalIcon className="m-auto h-4 w-4 mr-2" />
                         Filter
                     </DialogTrigger>

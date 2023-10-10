@@ -25,13 +25,16 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import Review from "@/components/review";
+import Title from "@/components/typography/Title";
 
 
 
 export default function Home() {
   return (
     <>
-      <div className="flex justify-around items-center my-5">
+    <Title title="Home" text="Find anything to rent!"/>
+      <div className="flex justify-between items-center my-5">
+        
         <div className="flex gap-4">
           <Input id="search" type="text" placeholder="search" />
           <Button>Search</Button>
@@ -41,10 +44,6 @@ export default function Home() {
 
         <Dialog>
           <DialogTrigger className="px-2 py-1 border-solid border-2 flex rounded-md border-slate-200">
-            {/* <Button id="filter" className="rounded-3xl">
-              <AdjustmentsHorizontalIcon className="mr-2 h-4 w-4" />
-              Filter
-            </Button> */}
             <AdjustmentsHorizontalIcon className="m-auto h-4 w-4 mr-2" />
             Filter
           </DialogTrigger>

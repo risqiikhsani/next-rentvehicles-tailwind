@@ -1,7 +1,9 @@
+import Title from "@/components/typography/Title";
+
 export default function Page(){
     return(
         <>
-            <h2>profile</h2>
+            <Title title="Profile Settings"/>
         </>
     )
 }

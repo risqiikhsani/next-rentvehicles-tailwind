@@ -1,3 +1,4 @@
+import Title from "@/components/typography/Title";
 import { Button } from "@/components/ui/button";
 import {
   Table,
@@ -15,10 +16,8 @@ import {FolderOpenIcon} from "@heroicons/react/24/solid";
 export default function Page() {
   return (
     <>
-      <h1 className="font-bold text-4xl">Rent orders</h1>
-      <div className="flex">
-        <Button>Filter</Button>
-      </div>
+      <Title title="Rent orders" text="List all of your rent orders"/>
+
 
       <Table>
         <TableCaption>A list of your recent invoices.</TableCaption>

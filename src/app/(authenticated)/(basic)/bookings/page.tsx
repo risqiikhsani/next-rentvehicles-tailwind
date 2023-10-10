@@ -1,3 +1,4 @@
+import Title from "@/components/typography/Title";
 import { Button } from "@/components/ui/button";
 import {
   Table,
@@ -14,10 +15,8 @@ import { ChevronDownIcon } from "@heroicons/react/24/solid";
 export default function Page() {
   return (
     <>
-      <h1 className="font-bold text-4xl">Bookings</h1>
-      <div className="flex">
-        <Button>Filter</Button>
-      </div>
+      <Title title="Bookings" text="List all of your booked items"/>
+
 
       <Table>
         <TableCaption>A list of your recent invoices.</TableCaption>
