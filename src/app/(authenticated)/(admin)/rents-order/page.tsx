@@ -10,6 +10,7 @@ import {
 } from "@/components/ui/table";
 
 import { ChevronDownIcon } from "@heroicons/react/24/solid";
+import {FolderOpenIcon} from "@heroicons/react/24/solid";
 
 export default function Page() {
   return (
@@ -30,7 +31,8 @@ export default function Page() {
             <TableHead>Rent Time</TableHead>
             <TableHead>Days Left</TableHead>
             <TableHead>Amount</TableHead>
-            <TableHead>Status</TableHead>
+            <TableHead>Payment Status</TableHead>
+            <TableHead>Rent Status</TableHead>
             <TableHead>Action</TableHead>
             <TableHead className="text-right">Files</TableHead>
           </TableRow>
@@ -45,15 +47,16 @@ export default function Page() {
 
             <TableCell>3</TableCell>
             <TableCell>$250.00</TableCell>
-            <TableCell>Paid</TableCell>
+            <TableCell>Paid (offline)</TableCell>
+            <TableCell>On going</TableCell>
             <TableCell>
-              <Button>
+              <Button variant="outline" size="icon">
                 <ChevronDownIcon className="h-4 w-4" />
-              </Button>
+              </Button> 
             </TableCell>
             <TableCell className="text-right">
-              <Button>
-                <ChevronDownIcon className="h-4 w-4" />
+              <Button variant="outline" size="icon">
+                <FolderOpenIcon className="h-4 w-4" />
               </Button>
             </TableCell>
           </TableRow>

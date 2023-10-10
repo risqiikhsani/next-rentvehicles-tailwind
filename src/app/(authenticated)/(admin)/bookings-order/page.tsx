@@ -30,7 +30,8 @@ export default function Page() {
             <TableHead>Booking Time</TableHead>
             <TableHead>Days Left</TableHead>
             <TableHead>Amount</TableHead>
-            <TableHead>Status</TableHead>
+            <TableHead>Payment Status</TableHead>
+            <TableHead>Book Status</TableHead>
             <TableHead className="text-right">Action</TableHead>
           </TableRow>
         </TableHeader>
@@ -44,8 +45,9 @@ export default function Page() {
             <TableCell>3</TableCell>
             <TableCell>$250.00</TableCell>
             <TableCell>Paid</TableCell>
+            <TableCell>Cancelled</TableCell>
             <TableCell className="text-right">
-              <Button>
+              <Button variant="outline" size="icon">
                 <ChevronDownIcon className="h-4 w-4" />
               </Button>
             </TableCell>
