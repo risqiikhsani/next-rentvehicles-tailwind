@@ -22,7 +22,6 @@ import { Separator } from '@/components/ui/separator'
 export default function Home() {
     return (
         <>
-            <div className='flex-1 p-4'>
                 <div className='flex justify-around items-center my-5'>
 
                     <div className='flex gap-4'>
@@ -66,7 +65,6 @@ export default function Home() {
                     <CarCard />
                     <CarCard />
                 </div>
-            </div>
         </>
     )
 }
