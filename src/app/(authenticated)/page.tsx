@@ -37,7 +37,7 @@ export default function Home() {
 
 
         <Dialog>
-          <DialogTrigger className="p-1 border-solid border-2 flex rounded-md border-slate-200">
+          <DialogTrigger className="px-2 py-1 border-solid border-2 flex rounded-md border-slate-200">
             {/* <Button id="filter" className="rounded-3xl">
               <AdjustmentsHorizontalIcon className="mr-2 h-4 w-4" />
               Filter
