@@ -26,7 +26,10 @@ import {
 import { Input } from "@/components/ui/input"
 import Title from "@/components/typography/Title"
 import Link from "next/link"
-
+import { Separator } from "@/components/ui/separator"
+import { Switch } from "@/components/ui/switch"
+import { useDropzone, FileWithPath } from 'react-dropzone';
+import Image from "next/image"
 
 const formSchema = z.object({
     brand: z.string().min(2, {
@@ -35,9 +38,9 @@ const formSchema = z.object({
     model: z.string().min(2, {
         message: "model must be at least 2 characters.",
     }),
-    email: z.string({
-        required_error: "Please select an email to display.",
-    }).email(),
+    type: z.string().min(2, {
+        message: "type must be at least 2 characters.",
+    }),
     year: z.string().min(4, {
         message: "year must be at least 4 characters.",
     }),
@@ -59,6 +62,14 @@ const formSchema = z.object({
     price_per_month: z.number().min(1, {
         message: "price per month must be at least 1.",
     }),
+    discount: z.number().min(1, {
+        message: "discount must be at least 1.",
+    }),
+    available: z.boolean(),
+    // image: z
+    // .custom<File>((v) => v instanceof File, {
+    //   message: 'Image is required',
+    // })
 })
 
 
@@ -70,12 +81,15 @@ export default function Page() {
             brand: "",
             model: "",
             year: "",
-            unit: 1,
-            transmission: "",
-            fuel_type: "",
-            price_per_day: 0,
-            price_per_week: 0,
-            price_per_month: 0,
+            type: "",
+            unit: undefined,
+            transmission: "manual",
+            fuel_type: "gasoline",
+            price_per_day: undefined,
+            price_per_week: undefined,
+            price_per_month: undefined,
+            discount: undefined,
+            available: true,
         },
     })
 
@@ -86,10 +100,27 @@ export default function Page() {
         console.log(values)
     }
 
+    const { acceptedFiles, getRootProps, getInputProps } = useDropzone({
+        onDrop: files => console.log(files),
+        accept: {
+            'image/png': ['.png',],
+            'text/html': ['.html', '.htm'],
+        }
+    });
+
+    const files = acceptedFiles.map((file: FileWithPath) => (
+        <div key={file.path}>
+            <Image src={URL.createObjectURL(file)} width="300" height="300" alt="pic" />
+            <p>{file.name} - {file.size} bytes</p>
+        </div>
+    ));
+
+
+
     return (
         <><Title title="Create Post" text="Create any post to rent!" />
             <Form {...form}>
-                <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+                <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8" encType="multipart/form-data">
                     <FormField
                         control={form.control}
                         name="brand"
@@ -135,27 +166,36 @@ export default function Page() {
                         )}
                     />
 
+                    <div {...getRootProps({ className: 'dropzone' })} className="hover:cursor-pointer border-solid border-2 border-indigo-600 p-6 rounded-xl">
+                        <input {...getInputProps()} />
+                        <p>Drag and drop some files here, or click to select files</p>
+                    </div>
+                    <div className="flex gap-4">
+                    {files}
+                    </div>
+
+
+
                     <FormField
                         control={form.control}
-                        name="email"
+                        name="type"
                         render={({ field }) => (
                             <FormItem>
-                                <FormLabel>Email</FormLabel>
+                                <FormLabel>Type</FormLabel>
                                 <Select onValueChange={field.onChange} defaultValue={field.value}>
                                     <FormControl>
                                         <SelectTrigger>
-                                            <SelectValue placeholder="email@gmail.com" />
+                                            <SelectValue placeholder="type" />
                                         </SelectTrigger>
                                     </FormControl>
                                     <SelectContent>
-                                        <SelectItem value="m@example.com">m@example.com</SelectItem>
-                                        <SelectItem value="m@google.com">m@google.com</SelectItem>
-                                        <SelectItem value="m@support.com">m@support.com</SelectItem>
+                                        <SelectItem value="Sedan">Sedan</SelectItem>
+                                        <SelectItem value="Sport">Sport</SelectItem>
+                                        <SelectItem value="Jeep">Jeep</SelectItem>
                                     </SelectContent>
                                 </Select>
                                 <FormDescription>
-                                    You can manage email addresses in your{" "}
-                                    <Link href="/examples/forms">email settings</Link>.
+                                    The vehicle's type.
                                 </FormDescription>
                                 <FormMessage />
                             </FormItem>
@@ -242,7 +282,10 @@ export default function Page() {
                             </FormItem>
                         )}
                     />
-                                        <FormField
+
+                    <Separator className="my-4" />
+
+                    <FormField
                         control={form.control}
                         name="price_per_day"
                         render={({ field }) => (
@@ -258,7 +301,7 @@ export default function Page() {
                             </FormItem>
                         )}
                     />
-                                        <FormField
+                    <FormField
                         control={form.control}
                         name="price_per_week"
                         render={({ field }) => (
@@ -274,7 +317,7 @@ export default function Page() {
                             </FormItem>
                         )}
                     />
-                                        <FormField
+                    <FormField
                         control={form.control}
                         name="price_per_month"
                         render={({ field }) => (
@@ -290,6 +333,46 @@ export default function Page() {
                             </FormItem>
                         )}
                     />
+                    <Separator className="my-4" />
+                    <FormField
+                        control={form.control}
+                        name="discount"
+                        render={({ field }) => (
+                            <FormItem>
+                                <FormLabel>Discount (%)</FormLabel>
+                                <FormControl>
+                                    <Input placeholder="10" {...field} />
+                                </FormControl>
+                                <FormDescription>
+                                    Discount applied to all prices.
+                                </FormDescription>
+                                <FormMessage />
+                            </FormItem>
+                        )}
+                    />
+                    <FormField
+                        control={form.control}
+                        name="available"
+                        render={({ field }) => (
+                            <FormItem className="flex flex-row items-center justify-between rounded-lg border p-3 shadow-sm">
+                                <div className="space-y-0.5">
+                                    <FormLabel>Available</FormLabel>
+                                    <FormDescription>
+                                        Disable if the item is not ready to rent.
+                                    </FormDescription>
+                                </div>
+                                <FormControl>
+                                    <Switch
+                                        checked={field.value}
+                                        onCheckedChange={field.onChange}
+                                    />
+                                </FormControl>
+                            </FormItem>
+                        )}
+                    />
+
+
+
                     <Button type="submit">Submit</Button>
                 </form>
             </Form>
