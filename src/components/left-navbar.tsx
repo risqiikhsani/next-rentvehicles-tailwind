@@ -61,11 +61,11 @@ const admin_urls = [
     url: "/bookings-order",
     icon: DocumentChartBarIcon, // Specify the Heroicon component
   },
-  {
-    text: "My Group",
-    url: "/group",
-    icon: DocumentChartBarIcon, // Specify the Heroicon component
-  },
+  // {
+  //   text: "My Group",
+  //   url: "/group",
+  //   icon: DocumentChartBarIcon, // Specify the Heroicon component
+  // },
   {
     text: "Locations",
     url: "/locations",
