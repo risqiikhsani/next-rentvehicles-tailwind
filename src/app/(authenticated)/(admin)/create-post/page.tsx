@@ -101,12 +101,13 @@ export default function Page() {
         console.log(values)
     }
 
-    const { acceptedFiles, getRootProps, getInputProps } = useDropzone({
+    const { acceptedFiles, fileRejections, getRootProps, getInputProps } = useDropzone({
         onDrop: files => console.log(files),
         accept: {
             'image/png': ['.png',],
             'text/html': ['.html', '.htm'],
-        }
+        },
+        maxFiles: 1
     });
 
 
@@ -117,6 +118,8 @@ export default function Page() {
             <p>{file.name} - {file.size / 1000} kb</p>
         </div>
     ));
+
+
 
     return (
         <><Title title="Create Post" text="Create any post to rent!" />
@@ -170,14 +173,16 @@ export default function Page() {
                     <FormItem>
                         <FormLabel>Image</FormLabel>
                         <FormControl>
-                            <div {...getRootProps({ className: 'dropzone' })} className="hover:cursor-pointer border-solid border-2 border-indigo-600 p-6 rounded-xl">
+                            <div {...getRootProps({ className: 'dropzone' })} className="hover:cursor-pointer border-solid border-2 p-6 rounded-xl border-slate-200 hover:border-slate-500">
                                 <input {...getInputProps()} />
                                 <p>Drag and drop some files here, or click to select files</p>
                             </div>
                         </FormControl>
-                        <div>
-                            {files}
-                        </div>
+                        <FormDescription>
+                            Select main image (only .png file)
+                        </FormDescription>
+                        {files}
+
                     </FormItem>
 
 
