@@ -31,6 +31,7 @@ import { Switch } from "@/components/ui/switch"
 import { useDropzone, FileWithPath } from 'react-dropzone';
 import Image from "next/image"
 import { useCallback } from "react"
+import { carFuelTypes, carTransmission, carTypes, manufacturers } from "@/constants"
 
 const formSchema = z.object({
     brand: z.string().min(2, {
@@ -101,7 +102,7 @@ export default function Page() {
         console.log(values)
     }
 
-    const { acceptedFiles:acceptedMainImage, getRootProps:getRootPropsMainImage, getInputProps:getInputPropsMainImage } = useDropzone({
+    const { acceptedFiles: acceptedMainImage, getRootProps: getRootPropsMainImage, getInputProps: getInputPropsMainImage } = useDropzone({
         onDrop: files => console.log(files),
         accept: {
             'image/png': ['.png',],
@@ -119,10 +120,10 @@ export default function Page() {
         </div>
     ));
 
-    const { acceptedFiles:acceptedImages, getRootProps:getRootPropsImages, getInputProps:getInputPropsImages } = useDropzone({
+    const { acceptedFiles: acceptedImages, getRootProps: getRootPropsImages, getInputProps: getInputPropsImages } = useDropzone({
         onDrop: files => console.log(files),
         accept: {
-            'image/png': ['.png','.jpg','.jpeg'],
+            'image/png': ['.png', '.jpg', '.jpeg'],
             'text/html': ['.html', '.htm'],
         },
         maxFiles: 3
@@ -152,12 +153,11 @@ export default function Page() {
                                         </SelectTrigger>
                                     </FormControl>
                                     <SelectContent>
-                                        <SelectItem value="BMW">BMW</SelectItem>
-                                        <SelectItem value="Toyota">Toyota</SelectItem>
-                                        <SelectItem value="Porsche">Porsche</SelectItem>
-                                        <SelectItem value="Lamborghini">Lamborghini</SelectItem>
-                                        <SelectItem value="Mitsubishi">Mitsubishi</SelectItem>
-                                        <SelectItem value="Nissan">Nissan</SelectItem>
+                                        {
+                                            manufacturers.map((a, index) => (
+                                                <SelectItem key={index} value={a}>{a}</SelectItem>
+                                            ))
+                                        }
                                     </SelectContent>
                                 </Select>
                                 <FormDescription>
@@ -187,9 +187,9 @@ export default function Page() {
                     <FormItem>
                         <FormLabel>Main Image (maximum is 1 file)</FormLabel>
                         <FormControl>
-                            <div {...getRootPropsMainImage({ className: 'dropzone' })} className="hover:cursor-pointer border-solid border-2 p-6 rounded-xl border-slate-200 hover:border-slate-500 bg-slate-50 text-center">
+                            <div {...getRootPropsMainImage({ className: 'dropzone' })} className="dark:bg-slate-300 hover:cursor-pointer border-solid border-2 p-6 rounded-xl border-slate-200 hover:border-slate-500 bg-slate-50 text-center">
                                 <input {...getInputPropsMainImage()} />
-                                <p>Drag and drop some files here, or click to select files</p>
+                                <p className="dark:text-gray-700">Drag and drop some files here, or click to select files</p>
                             </div>
                         </FormControl>
                         <FormDescription>
@@ -201,9 +201,9 @@ export default function Page() {
                     <FormItem>
                         <FormLabel>Other Images (maximum is 3 files)</FormLabel>
                         <FormControl>
-                            <div {...getRootPropsImages({ className: 'dropzone' })} className="hover:cursor-pointer border-solid border-2 p-6 rounded-xl border-slate-200 hover:border-slate-500 bg-slate-50 text-center">
+                            <div {...getRootPropsImages({ className: 'dropzone' })} className="dark:bg-slate-300 hover:cursor-pointer border-solid border-2 p-6 rounded-xl border-slate-200 hover:border-slate-500 bg-slate-50 text-center">
                                 <input {...getInputPropsImages()} />
-                                <p>Drag and drop some files here, or click to select files</p>
+                                <p className="dark:text-gray-700">Drag and drop some files here, or click to select files</p>
                             </div>
                         </FormControl>
                         <FormDescription>
@@ -227,13 +227,9 @@ export default function Page() {
                                         </SelectTrigger>
                                     </FormControl>
                                     <SelectContent>
-                                        <SelectItem value="Sedan">Sedan</SelectItem>
-                                        <SelectItem value="Sport">Sport</SelectItem>
-                                        <SelectItem value="SUV">SUV</SelectItem>
-                                        <SelectItem value="Minivan">Minivan</SelectItem>
-                                        <SelectItem value="Van">Van</SelectItem>
-                                        <SelectItem value="Pickup Truck">Pickup Truck</SelectItem>
-                                        <SelectItem value="Other">Other</SelectItem>
+                                        {carTypes.map((a, index) => (
+                                            <SelectItem key={index} value={a}>{a}</SelectItem>
+                                        ))}
                                     </SelectContent>
                                 </Select>
                                 <FormDescription>
@@ -288,9 +284,9 @@ export default function Page() {
                                         </SelectTrigger>
                                     </FormControl>
                                     <SelectContent>
-                                        <SelectItem value="automatic">automatic</SelectItem>
-                                        <SelectItem value="manual">manual</SelectItem>
-                                        <SelectItem value="CVT">CVT</SelectItem>
+                                        {carTransmission.map((a, index) => (
+                                            <SelectItem key={index} value={a}>{a}</SelectItem>
+                                        ))}
                                     </SelectContent>
                                 </Select>
                                 <FormDescription>
@@ -313,9 +309,9 @@ export default function Page() {
                                         </SelectTrigger>
                                     </FormControl>
                                     <SelectContent>
-                                        <SelectItem value="gasoline">gasoline</SelectItem>
-                                        <SelectItem value="diesel">diesel</SelectItem>
-                                        <SelectItem value="electric">electric</SelectItem>
+                                        {carFuelTypes.map((a, index) => (
+                                            <SelectItem key={index} value={a}>{a}</SelectItem>
+                                        ))}
                                     </SelectContent>
                                 </Select>
                                 <FormDescription>

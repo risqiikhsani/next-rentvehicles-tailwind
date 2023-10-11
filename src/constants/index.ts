@@ -41,6 +41,28 @@ export const manufacturers = [
     "Volkswagen",
     "Volvo",
   ];
+
+export const carTypes = [
+  "Sedan",
+  "SUV",
+  "Minivan",
+  "Van",
+  "Pickup Truck",
+  "Sport",
+  "Other",
+]
+
+export const carFuelTypes = [
+  "gasoline",
+  "diesel",
+  "electric"
+]
+
+export const carTransmission = [
+  "automatic",
+  "manual",
+  "CVT",
+]
   
   export const yearsOfProduction = [
     { title: "Year", value: "" },
