@@ -122,11 +122,18 @@ export default function Page() {
     const { acceptedFiles:acceptedImages, getRootProps:getRootPropsImages, getInputProps:getInputPropsImages } = useDropzone({
         onDrop: files => console.log(files),
         accept: {
-            'image/png': ['.png','.jpg'],
+            'image/png': ['.png','.jpg','.jpeg'],
             'text/html': ['.html', '.htm'],
         },
         maxFiles: 3
     });
+
+    const files2 = acceptedImages.map((file: FileWithPath, index) => (
+        <div key={file.path} className="relative">
+            {/* <Image src={URL.createObjectURL(file)} width={300} height={300} alt="pic" /> */}
+            <p>{file.name} - {file.size / 1000} kb</p>
+        </div>
+    ));
 
     return (
         <><Title title="Create Post" text="Create any post to rent!" />
@@ -178,9 +185,9 @@ export default function Page() {
                     />
 
                     <FormItem>
-                        <FormLabel>Main Image</FormLabel>
+                        <FormLabel>Main Image (maximum is 1 file)</FormLabel>
                         <FormControl>
-                            <div {...getRootPropsMainImage({ className: 'dropzone' })} className="hover:cursor-pointer border-solid border-2 p-6 rounded-xl border-slate-200 hover:border-slate-500">
+                            <div {...getRootPropsMainImage({ className: 'dropzone' })} className="hover:cursor-pointer border-solid border-2 p-6 rounded-xl border-slate-200 hover:border-slate-500 bg-slate-50 text-center">
                                 <input {...getInputPropsMainImage()} />
                                 <p>Drag and drop some files here, or click to select files</p>
                             </div>
@@ -191,7 +198,19 @@ export default function Page() {
                         {files}
                     </FormItem>
 
-
+                    <FormItem>
+                        <FormLabel>Other Images (maximum is 3 files)</FormLabel>
+                        <FormControl>
+                            <div {...getRootPropsImages({ className: 'dropzone' })} className="hover:cursor-pointer border-solid border-2 p-6 rounded-xl border-slate-200 hover:border-slate-500 bg-slate-50 text-center">
+                                <input {...getInputPropsImages()} />
+                                <p>Drag and drop some files here, or click to select files</p>
+                            </div>
+                        </FormControl>
+                        <FormDescription>
+                            Select other images (only .png/.jpg/.jpeg file)
+                        </FormDescription>
+                        {files2}
+                    </FormItem>
 
 
 
@@ -210,7 +229,11 @@ export default function Page() {
                                     <SelectContent>
                                         <SelectItem value="Sedan">Sedan</SelectItem>
                                         <SelectItem value="Sport">Sport</SelectItem>
-                                        <SelectItem value="Jeep">Jeep</SelectItem>
+                                        <SelectItem value="SUV">SUV</SelectItem>
+                                        <SelectItem value="Minivan">Minivan</SelectItem>
+                                        <SelectItem value="Van">Van</SelectItem>
+                                        <SelectItem value="Pickup Truck">Pickup Truck</SelectItem>
+                                        <SelectItem value="Other">Other</SelectItem>
                                     </SelectContent>
                                 </Select>
                                 <FormDescription>
@@ -267,6 +290,7 @@ export default function Page() {
                                     <SelectContent>
                                         <SelectItem value="automatic">automatic</SelectItem>
                                         <SelectItem value="manual">manual</SelectItem>
+                                        <SelectItem value="CVT">CVT</SelectItem>
                                     </SelectContent>
                                 </Select>
                                 <FormDescription>
