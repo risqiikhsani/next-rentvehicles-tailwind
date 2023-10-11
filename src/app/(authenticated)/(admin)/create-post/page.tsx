@@ -30,6 +30,7 @@ import { Separator } from "@/components/ui/separator"
 import { Switch } from "@/components/ui/switch"
 import { useDropzone, FileWithPath } from 'react-dropzone';
 import Image from "next/image"
+import { useCallback } from "react"
 
 const formSchema = z.object({
     brand: z.string().min(2, {
@@ -108,14 +109,14 @@ export default function Page() {
         }
     });
 
-    const files = acceptedFiles.map((file: FileWithPath) => (
-        <div key={file.path}>
-            <Image src={URL.createObjectURL(file)} width="300" height="300" alt="pic" />
-            <p>{file.name} - {file.size} bytes</p>
+
+
+    const files = acceptedFiles.map((file: FileWithPath, index) => (
+        <div key={file.path} className="relative">
+            {/* <Image src={URL.createObjectURL(file)} width={300} height={300} alt="pic" /> */}
+            <p>{file.name} - {file.size / 1000} kb</p>
         </div>
     ));
-
-
 
     return (
         <><Title title="Create Post" text="Create any post to rent!" />
@@ -166,13 +167,20 @@ export default function Page() {
                         )}
                     />
 
-                    <div {...getRootProps({ className: 'dropzone' })} className="hover:cursor-pointer border-solid border-2 border-indigo-600 p-6 rounded-xl">
-                        <input {...getInputProps()} />
-                        <p>Drag and drop some files here, or click to select files</p>
-                    </div>
-                    <div className="flex gap-4">
-                    {files}
-                    </div>
+                    <FormItem>
+                        <FormLabel>Image</FormLabel>
+                        <FormControl>
+                            <div {...getRootProps({ className: 'dropzone' })} className="hover:cursor-pointer border-solid border-2 border-indigo-600 p-6 rounded-xl">
+                                <input {...getInputProps()} />
+                                <p>Drag and drop some files here, or click to select files</p>
+                            </div>
+                        </FormControl>
+                        <div>
+                            {files}
+                        </div>
+                    </FormItem>
+
+
 
 
 
