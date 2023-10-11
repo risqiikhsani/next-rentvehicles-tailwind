@@ -101,7 +101,7 @@ export default function Page() {
         console.log(values)
     }
 
-    const { acceptedFiles, fileRejections, getRootProps, getInputProps } = useDropzone({
+    const { acceptedFiles:acceptedMainImage, getRootProps:getRootPropsMainImage, getInputProps:getInputPropsMainImage } = useDropzone({
         onDrop: files => console.log(files),
         accept: {
             'image/png': ['.png',],
@@ -112,14 +112,21 @@ export default function Page() {
 
 
 
-    const files = acceptedFiles.map((file: FileWithPath, index) => (
+    const files = acceptedMainImage.map((file: FileWithPath, index) => (
         <div key={file.path} className="relative">
             {/* <Image src={URL.createObjectURL(file)} width={300} height={300} alt="pic" /> */}
             <p>{file.name} - {file.size / 1000} kb</p>
         </div>
     ));
 
-
+    const { acceptedFiles:acceptedImages, getRootProps:getRootPropsImages, getInputProps:getInputPropsImages } = useDropzone({
+        onDrop: files => console.log(files),
+        accept: {
+            'image/png': ['.png','.jpg'],
+            'text/html': ['.html', '.htm'],
+        },
+        maxFiles: 3
+    });
 
     return (
         <><Title title="Create Post" text="Create any post to rent!" />
@@ -171,10 +178,10 @@ export default function Page() {
                     />
 
                     <FormItem>
-                        <FormLabel>Image</FormLabel>
+                        <FormLabel>Main Image</FormLabel>
                         <FormControl>
-                            <div {...getRootProps({ className: 'dropzone' })} className="hover:cursor-pointer border-solid border-2 p-6 rounded-xl border-slate-200 hover:border-slate-500">
-                                <input {...getInputProps()} />
+                            <div {...getRootPropsMainImage({ className: 'dropzone' })} className="hover:cursor-pointer border-solid border-2 p-6 rounded-xl border-slate-200 hover:border-slate-500">
+                                <input {...getInputPropsMainImage()} />
                                 <p>Drag and drop some files here, or click to select files</p>
                             </div>
                         </FormControl>
@@ -182,7 +189,6 @@ export default function Page() {
                             Select main image (only .png file)
                         </FormDescription>
                         {files}
-
                     </FormItem>
 
 
