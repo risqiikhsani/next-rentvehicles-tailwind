@@ -9,10 +9,12 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import Title from "@/components/typography/Title";
 
 export default function Page() {
   return (
     <>
+    <Title title="Post Detail"/>
       <div className="grid grid-cols-3 gap-4">
         <div className="">
           <Image src="/car1.png" alt="pic" width={500} height={500} />
@@ -31,16 +33,7 @@ export default function Page() {
             </div>
           </div>
 
-            <Table>
-              <TableBody>
-                <TableRow>
-                  <TableCell className="text-left font-medium">Transmission</TableCell>
-                  <TableCell className="text-left">:</TableCell>
-                  <TableCell className="text-left">Automatic</TableCell>
-                </TableRow>
-              </TableBody>
-            </Table>
-          
+                    
         </div>
       </div>
     </>

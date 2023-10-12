@@ -1,3 +1,5 @@
+"use client"
+
 import Link from "next/link";
 import React from "react";
 import { StarIcon } from "@heroicons/react/24/solid";
@@ -9,7 +11,7 @@ import {DocumentChartBarIcon} from "@heroicons/react/24/solid";
 import {ShieldCheckIcon} from "@heroicons/react/24/solid";
 import {UserIcon} from "@heroicons/react/24/solid";
 import {ComputerDesktopIcon} from "@heroicons/react/24/solid";
-
+import { usePathname } from 'next/navigation'
 const basic_urls = [
   {
     text: "Account",
@@ -31,13 +33,18 @@ const basic_urls = [
 
 
 const LeftNavBarSettings = () => {
+  const pathname = usePathname()
+
+
   return (
     <nav className="top-20 left-0 w-64 sticky h-screen">
       <div className="overflow-y-auto h-screen py-4">
           {basic_urls.map((a, index) => {
             const Icon = a.icon; // Extract the icon component
             return (
-                <Link href={a.url} key={index} className="px-4 py-2 hover:bg-slate-200 m-4 rounded-md hover:cursor-pointer flex items-center">
+              <Link href={a.url} key={index}
+              className={pathname === a.url ? 'px-4 py-2 hover:bg-slate-200 m-4 rounded-md hover:cursor-pointer flex items-center bg-red-300' :
+                'px-4 py-2 hover:bg-slate-200 m-4 rounded-md hover:cursor-pointer flex items-center'}>
                 {Icon && <Icon className="w-5 h-5 mr-2" />}{" "}
                 {/* Render the icon if available */}
                   {a.text}
