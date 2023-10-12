@@ -29,7 +29,7 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <Navbar />
-          <main className="container mx-auto mt-16 flex">
+          <main className="container mx-auto mt-20 flex">
             {children}
           </main>
           <Footer />

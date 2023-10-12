@@ -92,7 +92,7 @@ const LeftNavBar = () => {
           const Icon = a.icon; // Extract the icon component
           return (
             <Link href={a.url} key={index}
-              className={pathname === a.url ? 'px-4 py-2 hover:bg-slate-200 m-4 rounded-md hover:cursor-pointer flex items-center bg-red-300' :
+              className={pathname === a.url ? 'px-4 py-2 hover:bg-lime-200 m-4 rounded-md hover:cursor-pointer flex items-center bg-lime-400' :
                 'px-4 py-2 hover:bg-slate-200 m-4 rounded-md hover:cursor-pointer flex items-center'}>
               {Icon && <Icon className="w-5 h-5 mr-2" />}{" "}
               {/* Render the icon if available */}
@@ -104,7 +104,7 @@ const LeftNavBar = () => {
           const Icon = a.icon; // Extract the icon component
           return (
             <Link href={a.url} key={index}
-              className={pathname === a.url ? 'px-4 py-2 hover:bg-slate-200 m-4 rounded-md hover:cursor-pointer flex items-center bg-red-300' :
+              className={pathname === a.url ? 'px-4 py-2 hover:bg-lime-200 m-4 rounded-md hover:cursor-pointer flex items-center bg-lime-400' :
                 'px-4 py-2 hover:bg-slate-200 m-4 rounded-md hover:cursor-pointer flex items-center'}>
               {Icon && <Icon className="w-5 h-5 mr-2" />}{" "}
               {a.text}
