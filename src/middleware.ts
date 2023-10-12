@@ -17,8 +17,19 @@ export function middleware(request: NextRequest) {
   const allCookies = request.cookies.getAll();
   console.log(allCookies); // => [{ name: 'nextjs', value: 'fast' }]
 
-  if (!request.cookies.has("accesstoken")) {
+  const path = request.nextUrl.pathname
+
+  const publicPath = ['/auth', '/homepage'];
+  const isPublicPath = publicPath.includes(path);
+
+  // if user is in restricted pages , but no token , redirect user to auth/login
+  if (!isPublicPath && !request.cookies.has("accesstoken")) {
     return NextResponse.redirect(new URL("/auth/login", request.url));
+  }
+
+  // if user is in public pages, but have token, redirect user to / (app)
+  if(isPublicPath && request.cookies.has("accesstoken")){
+    return NextResponse.redirect(new URL("/", request.url));
   }
 
   const response = NextResponse.next();
@@ -27,5 +38,19 @@ export function middleware(request: NextRequest) {
 
 // See "Matching Paths" below to learn more
 export const config = {
-  matcher: ["/test/:path*", "/coba/:path*"],
+  matcher: [
+    "/",
+    "/rents",
+    "/bookings",
+    "/favorite",
+    "/settings",
+    "/my-posts",
+    "/rents-order",
+    "/books-order",
+    "/locations",
+    "/create-post",
+    "/coba/:path*",
+    "/homepage",
+    "/auth"
+  ],
 };
