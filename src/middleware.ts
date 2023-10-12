@@ -17,10 +17,17 @@ export function middleware(request: NextRequest) {
   const allCookies = request.cookies.getAll();
   console.log(allCookies); // => [{ name: 'nextjs', value: 'fast' }]
 
-  const path = request.nextUrl.pathname
+  const path = request.nextUrl.pathname;
 
-  const publicPath = ['/auth', '/homepage'];
-  const isPublicPath = publicPath.includes(path);
+  const publicPath = ["/auth", "/homepage"];
+  let isPublicPath = false;
+
+  for (const publicPathItem of publicPath) {
+    if (path.includes(publicPathItem)) {
+      isPublicPath = true;
+      break;
+    }
+  }
 
   // if user is in restricted pages , but no token , redirect user to auth/login
   if (!isPublicPath && !request.cookies.has("accesstoken")) {
@@ -28,7 +35,7 @@ export function middleware(request: NextRequest) {
   }
 
   // if user is in public pages, but have token, redirect user to / (app)
-  if(isPublicPath && request.cookies.has("accesstoken")){
+  if (isPublicPath && request.cookies.has("accesstoken")) {
     return NextResponse.redirect(new URL("/", request.url));
   }
 
@@ -44,6 +51,8 @@ export const config = {
     "/bookings",
     "/favorite",
     "/settings",
+    "/settings/:path*",
+    "/posts/:path*",
     "/my-posts",
     "/rents-order",
     "/books-order",
@@ -51,6 +60,6 @@ export const config = {
     "/create-post",
     "/coba/:path*",
     "/homepage",
-    "/auth"
+    "/auth/:path*",
   ],
 };
