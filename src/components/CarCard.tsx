@@ -21,6 +21,17 @@ import {
 import { Separator } from "@radix-ui/react-select"
 import Image from "next/image"
 import { ArrowRightIcon, HeartIcon } from "@heroicons/react/24/solid"
+import {
+    Table,
+    TableBody,
+    TableCaption,
+    TableCell,
+    TableHead,
+    TableHeader,
+    TableRow,
+} from "@/components/ui/table"
+import { Badge } from "./ui/badge"
+
 
 export function CarCard() {
     return (
@@ -30,7 +41,6 @@ export function CarCard() {
                     <div className="flex-grow">
                         <CardTitle>Lamborghini</CardTitle>
                         <CardDescription>Aventador</CardDescription>
-                        <CardDescription className="font-medium text-black">Sport</CardDescription>
                     </div>
                     <div className="flex flex-col justify-end">
                         <div className="rounded-md my-1 p-1 bg-emerald-400">
@@ -47,6 +57,34 @@ export function CarCard() {
             </CardHeader>
             <CardContent>
                 <Image src="/car1.png" width={920} height={360} alt="car" />
+                <Table className="max-w-sm my-2">
+                    <TableBody>
+                    <TableRow className="hover:bg-inherit">
+                            <TableCell className="font-medium">
+                                <Badge variant="outline" className="my-2">
+                                    Type
+                                </Badge>
+                            </TableCell>
+                            <TableCell className="text-left">Sport</TableCell>
+                        </TableRow>
+                        <TableRow className="hover:bg-inherit">
+                            <TableCell className="font-medium">
+                                <Badge variant="outline" className="my-2">
+                                    Transmission
+                                </Badge>
+                            </TableCell>
+                            <TableCell className="text-left">Manual</TableCell>
+                        </TableRow>
+                        <TableRow className="hover:bg-inherit">
+                            <TableCell className="font-medium">
+                                <Badge variant="outline" className="my-2">
+                                    Fuel Type
+                                </Badge>
+                            </TableCell>
+                            <TableCell className="text-left">Gasoline</TableCell>
+                        </TableRow>
+                    </TableBody>
+                </Table>
             </CardContent>
             <CardFooter className="flex justify-between">
                 <Button variant="outline">
