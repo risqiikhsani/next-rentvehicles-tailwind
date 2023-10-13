@@ -61,7 +61,7 @@ export default function Page({ params }: { params: { slug: string } }) {
                     Brand
                   </Badge>
                 </TableCell>
-                <TableCell className="text-left">Lamborghini</TableCell>
+                <TableCell className="text-left text-xl">Lamborghini</TableCell>
               </TableRow>
               <TableRow className="hover:bg-inherit">
                 <TableCell className="font-medium">
@@ -69,7 +69,7 @@ export default function Page({ params }: { params: { slug: string } }) {
                     Model
                   </Badge>
                 </TableCell>
-                <TableCell className="text-left">Aventador</TableCell>
+                <TableCell className="text-left text-xl">Aventador</TableCell>
               </TableRow>
               <TableRow className="hover:bg-inherit">
                 <TableCell className="font-medium">

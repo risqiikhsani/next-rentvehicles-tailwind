@@ -9,62 +9,62 @@ export default function Specification() {
         <div className="space-y-8">
             <div className="flex items-center">
                 <Avatar className="h-9 w-9">
-                    <AvatarImage src="/avatars/01.png" alt="Avatar" />
+                    <AvatarImage src="/specification/icons8-gearbox-32.png" alt="Avatar" />
                     <AvatarFallback>OM</AvatarFallback>
                 </Avatar>
                 <div className="ml-4 space-y-1">
-                    <p className="text-sm font-medium leading-none">Olivia Martin</p>
+                    <p className="text-sm font-medium leading-none">Transmission</p>
                     <p className="text-sm text-muted-foreground">
-                        olivia.martin@email.com
+                        Learn more about transmission.
                     </p>
                 </div>
-                <div className="ml-auto font-medium">+$1,999.00</div>
+                <div className="ml-auto font-medium">Automatic</div>
             </div>
             <div className="flex items-center">
                 <Avatar className="flex h-9 w-9 items-center justify-center space-y-0 border">
-                    <AvatarImage src="/avatars/02.png" alt="Avatar" />
+                    <AvatarImage src="/specification/icons8-fuel-32.png" alt="Avatar" />
                     <AvatarFallback>JL</AvatarFallback>
                 </Avatar>
                 <div className="ml-4 space-y-1">
-                    <p className="text-sm font-medium leading-none">Jackson Lee</p>
-                    <p className="text-sm text-muted-foreground">jackson.lee@email.com</p>
+                    <p className="text-sm font-medium leading-none">Fuel Type</p>
+                    <p className="text-sm text-muted-foreground">Learn more about fuel types.</p>
                 </div>
-                <div className="ml-auto font-medium">+$39.00</div>
+                <div className="ml-auto font-medium">Gasoline</div>
             </div>
             <div className="flex items-center">
                 <Avatar className="h-9 w-9">
-                    <AvatarImage src="/avatars/03.png" alt="Avatar" />
+                    <AvatarImage src="/specification/icons8-seat-32.png" alt="Avatar" />
                     <AvatarFallback>IN</AvatarFallback>
                 </Avatar>
                 <div className="ml-4 space-y-1">
-                    <p className="text-sm font-medium leading-none">Isabella Nguyen</p>
+                    <p className="text-sm font-medium leading-none">Seats</p>
                     <p className="text-sm text-muted-foreground">
-                        isabella.nguyen@email.com
+                       How many seats inside
                     </p>
                 </div>
-                <div className="ml-auto font-medium">+$299.00</div>
+                <div className="ml-auto font-medium">2</div>
             </div>
             <div className="flex items-center">
                 <Avatar className="h-9 w-9">
-                    <AvatarImage src="/avatars/04.png" alt="Avatar" />
+                    <AvatarImage src="/specification/icons8-queue-50.png" alt="Avatar" />
                     <AvatarFallback>WK</AvatarFallback>
                 </Avatar>
                 <div className="ml-4 space-y-1">
-                    <p className="text-sm font-medium leading-none">William Kim</p>
-                    <p className="text-sm text-muted-foreground">will@email.com</p>
+                    <p className="text-sm font-medium leading-none">Estimate Max People</p>
+                    <p className="text-sm text-muted-foreground">Max number of people fits in</p>
                 </div>
-                <div className="ml-auto font-medium">+$99.00</div>
+                <div className="ml-auto font-medium">2</div>
             </div>
             <div className="flex items-center">
                 <Avatar className="h-9 w-9">
-                    <AvatarImage src="/avatars/05.png" alt="Avatar" />
-                    <AvatarFallback>SD</AvatarFallback>
+                    <AvatarImage src="/specification/icons8-color-50.png" alt="Avatar" />
+                    <AvatarFallback>WK</AvatarFallback>
                 </Avatar>
                 <div className="ml-4 space-y-1">
-                    <p className="text-sm font-medium leading-none">Sofia Davis</p>
-                    <p className="text-sm text-muted-foreground">sofia.davis@email.com</p>
+                    <p className="text-sm font-medium leading-none">Available Colors</p>
+                    <p className="text-sm text-muted-foreground">Available colors to pick from</p>
                 </div>
-                <div className="ml-auto font-medium">+$39.00</div>
+                <div className="ml-auto font-medium">black,orange</div>
             </div>
         </div>
     )
