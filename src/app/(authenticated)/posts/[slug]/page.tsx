@@ -302,8 +302,8 @@ export default function Page() {
             </Card>
 
             <Separator className="my-4"/>
-            <Title title="Reviews" text="See all reviews from consumers" />
-            <Button>See reviews</Button>
+            <Title title="Reviews" text="See all reviews from consumers"/>
+            <Button className="rounded-xl">See reviews</Button>
             {reviews.map((review, index) => (
               <Review key={index} {...review} />
             ))}
