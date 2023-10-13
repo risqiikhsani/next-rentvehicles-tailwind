@@ -19,6 +19,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
+import { Badge } from "@/components/ui/badge"
 
 
 export default function Page() {
@@ -30,16 +31,98 @@ export default function Page() {
           <Image src="/car1.png" alt="pic" width={500} height={500} />
         </div>
         <div className="col-span-2">
-          <h1 className="font-bold text-2xl">Lamborghini</h1>
-          <h3>Aventador</h3>
+          <Badge variant="outline" className="my-2">Brand</Badge>
+          <h1 className="font-bold text-xl ml-4">Lamborghini</h1>
+          <Badge variant="outline" className="my-2">Model</Badge>
+          <h3 className="font-bold text-xl ml-4">Aventador</h3>
+          <Badge variant="outline" className="my-2">Type</Badge>
+          <h3 className="font-bold text-xl ml-4">Sport</h3>
+          <Badge variant="outline" className="my-2">Available unit</Badge>
+          <h4 className="font-bold text-xl ml-4">12</h4>
 
           <div className="flex flex-col justify-end gap-4">
-            <div className="rounded-md my-1 p-1 bg-emerald-400">$50 / day</div>
-            <div className="rounded-md my-1 p-1 bg-emerald-400">
-              $300 / week
-            </div>
-            <div className="rounded-md my-1 p-1 bg-emerald-400">
-              $1100 / month
+            <div className="grid gap-4 md:grid-cols-1 lg:grid-cols-3 my-4">
+              <Card>
+                <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                  <CardTitle className="text-sm font-medium">
+                    Daily Price (1 day)
+                  </CardTitle>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    className="h-4 w-4 text-muted-foreground"
+                  >
+                    <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
+                  </svg>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-2xl font-bold">
+                    $45,231.89
+                  </p>
+                  <p className="text-xs text-muted-foreground">
+                    +20.1% from last month
+                  </p>
+                </CardContent>
+              </Card>
+              <Card>
+                <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                  <CardTitle className="text-sm font-medium">
+                    Weekly Price (7 days)
+                  </CardTitle>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    className="h-4 w-4 text-muted-foreground"
+                  >
+                    <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
+                  </svg>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-2xl font-bold">
+                    $45,231.89
+                  </p>
+                  <p className="text-xs text-muted-foreground">
+                    +20.1% from last month
+                  </p>
+                </CardContent>
+              </Card>
+              <Card>
+                <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                  <CardTitle className="text-sm font-medium">
+                    Monthly Price (30 days)
+                  </CardTitle>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    className="h-4 w-4 text-muted-foreground"
+                  >
+                    <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
+                  </svg>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-2xl font-bold">
+                    $45,231.89
+                  </p>
+                  <p className="text-xs text-muted-foreground">
+                    +20.1% from last month
+                  </p>
+                </CardContent>
+              </Card>
             </div>
 
             <Card>
