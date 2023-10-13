@@ -8,7 +8,7 @@ export default function Specification() {
     return (
         <div className="space-y-8">
             <div className="flex items-center">
-                <Avatar className="h-9 w-9">
+                <Avatar className="h-9 w-9 items-center justify-center space-y-0 border dark:bg-slate-400">
                     <AvatarImage src="/specification/icons8-gearbox-32.png" alt="Avatar" />
                     <AvatarFallback>OM</AvatarFallback>
                 </Avatar>
@@ -21,7 +21,7 @@ export default function Specification() {
                 <div className="ml-auto font-medium">Automatic</div>
             </div>
             <div className="flex items-center">
-                <Avatar className="flex h-9 w-9 items-center justify-center space-y-0 border">
+                <Avatar className="flex h-9 w-9 items-center justify-center space-y-0 border dark:bg-slate-400">
                     <AvatarImage src="/specification/icons8-fuel-32.png" alt="Avatar" />
                     <AvatarFallback>JL</AvatarFallback>
                 </Avatar>
@@ -32,7 +32,7 @@ export default function Specification() {
                 <div className="ml-auto font-medium">Gasoline</div>
             </div>
             <div className="flex items-center">
-                <Avatar className="h-9 w-9">
+                <Avatar className="h-9 w-9 items-center justify-center space-y-0 border dark:bg-slate-400">
                     <AvatarImage src="/specification/icons8-seat-32.png" alt="Avatar" />
                     <AvatarFallback>IN</AvatarFallback>
                 </Avatar>
@@ -45,7 +45,7 @@ export default function Specification() {
                 <div className="ml-auto font-medium">2</div>
             </div>
             <div className="flex items-center">
-                <Avatar className="h-9 w-9">
+                <Avatar className="h-9 w-9 items-center justify-center space-y-0 border dark:bg-slate-400">
                     <AvatarImage src="/specification/icons8-queue-50.png" alt="Avatar" />
                     <AvatarFallback>WK</AvatarFallback>
                 </Avatar>
@@ -56,7 +56,7 @@ export default function Specification() {
                 <div className="ml-auto font-medium">2</div>
             </div>
             <div className="flex items-center">
-                <Avatar className="h-9 w-9">
+                <Avatar className="h-9 w-9 items-center justify-center space-y-0 border dark:bg-slate-400">
                     <AvatarImage src="/specification/icons8-color-50.png" alt="Avatar" />
                     <AvatarFallback>WK</AvatarFallback>
                 </Avatar>
