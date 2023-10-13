@@ -18,35 +18,80 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-
+} from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
 
 export default function Page() {
   return (
     <>
       <Title title="Post Detail" />
       <div className="lg:grid lg:grid-cols-3 gap-4">
-
         <Image src="/car1.png" alt="pic" width={500} height={500} />
 
+
         <div className="col-span-2 mt-4 lg:mt-0">
-          <div className="flex gap-2 items-center">
-            <Badge variant="outline" className="my-2">Brand</Badge>
+
+        <Table className="max-w-sm">
+          <TableBody>
+            <TableRow className="hover:bg-inherit">
+              <TableCell className="font-medium">
+              <Badge variant="outline" className="my-2">
+              Brand
+            </Badge>
+              </TableCell>
+              <TableCell className="text-left">Lamborghini</TableCell>
+            </TableRow>
+            <TableRow className="hover:bg-inherit">
+              <TableCell className="font-medium">
+              <Badge variant="outline" className="my-2">
+              Model
+            </Badge>
+              </TableCell>
+              <TableCell className="text-left">Aventador</TableCell>
+            </TableRow>
+            <TableRow className="hover:bg-inherit">
+              <TableCell className="font-medium">
+              <Badge variant="outline" className="my-2">
+              Year
+            </Badge>
+              </TableCell>
+              <TableCell className="text-left">2015</TableCell>
+            </TableRow>
+            <TableRow className="hover:bg-inherit">
+              <TableCell className="font-medium">
+              <Badge variant="outline" className="my-2">
+              Type
+            </Badge>
+              </TableCell>
+              <TableCell className="text-left">Sport</TableCell>
+            </TableRow>
+          </TableBody>
+        </Table>
+
+          {/* <div className="flex gap-2 items-center">
+            <Badge variant="outline" className="my-2">
+              Brand
+            </Badge>
             <h1 className="font-bold text-xl ml-4">Lamborghini</h1>
           </div>
           <div className="flex gap-2 items-center">
-            <Badge variant="outline" className="my-2">Model</Badge>
-            <h3 className="font-bold text-xl ml-4">Aventador</h3></div>
+            <Badge variant="outline" className="my-2">
+              Model
+            </Badge>
+            <h3 className="font-bold text-xl ml-4">Aventador</h3>
+          </div>
           <div className="flex gap-2 items-center">
-            <Badge variant="outline" className="my-2">Year</Badge>
+            <Badge variant="outline" className="my-2">
+              Year
+            </Badge>
             <h3 className="font-bold text-xl ml-4">2015</h3>
           </div>
           <div className="flex gap-2 items-center">
-            <Badge variant="outline" className="my-2">Type</Badge>
+            <Badge variant="outline" className="my-2">
+              Type
+            </Badge>
             <h3 className="font-bold text-xl ml-4">Sport</h3>
-          </div>
-
+          </div> */}
 
           <div className="flex flex-col justify-end gap-4">
             <div className="grid gap-4 md:grid-cols-1 lg:grid-cols-3 my-4">
@@ -69,9 +114,7 @@ export default function Page() {
                   </svg>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-2xl font-bold">
-                    $45,231.89
-                  </p>
+                  <p className="text-2xl font-bold">$45,231.89</p>
                   <p className="text-xs text-muted-foreground">
                     +20.1% from last month
                   </p>
@@ -96,9 +139,7 @@ export default function Page() {
                   </svg>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-2xl font-bold">
-                    $45,231.89
-                  </p>
+                  <p className="text-2xl font-bold">$45,231.89</p>
                   <p className="text-xs text-muted-foreground">
                     +20.1% from last month
                   </p>
@@ -123,9 +164,7 @@ export default function Page() {
                   </svg>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-2xl font-bold">
-                    $45,231.89
-                  </p>
+                  <p className="text-2xl font-bold">$45,231.89</p>
                   <p className="text-xs text-muted-foreground">
                     +20.1% from last month
                   </p>
@@ -136,18 +175,15 @@ export default function Page() {
             <Card>
               <CardHeader>
                 <CardTitle>Specification</CardTitle>
-                <CardDescription>Detailed vehicle's specification.</CardDescription>
+                <CardDescription>
+                  Detailed vehicle's specification.
+                </CardDescription>
               </CardHeader>
               <CardContent>
                 <Specification />
               </CardContent>
             </Card>
-
-
-
           </div>
-
-
         </div>
       </div>
     </>
