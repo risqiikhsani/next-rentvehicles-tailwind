@@ -26,19 +26,27 @@ export default function Page() {
   return (
     <>
       <Title title="Post Detail" />
-      <div className="grid grid-cols-3 gap-4">
-        <div className="mt-10">
-          <Image src="/car1.png" alt="pic" width={500} height={500} />
-        </div>
-        <div className="col-span-2">
-          <Badge variant="outline" className="my-2">Brand</Badge>
-          <h1 className="font-bold text-xl ml-4">Lamborghini</h1>
-          <Badge variant="outline" className="my-2">Model</Badge>
-          <h3 className="font-bold text-xl ml-4">Aventador</h3>
-          <Badge variant="outline" className="my-2">Type</Badge>
-          <h3 className="font-bold text-xl ml-4">Sport</h3>
-          <Badge variant="outline" className="my-2">Available unit</Badge>
-          <h4 className="font-bold text-xl ml-4">12</h4>
+      <div className="lg:grid lg:grid-cols-3 gap-4">
+
+        <Image src="/car1.png" alt="pic" width={500} height={500} />
+
+        <div className="col-span-2 mt-4 lg:mt-0">
+          <div className="flex gap-2 items-center">
+            <Badge variant="outline" className="my-2">Brand</Badge>
+            <h1 className="font-bold text-xl ml-4">Lamborghini</h1>
+          </div>
+          <div className="flex gap-2 items-center">
+            <Badge variant="outline" className="my-2">Model</Badge>
+            <h3 className="font-bold text-xl ml-4">Aventador</h3></div>
+          <div className="flex gap-2 items-center">
+            <Badge variant="outline" className="my-2">Year</Badge>
+            <h3 className="font-bold text-xl ml-4">2015</h3>
+          </div>
+          <div className="flex gap-2 items-center">
+            <Badge variant="outline" className="my-2">Type</Badge>
+            <h3 className="font-bold text-xl ml-4">Sport</h3>
+          </div>
+
 
           <div className="flex flex-col justify-end gap-4">
             <div className="grid gap-4 md:grid-cols-1 lg:grid-cols-3 my-4">
