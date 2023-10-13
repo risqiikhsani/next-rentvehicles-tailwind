@@ -26,84 +26,10 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import Review from "@/components/review";
 import { Separator } from "@/components/ui/separator";
+import Link from "next/link";
 
-const reviews = [
-  {
-    user: {
-      name: "kucing imut",
-      address: "California, US",
-    },
-    review_stars: 5,
-    review_title: "clean car !",
-    review_text:
-      "the car I use is super clean and like a new car . definately worth to rent ! thank you to this website , I'll do my next rent soon",
-  },
-  // Add more reviews here...
-  {
-    user: {
-      name: "John Doe",
-      address: "New York, US",
-    },
-    review_stars: 4,
-    review_title: "Great Service",
-    review_text:
-      "I had a great experience renting from this website. The car was in good condition, and the service was excellent.",
-  },
-  {
-    user: {
-      name: "Alice Smith",
-      address: "London, UK",
-    },
-    review_stars: 5,
-    review_title: "Highly Recommend",
-    review_text:
-      "The cars available for rent are fantastic, and the booking process was smooth. Will definitely rent again.",
-  },
-  {
-    user: {
-      name: "Emily Johnson",
-      address: "Chicago, US",
-    },
-    review_stars: 5,
-    review_title: "Excellent Experience",
-    review_text:
-      "I rented a car from this website, and it was a fantastic experience. The car was clean and well-maintained, and the customer service was top-notch. I highly recommend it!",
-  },
-  {
-    user: {
-      name: "David Smith",
-      address: "Los Angeles, US",
-    },
-    review_stars: 4,
-    review_title: "Smooth Rental Process",
-    review_text:
-      "Renting a car from this website was a breeze. The booking process was straightforward, and the car was ready on time. The only minor issue was the gas tank not being completely full, but overall, it was a good experience.",
-  },
-  {
-    user: {
-      name: "Sophia Lee",
-      address: "San Francisco, US",
-    },
-    review_stars: 5,
-    review_title: "Impressive Selection",
-    review_text:
-      "I was impressed with the wide selection of cars available for rent on this website. I was able to find the perfect car for my trip, and it made my vacation even more enjoyable.",
-  },
-  {
-    user: {
-      name: "Michael Brown",
-      address: "Miami, US",
-    },
-    review_stars: 3,
-    review_title: "Decent Rental",
-    review_text:
-      "The car I rented was in decent condition, but I did encounter some minor issues with the air conditioning. It could have been better, but it got the job done.",
-  },
-
-  // Add more reviews as needed...
-];
-
-export default function Page() {
+export default function Page({ params }: { params: { slug: string } }) {
+  const slug = params.slug
   return (
     <>
       <Title title="Post Detail" />
@@ -115,15 +41,15 @@ export default function Page() {
               <HeartIcon className="w-4 h-4 mr-2" />
               Favorite
             </Button>
-            <Button variant="outline" className="rounded-xl w-full">
-              <LockClosedIcon className="w-4 h-4 mr-2" />
-              Book
+            <Button variant="outline" className="rounded-xl w-full" asChild>
+              
+              <Link href={`/posts/${slug}/book`}><LockClosedIcon className="w-4 h-4 mr-2" />Book</Link>
             </Button>
           </div>
-          <Button className="rounded-xl w-full">
-              <KeyIcon className="w-4 h-4 mr-2" />
-              Rent
-            </Button>
+          <Button className="rounded-xl w-full" asChild>
+            
+            <Link href={`/posts/${slug}/rent`}><KeyIcon className="w-4 h-4 mr-2" />Rent</Link>
+          </Button>
         </div>
 
         <div className="col-span-2 mt-4 lg:mt-0">
@@ -300,13 +226,6 @@ export default function Page() {
                 <Specification />
               </CardContent>
             </Card>
-
-            <Separator className="my-4"/>
-            <Title title="Reviews" text="See all reviews from consumers"/>
-            <Button className="rounded-xl">See reviews</Button>
-            {reviews.map((review, index) => (
-              <Review key={index} {...review} />
-            ))}
           </div>
         </div>
       </div>

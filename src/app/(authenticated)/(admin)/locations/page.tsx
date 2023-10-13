@@ -1,3 +1,4 @@
+import Title from "@/components/typography/Title"
 import {
     Card,
     CardContent,
@@ -27,6 +28,7 @@ const locations = [
 export default function Page(){
     return(
         <>
+        <Title title="Locations" text="Set up your rent business locations"/>
         {locations.map((a,index) => (
             <Card key={index} className="m-10">
             <CardHeader>
