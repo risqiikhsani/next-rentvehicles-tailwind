@@ -31,7 +31,7 @@ export function middleware(request: NextRequest) {
 
   // if user is in restricted pages , but no token , redirect user to auth/login
   if (!isPublicPath && !request.cookies.has("accesstoken")) {
-    return NextResponse.redirect(new URL("/auth/login", request.url));
+    return NextResponse.redirect(new URL("/homepage", request.url));
   }
 
   // if user is in public pages, but have token, redirect user to / (app)
