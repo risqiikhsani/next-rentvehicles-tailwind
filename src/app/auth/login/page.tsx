@@ -35,18 +35,45 @@ interface LoginInput {
 
 export default function Page() {
 
-  const { register, 
-    handleSubmit, 
+  const { register,
+    handleSubmit,
     watch,
-    formState: { errors }, 
+    formState: { errors },
     reset } = useForm<LoginInput>();
 
+  const [loading, setLoading] = React.useState(false);
 
-
-  const onSubmit: SubmitHandler<LoginInput> = (data) => {
+  const onSubmit: SubmitHandler<LoginInput> = async (data) => {
     console.log('Submitted data:', data);
     // You can handle login logic here
-    reset();
+    setLoading(true);
+    try {
+      const response = await fetch("http://localhost:8080/api/login", {
+        method: "POST",
+        body: JSON.stringify(data),
+        headers: {
+          "Content-Type": "application/json"
+        }
+      });
+
+      const responseData = await response.json();
+
+      if (!response.ok) {
+        toast.error('Error');
+        setLoading(false);
+        return;
+      }
+
+      toast.success('Successfully Login');
+      console.log(responseData);
+
+      reset();
+    } catch (error) {
+      toast.error('Error occurred while processing');
+      console.error('Error:', error);
+    } finally {
+      setLoading(false); // Set loading to false when the request is done (success or error)
+    }
   }
 
   return (
@@ -65,16 +92,16 @@ export default function Page() {
         </CardHeader>
         <form onSubmit={handleSubmit(onSubmit)}>
           <CardContent>
-            
+
             <div className="grid w-full items-center gap-4">
               <div className="flex flex-col space-y-1.5">
                 <Label htmlFor="username">Username</Label>
-                <Input {...register("username", { required: "Username is required"})} id="username" placeholder="username" />
+                <Input {...register("username", { required: "Username is required" })} id="username" placeholder="username" />
                 {errors.username && <p className="text-red-600">{errors.username.message}</p>}
               </div>
               <div className="flex flex-col space-y-1.5">
                 <Label htmlFor="password">Password</Label>
-                <Input type="password" {...register("password", { required: "Password is required"})} id="password" />
+                <Input type="password" {...register("password", { required: "Password is required" })} id="password" />
                 {errors.password && <p className="text-red-600">{errors.password.message}</p>}
               </div>
             </div>
@@ -82,7 +109,13 @@ export default function Page() {
           </CardContent>
           <CardFooter className="flex">
             <div className="flex-grow" />
-            <Button type="submit" onClick={() => toast.success('Login')}>Login</Button>
+            <Button type="submit">
+              {loading && (
+                <svg className="animate-spin h-5 w-5 mr-3 ..." xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99" />
+                </svg>
+              )}
+              Login</Button>
           </CardFooter>
         </form>
 
