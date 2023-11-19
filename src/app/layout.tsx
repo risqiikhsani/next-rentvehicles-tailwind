@@ -6,7 +6,9 @@ import '@/styles/globals.css'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import { ThemeProvider } from "@/components/theme-provider"
-import { Toaster } from "@/components/ui/toaster"
+
+import { Toaster, toast } from 'sonner'
+
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
@@ -32,8 +34,8 @@ export default function RootLayout({
           <main className="container mx-auto mt-20 flex">
             {children}
           </main>
-          <Toaster />
           <Footer />
+          <Toaster position="top-center" richColors/>
         </ThemeProvider>
 
       </body>

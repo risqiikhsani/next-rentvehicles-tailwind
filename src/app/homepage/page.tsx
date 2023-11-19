@@ -7,7 +7,7 @@ import { useState } from "react";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/solid";
 import Hero2 from "@/components/hero2";
 import LogoCarousel from "@/components/LogoCarousel";
-import ImageCarousel from "@/components/image-carousel";
+import Carousel from "@/components/carousel";
 import Hero3 from "@/components/hero3";
 
 const reviews = [
@@ -104,7 +104,7 @@ export default function Page() {
             <Hero3/>
             <Separator className="my-6"/>
             <h1 className="text-6xl font-bold align-middle text-center my-5">Customer Photos</h1>
-            <ImageCarousel images={carouselImages}/>
+            <Carousel images={carouselImages}/>
 
             <Separator className="my-6"/>
             <h1 className="text-6xl font-bold align-middle text-center my-5">Customer Reviews</h1>
