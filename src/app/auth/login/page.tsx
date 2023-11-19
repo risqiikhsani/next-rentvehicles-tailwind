@@ -42,11 +42,13 @@ export default function Page() {
     reset } = useForm<LoginInput>();
 
   const [loading, setLoading] = React.useState(false);
+  const [error,setError] = React.useState("")
 
   const onSubmit: SubmitHandler<LoginInput> = async (data) => {
     console.log('Submitted data:', data);
     // You can handle login logic here
     setLoading(true);
+    setError("")
     try {
       const response = await fetch("http://localhost:8080/api/login", {
         method: "POST",
@@ -60,6 +62,7 @@ export default function Page() {
 
       if (!response.ok) {
         toast.error('Error');
+        setError(responseData.error)
         setLoading(false);
         return;
       }
@@ -91,8 +94,8 @@ export default function Page() {
           <CardDescription>Enter your username and password !</CardDescription>
         </CardHeader>
         <form onSubmit={handleSubmit(onSubmit)}>
-          <CardContent>
-
+          <CardContent> 
+            {error && <p className="text-red-600">{error}</p>}
             <div className="grid w-full items-center gap-4">
               <div className="flex flex-col space-y-1.5">
                 <Label htmlFor="username">Username</Label>
@@ -109,7 +112,7 @@ export default function Page() {
           </CardContent>
           <CardFooter className="flex">
             <div className="flex-grow" />
-            <Button type="submit">
+            <Button type="submit" className="transition duration-300 ease-in-out hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500">
               {loading && (
                 <svg className="animate-spin h-5 w-5 mr-3 ..." xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99" />
