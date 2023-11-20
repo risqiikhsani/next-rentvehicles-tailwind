@@ -86,7 +86,7 @@ const carouselImages = [
     '/reviews/4.jpg',
     '/reviews/5.jpg',
     '/reviews/6.jpg',
-  ];
+];
 
 export default function Page() {
 
@@ -100,13 +100,36 @@ export default function Page() {
                     <LogoCarousel />
                 </div>
             </div>
-            <Separator className="my-6"/>
-            <Hero3/>
-            <Separator className="my-6"/>
-            <h1 className="text-6xl font-bold align-middle text-center my-5">Customer Photos</h1>
-            <Carousel images={carouselImages}/>
+            <Separator className="my-6" />
+            <Hero3 />
+            <Separator className="my-6" />
+            <div className="flex flex-col items-center justify-center my-20">
+                <div className="flex p-10 rounded-2xl shadow-xl max-w-2xl hover:cursor-pointer transition ease-in-out delay-150 bg-blue-500 hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500 duration-300">
+                    <h1 className="text-6xl font-bold text-center my-5">Try searching for our cars!</h1>
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        strokeWidth={1.5}
+                        stroke="currentColor"
+                        className="w-40 h-40"
+                    >
+                        <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"
+                        />
+                    </svg>
+                </div>
+                <p className="my-10 text-3xl font-light">Search cars and see the prices for free, without making an account!</p>
+            </div>
 
-            <Separator className="my-6"/>
+
+            <Separator className="my-6" />
+            <h1 className="text-6xl font-bold align-middle text-center my-5">Customer Photos</h1>
+            <Carousel images={carouselImages} />
+
+            <Separator className="my-6" />
             <h1 className="text-6xl font-bold align-middle text-center my-5">Customer Reviews</h1>
 
             <div className="grid grid-cols-3 space-x-4">

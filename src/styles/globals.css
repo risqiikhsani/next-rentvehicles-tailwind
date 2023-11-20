@@ -140,7 +140,7 @@
 }
 
 .hero__subtitle {
-  @apply text-[27px] text-black font-light mt-5;
+  @apply text-[27px] font-light mt-5;
 }
 
 .hero__image-container {
@@ -170,7 +170,7 @@
 }
 
 .hero__subtitle2 {
-  @apply text-[27px] text-black font-light mt-5;
+  @apply text-[27px] font-light mt-5;
   /* Keep the subtitle styles as they are */
 }
 
