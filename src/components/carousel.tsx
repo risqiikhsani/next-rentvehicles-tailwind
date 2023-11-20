@@ -30,9 +30,9 @@ export default function Carousel({ images }: ImageProps) {
           transform: `translateX(-${current * 100}%)`,
         }}
       >
-        {images.map((s) => {
+        {images.map((s,index) => {
           return (
-            <div className="min-w-full">
+            <div className="min-w-full" key={index}>
               <Image
                 width={1000}
                 height={600}
