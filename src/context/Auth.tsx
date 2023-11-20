@@ -9,25 +9,74 @@ import {
     ReactNode,
     createContext,
     useContext,
-    useEffect
+    useEffect,
+    useState
 } from "react";
 import { toast } from "sonner";
 
+interface UserData {
+    ID: number;
+    CreatedAt: string;
+    UpdatedAt: string;
+    DeletedAt: string | null;
+    publicUsername: string;
+    name: string;
+    about: string;
+    gender: string;
+    role: string;
+    is_active: string; // Consider changing to boolean if it's a boolean value in your application
+    AccountID: number;
+}
+
+
+interface AccountData {
+    ID: number;
+    CreatedAt: string;
+    UpdatedAt: string;
+    DeletedAt: string | null;
+    username: string;
+    email: string;
+    email_verified: boolean;
+    phone: string;
+}
+
 export interface IAuthContext {
-    handleLoginSuccess: (data:any) => void;
+    handleLoginSuccess: (data: any) => void;
     logoutUser: () => void;
+    user: UserData,
+    account: AccountData,
 }
 
 const authContextDefaultValues: IAuthContext = {
-    handleLoginSuccess: (data:any) => { },
+    handleLoginSuccess: (data: any) => { },
     logoutUser: () => { },
+    user: {
+        ID: 0,
+        CreatedAt: "",
+        UpdatedAt: "",
+        DeletedAt: null,
+        publicUsername: "",
+        name: "",
+        about: "",
+        gender: "",
+        role: "",
+        is_active: "", // Consider changing to boolean if it's a boolean value in your application
+        AccountID: 0,
+    },
+    account: {
+        ID: 0,
+        CreatedAt: "",
+        UpdatedAt: "",
+        DeletedAt: null,
+        username: "",
+        email: "",
+        email_verified: false,
+        phone: ""
+    }
 };
 
 export const AuthContext = createContext<IAuthContext>(authContextDefaultValues);
 
-export function useAuth() {
-    return useContext(AuthContext);
-}
 
 interface Props {
     children: ReactNode;
@@ -36,14 +85,20 @@ interface Props {
 
 
 export function AuthHandler({ children }: Props) {
+
+    const [user, setUser] = useState(authContextDefaultValues.user)
+    const [account, setAccount] = useState(authContextDefaultValues.account)
+    const [loading, setLoading] = useState(true)
+
     // const dispatch = useAppDispatch();  
     const router = useRouter()
     const fetchUserData = async (): Promise<boolean> => {
+
         try {
             // get user
-            // const response = await my.get_user();
-            // const data = response.data;
-
+            const response = await api.get('api/me/user')
+            const data: UserData = response.data;
+            setUser(data)
             // Set user data
 
             return true;
@@ -54,17 +109,17 @@ export function AuthHandler({ children }: Props) {
         }
     };
 
-    const fetchUserProfileData = async (): Promise<boolean> => {
-        try {
-            // get user
-            // const response = await my.get_profile();
-            // const data = response.data;
+    const fetchAccountData = async (): Promise<boolean> => {
 
-            // Set user data
+        try {
+            // get account
+            const response = await api.get('api/me/account')
+            const data: AccountData = response.data;
+            setAccount(data)
 
             return true;
         } catch (error) {
-            toast.error('Error fetching user profile data');
+            toast.error('Error fetching account data');
             console.error('Error:', error);
             return false;
         }
@@ -72,79 +127,103 @@ export function AuthHandler({ children }: Props) {
 
     const logoutUser = () => {
         Cookies.remove('accesstoken')
-        delete api.defaults.headers.Authorization
+        // delete api.defaults.headers.Authorization
 
         // Clear user data and set authenticated to false
         //   dispatch(clearUser());
-        //   dispatch(clearUserProfile());
+        //   dispatch(clearUseraccount());
 
         return router.refresh()
 
     };
 
- 
+
     const handleLoginSuccess = async (data: any) => {
+
         if (data.token) {
             Cookies.set('accesstoken', data.token, { expires: 60 })
-            api.defaults.headers.Authorization = `Bearer ${data.token}`
+            // api.defaults.headers.Authorization = `Bearer ${data.token}`
         }
 
-        // Set cookies or perform any other login logic
-        // ...
-
-        try {
-            // Fetch user data and user profile data simultaneously using Promise.all
-            const [userDataSuccess, userProfileDataSuccess] = await Promise.all([
-                fetchUserData(),
-                fetchUserProfileData(),
-            ]);
-
-            // If both fetches are successful
-            if (userDataSuccess && userProfileDataSuccess) {
-                // set user in context/redux
-                return router.refresh()
-            } else {
-                // Handle the case when either or both fetches failed
-                // (e.g., show an error message or perform some other actions)
-                toast.error('Error fetching user data or profile data');
-                console.error('Error fetching user data or profile data');
-            }
-        } catch (error) {
-            // Handle any errors that occurred during login or fetches
-            toast.error('Error fetching user data or profile data');
-            console.error('Error during login:', error);
-            // You can also set an error state here to display an error message to the user
-        }
+        fetchData()
     };
 
     const value = {
         handleLoginSuccess,
         logoutUser,
+        user,
+        account
     };
 
     useEffect(() => {
-        // Fetch user data and user profile data simultaneously using Promise.all
-        Promise.all([fetchUserData(), fetchUserProfileData()])
-            .then(([userDataSuccess, userProfileDataSuccess]) => {
-                if (userDataSuccess && userProfileDataSuccess) {
-                    toast.success('Successfully fetching user data and user profile data');
-                    // set user data
-                }
-            })
-            .catch((error) => {
-                // Handle any errors that occurred during fetch
-                toast.error('Error fetching user data or profile data');
-                console.error('Error fetching data:', error);
-            });
+        fetchData();
     }, []);
 
+    // this below code runs twice per fetch , so 4 fetch ?
+    
+    // const fetchData = async () => {
+    //     setLoading(true); // Set loading to true when component mounts or updates
+    //     try {
+    //         const [userDataSuccess, accountDataSuccess] = await Promise.all([
+    //             fetchUserData(),
+    //             fetchAccountData(),
+    //         ]);
+
+    //         if (userDataSuccess && accountDataSuccess) {
+    //             toast.success('Successfully fetching user data and user account data');
+    //             // set user data
+    //             // set user in context/redux
+    //             return router.refresh()
+    //         }
+    //     } catch (error) {
+    //         // Handle any errors that occurred during fetch
+    //         toast.error('Error fetching user data or account data');
+    //         console.error('Error fetching data:', error);
+    //     } finally {
+    //         setLoading(false); // Set loading to false regardless of success or error
+    //     }
+    // };
+
+    // In your code, the fetchData function is called inside the handleLoginSuccess function. Also, you've initialized a call to fetchData inside the useEffect hook without any dependencies array, which means it runs once on the initial render.
+
+    // The fetchData function, in turn, invokes both fetchUserData and fetchAccountData, leading to two fetch calls. Since both of these functions are asynchronous, they will not necessarily complete simultaneously. Therefore, the possibility of running twice might stem from these asynchronous calls.
+
+    // One way to ensure that the fetching only happens once is to refactor the code to fetch user and account data in a sequence rather than concurrently. You can fetch account data only after the user data has been successfully fetched and set.
+
+    const fetchData = async () => {
+        setLoading(true);
+
+        try {
+            const userDataSuccess = await fetchUserData();
+
+            if (userDataSuccess) {
+                const accountDataSuccess = await fetchAccountData();
+                if (accountDataSuccess) {
+                    toast.success('Successfully fetched user data and account data');
+                    // set user data
+                    // set user in context/redux
+                    return router.refresh();
+                }
+            }
+        } catch (error) {
+            toast.error('Error fetching user data or account data');
+            console.error('Error fetching data:', error);
+        } finally {
+            setLoading(false);
+        }
+    };
 
 
     return (
         <>
             <AuthContext.Provider value={value}>
+                {loading && (<p className="text-orange-500">loading....</p>)}
                 {children}
             </AuthContext.Provider>
         </>
     );
+}
+
+export function useAuth() {
+    return useContext(AuthContext);
 }

@@ -32,7 +32,7 @@ const Hero2 = () => {
       </div>
       <div className="hero__image-container2">
         <div className="hero__image2">
-          <Image src="/hero2.png" alt="hero" fill className="object-contain" />
+          <Image src="/hero2.png" alt="hero" fill sizes="100%" className="object-contain" />
         </div>
 
         <div className="hero__image-overlay2" />

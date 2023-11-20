@@ -8,6 +8,7 @@ import { Inter } from 'next/font/google'
 import { ThemeProvider } from "@/components/theme-provider"
 
 import { Toaster, toast } from 'sonner'
+import { AuthHandler } from '@/context/Auth'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -24,6 +25,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
+        <AuthHandler>
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
@@ -37,7 +39,7 @@ export default function RootLayout({
           <Footer />
           <Toaster position="top-center" richColors/>
         </ThemeProvider>
-
+        </AuthHandler>
       </body>
     </html>
   )

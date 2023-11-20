@@ -1,12 +1,14 @@
 import Axios from "axios";
 import Cookies from 'js-cookie'
 
+const BASE_URL = "http://localhost:8080"
+
 const api = Axios.create({
-    baseURL: "http://localhost:8080",
+    baseURL: BASE_URL,
     headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-    }
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
 });
 
 // Add a request interceptor

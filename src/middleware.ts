@@ -14,8 +14,9 @@ export function middleware(request: NextRequest) {
   //   https://nextjs.org/docs/app/building-your-application/routing/middleware
   // let cookie = request.cookies.get('nextjs')
   // console.log(cookie) // => { name: 'nextjs', value: 'fast', Path: '/' }
-  const allCookies = request.cookies.getAll();
-  console.log(allCookies); // => [{ name: 'nextjs', value: 'fast' }]
+  
+  // const allCookies = request.cookies.getAll();
+  // console.log(allCookies); // => [{ name: 'nextjs', value: 'fast' }]
 
   const path = request.nextUrl.pathname;
 

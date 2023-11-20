@@ -26,6 +26,7 @@ import { toast } from "sonner"
 import { LoginAccount } from "./actions"
 
 import { useForm, SubmitHandler } from "react-hook-form"
+import { useAuth } from "@/context/Auth"
 
 
 interface LoginInput {
@@ -34,6 +35,8 @@ interface LoginInput {
 }
 
 export default function Page() {
+
+  const { handleLoginSuccess } = useAuth();
 
   const { register,
     handleSubmit,
@@ -67,8 +70,8 @@ export default function Page() {
         return;
       }
 
+      handleLoginSuccess(responseData)
       toast.success('Successfully Login');
-      console.log(responseData);
 
       reset();
     } catch (error) {
