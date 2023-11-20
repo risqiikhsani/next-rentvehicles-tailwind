@@ -132,7 +132,9 @@ export function AuthHandler({ children }: Props) {
         // Clear user data and set authenticated to false
         //   dispatch(clearUser());
         //   dispatch(clearUseraccount());
-
+        setUser(authContextDefaultValues.user)
+        setAccount(authContextDefaultValues.account)
+        toast.success("Successfully Logout")
         return router.refresh()
 
     };
@@ -156,11 +158,13 @@ export function AuthHandler({ children }: Props) {
     };
 
     useEffect(() => {
+        console.log(user)
+        console.log(account)
         fetchData();
     }, []);
 
     // this below code runs twice per fetch , so 4 fetch ?
-    
+
     // const fetchData = async () => {
     //     setLoading(true); // Set loading to true when component mounts or updates
     //     try {
