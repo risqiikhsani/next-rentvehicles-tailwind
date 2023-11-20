@@ -1,6 +1,9 @@
 "use client"
+import api from "@/lib/axios";
 import { redirect } from "next/navigation";
 import { useRouter } from "next/navigation";
+import Cookies from 'js-cookie'
+
 
 import {
     ReactNode,
@@ -8,14 +11,15 @@ import {
     useContext,
     useEffect
 } from "react";
+import { toast } from "sonner";
 
 export interface IAuthContext {
-    handleLoginSuccess: () => void;
+    handleLoginSuccess: (data:any) => void;
     logoutUser: () => void;
 }
 
 const authContextDefaultValues: IAuthContext = {
-    handleLoginSuccess: () => { },
+    handleLoginSuccess: (data:any) => { },
     logoutUser: () => { },
 };
 
@@ -34,8 +38,7 @@ interface Props {
 export function AuthHandler({ children }: Props) {
     // const dispatch = useAppDispatch();  
     const router = useRouter()
-    const getUserData = async (): Promise<boolean> => {
-        console.log("getUserData is running")
+    const fetchUserData = async (): Promise<boolean> => {
         try {
             // get user
             // const response = await my.get_user();
@@ -45,13 +48,13 @@ export function AuthHandler({ children }: Props) {
 
             return true;
         } catch (error) {
-            console.log("error fetching user data")
+            toast.error('Error fetching user data');
+            console.error('Error:', error);
             return false;
         }
     };
 
-    const getUserProfileData = async (): Promise<boolean> => {
-        console.log("getUserProfileData is running")
+    const fetchUserProfileData = async (): Promise<boolean> => {
         try {
             // get user
             // const response = await my.get_profile();
@@ -61,17 +64,15 @@ export function AuthHandler({ children }: Props) {
 
             return true;
         } catch (error) {
-            console.log("error fetching user profile data")
+            toast.error('Error fetching user profile data');
+            console.error('Error:', error);
             return false;
         }
     };
 
     const logoutUser = () => {
-        // Perform the logout logic (e.g., remove cookies, clear local storage)
-        //   deleteCookie("access_token")
-        //   deleteCookie("refresh_token")
-        //   deleteCookie("authenticated")
-        // ...
+        Cookies.remove('accesstoken')
+        delete api.defaults.headers.Authorization
 
         // Clear user data and set authenticated to false
         //   dispatch(clearUser());
@@ -81,51 +82,58 @@ export function AuthHandler({ children }: Props) {
 
     };
 
-    const handleLoginSuccess = async () => {
-        console.log("handleLoginSuccess is running")
+ 
+    const handleLoginSuccess = async (data: any) => {
+        if (data.token) {
+            Cookies.set('accesstoken', data.token, { expires: 60 })
+            api.defaults.headers.Authorization = `Bearer ${data.token}`
+        }
+
         // Set cookies or perform any other login logic
         // ...
 
         try {
             // Fetch user data and user profile data simultaneously using Promise.all
             const [userDataSuccess, userProfileDataSuccess] = await Promise.all([
-                getUserData(),
-                getUserProfileData(),
+                fetchUserData(),
+                fetchUserProfileData(),
             ]);
 
-            // If both fetches are successful, set the authenticated state to true
+            // If both fetches are successful
             if (userDataSuccess && userProfileDataSuccess) {
-                //   setCookie("authenticated",true,7)
+                // set user in context/redux
                 return router.refresh()
             } else {
                 // Handle the case when either or both fetches failed
                 // (e.g., show an error message or perform some other actions)
-                console.log('Login failed: Some data fetches were unsuccessful.');
+                toast.error('Error fetching user data or profile data');
+                console.error('Error fetching user data or profile data');
             }
         } catch (error) {
             // Handle any errors that occurred during login or fetches
+            toast.error('Error fetching user data or profile data');
             console.error('Error during login:', error);
             // You can also set an error state here to display an error message to the user
         }
     };
 
     const value = {
-
         handleLoginSuccess,
         logoutUser,
     };
 
     useEffect(() => {
         // Fetch user data and user profile data simultaneously using Promise.all
-        Promise.all([getUserData(), getUserProfileData()])
+        Promise.all([fetchUserData(), fetchUserProfileData()])
             .then(([userDataSuccess, userProfileDataSuccess]) => {
-                // If both fetches are successful, set the authenticated state to true
                 if (userDataSuccess && userProfileDataSuccess) {
-                    // setCookie("authenticated",true,7)
+                    toast.success('Successfully fetching user data and user profile data');
+                    // set user data
                 }
             })
             .catch((error) => {
                 // Handle any errors that occurred during fetch
+                toast.error('Error fetching user data or profile data');
                 console.error('Error fetching data:', error);
             });
     }, []);
