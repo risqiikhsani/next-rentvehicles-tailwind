@@ -26,15 +26,28 @@ import {
 } from "@/components/ui/dialog";
 import Review from "@/components/review";
 import Title from "@/components/typography/Title";
+import { PostType } from "@/types/types";
 
+async function getData() {
+  // const res = await fetch('http://localhost:8080/api/posts',{ next: { tags: ['posts'] } })
+  const res = await fetch('http://localhost:8080/api/posts', { cache: 'no-store' })
 
+  if (!res.ok) {
+    // This will activate the closest `error.js` Error Boundary
+    throw new Error('Failed to fetch data')
+  }
 
-export default function Home() {
+  return res.json()
+}
+
+export default async function Home() {
+  const data = await getData()
+
   return (
     <>
-    <Title title="Home" text="Find anything to rent!"/>
+      <Title title="Home" text="Find anything to rent!" />
       <div className="flex justify-between items-center my-5">
-        
+
         <div className="flex gap-4">
           <Input id="search" type="text" placeholder="search" />
           <Button>Search</Button>
@@ -73,21 +86,10 @@ export default function Home() {
 
       <Separator className="my-6" />
 
-      <div className="flex flex-wrap gap-4 justify-center">
-        <CarCard />
-        <CarCard />
-        <CarCard />
-        <CarCard />
-        <CarCard />
-        <CarCard />
-        <CarCard />
-        <CarCard />
-        <CarCard />
-        <CarCard />
-        <CarCard />
-        <CarCard />
-        <CarCard />
-        <CarCard />
+      <div className="flex flex-wrap gap-4 ">
+        {data && data.map((a: PostType,index: number) => (
+          <CarCard data={a} key={index}/>
+        ))}
       </div>
     </>
   );

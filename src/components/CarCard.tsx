@@ -31,41 +31,43 @@ import {
     TableRow,
 } from "@/components/ui/table"
 import { Badge } from "./ui/badge"
+import { PostType } from "@/types/types"
+import Link from "next/link"
 
 
-export function CarCard() {
+export function CarCard({ data }: { data: PostType }) {
     return (
         <Card className="w-[300px] hover:border-solid hover:border-2 hover:border-indigo-600">
             <CardHeader>
                 <div className="flex">
-                    <div className="flex-grow">
-                        <CardTitle>Lamborghini</CardTitle>
-                        <CardDescription>Aventador</CardDescription>
+                    <div className="w-full">
+                        <CardTitle className="text-xl italic">{data.brand}</CardTitle>
+                        <CardDescription className="text-lg">{data.brand_model}</CardDescription>
                     </div>
-                    <div className="flex flex-col justify-end">
+                    <div className="flex flex-col w-full">
                         <div className="rounded-md my-1 p-1 bg-emerald-400">
-                            $50 / day
+                            {data.price_per_day}
                         </div>
                         <div className="rounded-md my-1 p-1 bg-emerald-400">
-                            $300 / week
+                            {data.price_per_week}
                         </div>
                         <div className="rounded-md my-1 p-1 bg-emerald-400">
-                            $1100 / month
+                            {data.price_per_month}
                         </div>
                     </div>
                 </div>
             </CardHeader>
             <CardContent>
-                <Image src="/car1.png" width={920} height={360} alt="car" />
+                <Image src={data.MainImage.url} width={920} height={360} alt="car" className="rounded-xl" />
                 <Table className="max-w-sm my-2">
                     <TableBody>
-                    <TableRow className="hover:bg-inherit">
+                        <TableRow className="hover:bg-inherit">
                             <TableCell className="font-medium">
                                 <Badge variant="outline" className="my-2">
                                     Type
                                 </Badge>
                             </TableCell>
-                            <TableCell className="text-left">Sport</TableCell>
+                            <TableCell className="text-left">{data.vehicle_type}</TableCell>
                         </TableRow>
                         <TableRow className="hover:bg-inherit">
                             <TableCell className="font-medium">
@@ -73,7 +75,7 @@ export function CarCard() {
                                     Transmission
                                 </Badge>
                             </TableCell>
-                            <TableCell className="text-left">Manual</TableCell>
+                            <TableCell className="text-left">{data.transmission}</TableCell>
                         </TableRow>
                         <TableRow className="hover:bg-inherit">
                             <TableCell className="font-medium">
@@ -81,7 +83,7 @@ export function CarCard() {
                                     Fuel Type
                                 </Badge>
                             </TableCell>
-                            <TableCell className="text-left">Gasoline</TableCell>
+                            <TableCell className="text-left">{data.fuel_type}</TableCell>
                         </TableRow>
                     </TableBody>
                 </Table>
@@ -90,9 +92,9 @@ export function CarCard() {
                 <Button variant="outline">
                     <HeartIcon className="mr-2 h-4 w-4" />
                     Favorite</Button>
-                <Button>
-                    See Detail
-                    <ArrowRightIcon className="ml-2 h-4 w-4" /></Button>
+
+                <Button asChild><Link href={`posts/${data.ID}`}>See Detail
+                    <ArrowRightIcon className="ml-2 h-4 w-4" /></Link></Button>
             </CardFooter>
         </Card>
     )

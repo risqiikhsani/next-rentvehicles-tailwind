@@ -3,8 +3,9 @@ import {
     AvatarFallback,
     AvatarImage,
 } from "@/components/ui/avatar"
+import { PostType } from "@/types/types"
 
-export default function Specification() {
+export default function Specification({data}: {data:PostType}) {
     return (
         <div className="space-y-8">
             <div className="flex items-center">
@@ -18,7 +19,7 @@ export default function Specification() {
                         Learn more about transmission.
                     </p>
                 </div>
-                <div className="ml-auto font-medium">Automatic</div>
+                <div className="ml-auto font-medium">{data.transmission}</div>
             </div>
             <div className="flex items-center">
                 <Avatar className="flex h-9 w-9 items-center justify-center space-y-0 border dark:bg-slate-400">
@@ -29,7 +30,7 @@ export default function Specification() {
                     <p className="text-sm font-medium leading-none">Fuel Type</p>
                     <p className="text-sm text-muted-foreground">Learn more about fuel types.</p>
                 </div>
-                <div className="ml-auto font-medium">Gasoline</div>
+                <div className="ml-auto font-medium">{data.fuel_type}</div>
             </div>
             <div className="flex items-center">
                 <Avatar className="h-9 w-9 items-center justify-center space-y-0 border dark:bg-slate-400">
@@ -64,7 +65,7 @@ export default function Specification() {
                     <p className="text-sm font-medium leading-none">Available Colors</p>
                     <p className="text-sm text-muted-foreground">Available colors to pick from</p>
                 </div>
-                <div className="ml-auto font-medium">black,orange</div>
+                <div className="ml-auto font-medium">{data.body_color}</div>
             </div>
         </div>
     )
