@@ -27,8 +27,13 @@ import {
 import Review from "@/components/review";
 import Title from "@/components/typography/Title";
 import { PostType } from "@/types/types";
+import { Suspense } from "react";
+import PostSkeleton from "@/components/spinner/post-skeleton";
 
 async function getData() {
+  const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
+
+  await delay(2000); // Introduce a delay of 2 seconds before fetching data
   // const res = await fetch('http://localhost:8080/api/posts',{ next: { tags: ['posts'] } })
   const res = await fetch('http://localhost:8080/api/posts', { cache: 'no-store' })
 
@@ -39,6 +44,8 @@ async function getData() {
 
   return res.json()
 }
+
+
 
 export default async function Home() {
   const data: PostType[] = await getData()
@@ -87,9 +94,18 @@ export default async function Home() {
       <Separator className="my-6" />
 
       <div className="flex flex-wrap gap-4 ">
+        <Suspense fallback={<>
+          <PostSkeleton/>
+          <PostSkeleton/>
+          <PostSkeleton/>
+          <PostSkeleton/>
+          <PostSkeleton/>
+          <PostSkeleton/>
+        </>}>
         {data && data.map((a: PostType,index: number) => (
           <CarCard data={a} key={index}/>
         ))}
+        </Suspense>
       </div>
     </>
   );
