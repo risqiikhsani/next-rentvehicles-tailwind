@@ -28,7 +28,7 @@ import { Separator } from "@/components/ui/separator";
 import { Switch } from "@/components/ui/switch";
 import { useDropzone, FileWithPath } from "react-dropzone";
 import Image from "next/image";
-import { useCallback } from "react";
+import { useCallback, useEffect, useState } from "react";
 import {
   carFuelTypes,
   carTransmission,
@@ -36,15 +36,18 @@ import {
   manufacturers,
 } from "@/constants";
 import { LocationType } from "@/types/types";
+import { toast } from "sonner";
+import api from "@/lib/axios";
+import axios from "axios";
 
 const formSchema = z.object({
   brand: z.string().min(2, {
     message: "brand must be at least 2 characters.",
   }),
-  model: z.string().min(2, {
+  brand_model: z.string().min(2, {
     message: "model must be at least 2 characters.",
   }),
-  type: z.string().min(2, {
+  vehicle_type: z.string().min(2, {
     message: "type must be at least 2 characters.",
   }),
   year: z.coerce.number().min(4, {
@@ -83,32 +86,47 @@ const formSchema = z.object({
   // })
 });
 
-async function getLocationsData() {
-  // const res = await fetch('http://localhost:8080/api/posts',{ next: { tags: ['posts'] } })
-  const res = await fetch("http://localhost:8080/api/locations", {
-    cache: "no-store",
-  });
-
-  if (!res.ok) {
-    // This will activate the closest `error.js` Error Boundary
-    throw new Error("Failed to fetch data");
-  }
-
-  return res.json();
-}
 
 
 
-export default async function Page() {
-  const locations: LocationType[] = await getLocationsData();
+export default function Page() {
+
+  const [locations, setLocations] = useState<LocationType[]>([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch("http://localhost:8080/api/locations", {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+
+        if (!response.ok) {
+          throw new Error('Failed to fetch data');
+        }
+
+        const data = await response.json();
+        setLocations(data);
+      } catch (error) {
+        // Handle error here, you might want to log it or set an error state
+        toast.error("Error fetching locations");
+      }
+    };
+
+    fetchData();
+  }, []);
+
+
+
   // 1. Define your form.
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       brand: "",
-      model: "",
+      brand_model: "",
       year: undefined,
-      type: "",
+      vehicle_type: "",
       transmission: "manual",
       fuel_type: "gasoline",
       price_per_day: undefined,
@@ -124,10 +142,62 @@ export default async function Page() {
   });
 
   // 2. Define a submit handler.
-  function onSubmit(values: z.infer<typeof formSchema>) {
+  async function onSubmit(values: z.infer<typeof formSchema>) {
     // Do something with the form values.
     // ✅ This will be type-safe and validated.
+
     console.log(values);
+
+    try {
+      const formData = new FormData();
+
+      formData.append("brand", values.brand)
+      formData.append("brand_model", values.brand_model)
+      formData.append("vehicle_type", values.vehicle_type)
+      formData.append("year", values.year.toString())
+      formData.append("transmission", values.transmission)
+      formData.append("fuel_type", values.fuel_type)
+      formData.append("price_per_day", values.price_per_day.toString())
+      formData.append("price_per_week", values.price_per_week.toString())
+      formData.append("price_per_month", values.price_per_month.toString())
+      formData.append("body_color", values.body_color)
+      formData.append("location_id", values.location_id)
+      formData.append("license_plate", values.license_plate)
+      formData.append("bookable", values.bookable ? 'true' : 'false')
+      formData.append("available", values.available ? 'true' : 'false')
+
+      if (acceptedMainImage !== null) {
+        acceptedMainImage.forEach(element => {
+          formData.append("main_image", element);
+        });
+      }
+
+      if (acceptedImages !== null) {
+        acceptedImages.forEach(element => {
+          formData.append("images", element);
+        });
+      }
+
+      const response = await api.post("/api/posts", formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      })
+      // Handle successful submission
+      toast.success('Data submitted successfully!');
+      return response.data
+    } catch (error: unknown) {
+      if (axios.isAxiosError(error)) {
+        // Axios error
+        if (error.response) {
+          toast.error(error.response.data)
+        } 
+      } else {
+        // Non-Axios error
+        console.log('Non-Axios error:', error);
+      }
+      throw error;
+    }
   }
 
   const {
@@ -137,8 +207,7 @@ export default async function Page() {
   } = useDropzone({
     onDrop: (files) => console.log(files),
     accept: {
-      "image/png": [".png"],
-      "text/html": [".html", ".htm"],
+      "image/png": [".png"]
     },
     maxFiles: 1,
   });
@@ -159,8 +228,7 @@ export default async function Page() {
   } = useDropzone({
     onDrop: (files) => console.log(files),
     accept: {
-      "image/png": [".png", ".jpg", ".jpeg"],
-      "text/html": [".html", ".htm"],
+      "image/png": [".png", ".jpg", ".jpeg"]
     },
     maxFiles: 3,
   });
@@ -214,7 +282,7 @@ export default async function Page() {
             />
             <FormField
               control={form.control}
-              name="model"
+              name="brand_model"
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Model</FormLabel>
@@ -269,7 +337,7 @@ export default async function Page() {
 
             <FormField
               control={form.control}
-              name="type"
+              name="vehicle_type"
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Type</FormLabel>
