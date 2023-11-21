@@ -14,6 +14,23 @@ export interface ImageType {
   url: string;
 }
 
+export interface LocationType {
+  ID: number;
+  CreatedAt: string;
+  UpdatedAt: string;
+  DeletedAt: string | null;
+  Name: string;
+  Description: string;
+  StreetName: string;
+  Address: string;
+  PostCode: string;
+  City: string;
+  Latitude: string;
+  Longitude: string;
+  UserID: number;
+}
+
+
 export interface PostType {
   ID: number;
   CreatedAt: string;
