@@ -41,7 +41,7 @@ async function getData() {
 }
 
 export default async function Home() {
-  const data = await getData()
+  const data: PostType[] = await getData()
 
   return (
     <>

@@ -13,6 +13,8 @@ import {
 } from "react";
 import { toast } from "sonner";
 import CarLoader from "@/components/spinner/car-loader";
+import Loader2 from "@/components/spinner/Loader2";
+import CircleLoader from "@/components/spinner/circle-loader";
 
 interface UserData {
   ID: number;
@@ -213,14 +215,13 @@ export function AuthHandler({ children }: Props) {
     <>
       <AuthContext.Provider value={value}>
         <div className="relative">
-          {loading && (
+          {loading ? (
             <div className="absolute flex items-center justify-center w-full ">
               {/* Your CarLoader component */}
-              <CarLoader />
+              <CircleLoader />
             </div>
-          )}
-          {/* Your children components */}
-          {children}
+          ) : children}
+
         </div>
       </AuthContext.Provider>
     </>
