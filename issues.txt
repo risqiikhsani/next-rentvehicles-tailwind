@@ -1,0 +1,3 @@
+form number input
+
+https://github.com/shadcn-ui/ui/issues/421
