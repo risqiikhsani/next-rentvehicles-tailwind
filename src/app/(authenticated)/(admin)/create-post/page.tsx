@@ -184,19 +184,12 @@ export default function Page() {
         }
       })
       // Handle successful submission
+      console.log('Response:', response.data);
       toast.success('Data submitted successfully!');
-      return response.data
+
     } catch (error: unknown) {
-      if (axios.isAxiosError(error)) {
-        // Axios error
-        if (error.response) {
-          toast.error(error.response.data)
-        } 
-      } else {
-        // Non-Axios error
-        console.log('Non-Axios error:', error);
-      }
-      throw error;
+      console.error('Error:', error);
+      toast.error("Error creating post. Check some inputs !")
     }
   }
 
