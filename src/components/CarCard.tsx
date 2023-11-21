@@ -33,6 +33,7 @@ import {
 import { Badge } from "./ui/badge"
 import { PostType } from "@/types/types"
 import Link from "next/link"
+import CarCardButtons from "./CarCardButtons"
 
 
 export function CarCard({ data }: { data: PostType }) {
@@ -45,14 +46,26 @@ export function CarCard({ data }: { data: PostType }) {
                         <CardDescription className="text-lg">{data.brand_model}</CardDescription>
                     </div>
                     <div className="flex flex-col w-full">
-                        <div className="rounded-md my-1 p-1 bg-emerald-400">
-                            {data.price_per_day}
+                        <div className="flex justify-between rounded-md my-1 p-2 bg-green-400">
+                            <Badge variant="outline">
+                                1d
+                            </Badge>
+                            <p>{data.price_per_day}</p>
+
                         </div>
-                        <div className="rounded-md my-1 p-1 bg-emerald-400">
-                            {data.price_per_week}
+                        <div className="flex justify-between rounded-md my-1 p-2 bg-green-400">
+                            <Badge variant="outline" >
+                                7d
+                            </Badge>
+                            <p>{data.price_per_week}</p>
+
                         </div>
-                        <div className="rounded-md my-1 p-1 bg-emerald-400">
-                            {data.price_per_month}
+                        <div className="flex justify-between rounded-md my-1 p-2 bg-green-400">
+                            <Badge variant="outline">
+                                30d
+                            </Badge>
+                            <p>{data.price_per_month}</p>
+
                         </div>
                     </div>
                 </div>
@@ -89,12 +102,7 @@ export function CarCard({ data }: { data: PostType }) {
                 </Table>
             </CardContent>
             <CardFooter className="flex justify-between">
-                <Button variant="outline">
-                    <HeartIcon className="mr-2 h-4 w-4" />
-                    Favorite</Button>
-
-                <Button asChild><Link href={`posts/${data.ID}`}>See Detail
-                    <ArrowRightIcon className="ml-2 h-4 w-4" /></Link></Button>
+                <CarCardButtons data={data}/>
             </CardFooter>
         </Card>
     )

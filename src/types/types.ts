@@ -58,3 +58,29 @@ export interface PostType {
   Images: ImageType[];
   location_id: number;
 }
+
+
+export interface UserType {
+  ID: number;
+  CreatedAt: string;
+  UpdatedAt: string;
+  DeletedAt: string | null;
+  publicUsername: string;
+  name: string;
+  about: string;
+  gender: string;
+  role: string;
+  is_active: string; // Consider changing to boolean if it's a boolean value in your application
+  AccountID: number;
+}
+
+export interface AccountType {
+  ID: number;
+  CreatedAt: string;
+  UpdatedAt: string;
+  DeletedAt: string | null;
+  username: string;
+  email: string;
+  email_verified: boolean;
+  phone: string;
+}

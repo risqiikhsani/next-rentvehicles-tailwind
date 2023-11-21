@@ -39,6 +39,9 @@ import { LocationType } from "@/types/types";
 import { toast } from "sonner";
 import api from "@/lib/axios";
 import axios from "axios";
+import { redirect } from 'next/navigation'
+import { useRouter } from 'next/navigation'
+
 
 const formSchema = z.object({
   brand: z.string().min(2, {
@@ -68,9 +71,7 @@ const formSchema = z.object({
   price_per_month: z.coerce.number().min(1, {
     message: "price per month must be at least 1.",
   }),
-  discount: z.coerce.number().min(1, {
-    message: "discount must be at least 1.",
-  }),
+  discount: z.coerce.number(),
   available: z.boolean(),
   bookable: z.boolean(),
   license_plate: z.string().min(1, {
@@ -90,7 +91,7 @@ const formSchema = z.object({
 
 
 export default function Page() {
-
+  const router = useRouter()
   const [locations, setLocations] = useState<LocationType[]>([]);
 
   useEffect(() => {
@@ -132,7 +133,7 @@ export default function Page() {
       price_per_day: undefined,
       price_per_week: undefined,
       price_per_month: undefined,
-      discount: undefined,
+      discount: 0,
       available: true,
       bookable: true,
       license_plate: "",
@@ -186,6 +187,9 @@ export default function Page() {
       // Handle successful submission
       console.log('Response:', response.data);
       toast.success('Data submitted successfully!');
+
+      // redirect('/my-posts')  // https://stackoverflow.com/questions/76191324/next-13-4-error-next-redirect-in-api-routes
+      router.push("/my-posts")
 
     } catch (error: unknown) {
       console.error('Error:', error);
@@ -260,7 +264,7 @@ export default function Page() {
                         <SelectValue placeholder="Select brand" />
                       </SelectTrigger>
                     </FormControl>
-                    <SelectContent>
+                    <SelectContent className="overflow-y-auto max-h-[30rem]">
                       {manufacturers.map((a, index) => (
                         <SelectItem key={index} value={a}>
                           {a}

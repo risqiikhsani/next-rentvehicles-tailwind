@@ -51,6 +51,11 @@ const admin_urls = [
     icon: HomeIcon, // Specify the Heroicon component
   },
   {
+    text: "Dashboard",
+    url: "/dashboard",
+    icon: DocumentChartBarIcon, // Specify the Heroicon component
+  },
+  {
     text: "My Posts",
     url: "/my-posts",
     icon: DocumentChartBarIcon, // Specify the Heroicon component

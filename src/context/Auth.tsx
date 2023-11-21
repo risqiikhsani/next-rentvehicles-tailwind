@@ -15,37 +15,15 @@ import { toast } from "sonner";
 import CarLoader from "@/components/spinner/car-loader";
 import Loader2 from "@/components/spinner/Loader2";
 import CircleLoader from "@/components/spinner/circle-loader";
+import { AccountType, UserType } from "@/types/types";
 
-interface UserData {
-  ID: number;
-  CreatedAt: string;
-  UpdatedAt: string;
-  DeletedAt: string | null;
-  publicUsername: string;
-  name: string;
-  about: string;
-  gender: string;
-  role: string;
-  is_active: string; // Consider changing to boolean if it's a boolean value in your application
-  AccountID: number;
-}
 
-interface AccountData {
-  ID: number;
-  CreatedAt: string;
-  UpdatedAt: string;
-  DeletedAt: string | null;
-  username: string;
-  email: string;
-  email_verified: boolean;
-  phone: string;
-}
 
 export interface IAuthContext {
   handleLoginSuccess: (data: any) => void;
   logoutUser: () => void;
-  user: UserData;
-  account: AccountData;
+  user: UserType;
+  account: AccountType;
 }
 
 const authContextDefaultValues: IAuthContext = {
@@ -95,7 +73,7 @@ export function AuthHandler({ children }: Props) {
     try {
       // get user
       const response = await api.get("api/me/user");
-      const data: UserData = response.data;
+      const data: UserType = response.data;
       setUser(data);
       // Set user data
 
@@ -111,7 +89,7 @@ export function AuthHandler({ children }: Props) {
     try {
       // get account
       const response = await api.get("api/me/account");
-      const data: AccountData = response.data;
+      const data: AccountType = response.data;
       setAccount(data);
 
       return true;
