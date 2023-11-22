@@ -94,6 +94,7 @@ export function AuthHandler({ children }: Props) {
 
       return true;
     } catch (error) {
+      
       toast.error("Error fetching account data");
       console.error("Error:", error);
       return false;

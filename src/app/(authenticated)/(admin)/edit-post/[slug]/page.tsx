@@ -90,7 +90,7 @@ export default function Page({ params }: { params: { slug: string } }) {
   const slug = params.slug;
   const router = useRouter();
   const [locations, setLocations] = useState<LocationType[]>([]);
-  const [formValues, setFormValues] = useState<any>({} as PostType);
+  const [post,setPost] = useState<PostType>()
 
   useEffect(() => {
     const fetchPost = async () => {
@@ -110,24 +110,22 @@ export default function Page({ params }: { params: { slug: string } }) {
 
         const data: PostType = await response.json();
         console.log("post", data);
-        setFormValues({
-          ID: data.ID,
-          brand: data.brand,
-          brand_model: data.brand_model,
-          vehicle_type: data.vehicle_type,
-          year: data.year,
-          transmission: data.transmission,
-          fuel_type: data.fuel_type,
-          price_per_day: data.price_per_day,
-          price_per_week: data.price_per_week,
-          price_per_month: data.price_per_month,
-          discount_percentage: data.discount_percentage,
-          available: data.available,
-          bookable: data.bookable,
-          license_plate: data.license_plate,
-          location_id: data.location_id,
-          body_color: data.body_color,
-        });
+        setPost(data)
+        form.setValue("brand",data.brand)
+        form.setValue("brand_model",data.brand_model)
+        form.setValue("year",data.year)
+        form.setValue("vehicle_type",data.vehicle_type)
+        form.setValue("transmission",data.transmission)
+        form.setValue("fuel_type",data.fuel_type)
+        form.setValue("price_per_day",data.price_per_day)
+        form.setValue("price_per_week",data.price_per_week)
+        form.setValue("price_per_month",data.price_per_month)
+        form.setValue("discount_percentage",data.discount_percentage)
+        form.setValue("available",data.available)
+        form.setValue("bookable",data.bookable)
+        form.setValue("license_plate",data.license_plate)
+        form.setValue("location_id",data.location_id.toString())
+        form.setValue("body_color",data.body_color)
       } catch (error) {
         // Handle error here, you might want to log it or set an error state
         console.log("error", error);
@@ -163,7 +161,23 @@ export default function Page({ params }: { params: { slug: string } }) {
   // 1. Define your form.
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
-    defaultValues: formValues,
+    defaultValues: {
+      brand: post?.brand,
+      brand_model: post?.brand_model,
+      year: post?.year,
+      vehicle_type: post?.vehicle_type,
+      transmission: post?.transmission,
+      fuel_type: post?.fuel_type,
+      price_per_day: post?.price_per_day,
+      price_per_week: post?.price_per_week,
+      price_per_month: post?.price_per_month,
+      discount_percentage: post?.discount_percentage,
+      available: post?.available,
+      bookable: post?.bookable,
+      license_plate: post?.license_plate,
+      location_id: post?.location_id.toString(),
+      body_color: post?.body_color,
+    },
   });
 
   // 2. Define a submit handler.
@@ -171,7 +185,7 @@ export default function Page({ params }: { params: { slug: string } }) {
     // Do something with the form values.
     // ✅ This will be type-safe and validated.
 
-    console.log(values);
+    console.log("onsubmit",values);
 
     try {
       const formData = new FormData();
@@ -307,7 +321,7 @@ export default function Page({ params }: { params: { slug: string } }) {
                 <FormItem>
                   <FormLabel>Model</FormLabel>
                   <FormControl>
-                    <Input placeholder="model" {...field} />
+                    <Input placeholder="model" {...field} defaultValue={field.value}/>
                   </FormControl>
                   <FormDescription>
                     This is your public display name.
