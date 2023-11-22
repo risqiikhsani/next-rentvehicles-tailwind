@@ -35,13 +35,12 @@ import {
   carTypes,
   manufacturers,
 } from "@/constants";
-import { LocationType } from "@/types/types";
+import { LocationType, PostType } from "@/types/types";
 import { toast } from "sonner";
 import api from "@/lib/axios";
 import axios from "axios";
-import { redirect } from 'next/navigation'
-import { useRouter } from 'next/navigation'
-
+import { redirect } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 const formSchema = z.object({
   brand: z.string().min(2, {
@@ -87,15 +86,56 @@ const formSchema = z.object({
   // })
 });
 
-
-
-
-export default function Page() {
-  const router = useRouter()
+export default function Page({ params }: { params: { slug: string } }) {
+  const slug = params.slug;
+  const router = useRouter();
   const [locations, setLocations] = useState<LocationType[]>([]);
+  const [formValues, setFormValues] = useState<any>({} as PostType);
 
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchPost = async () => {
+      try {
+        const response = await fetch(
+          `http://localhost:8080/api/posts/${slug}`,
+          {
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        );
+
+        if (!response.ok) {
+          throw new Error("Failed to fetch data");
+        }
+
+        const data: PostType = await response.json();
+        console.log("post", data);
+        setFormValues({
+          ID: data.ID,
+          brand: data.brand,
+          brand_model: data.brand_model,
+          vehicle_type: data.vehicle_type,
+          year: data.year,
+          transmission: data.transmission,
+          fuel_type: data.fuel_type,
+          price_per_day: data.price_per_day,
+          price_per_week: data.price_per_week,
+          price_per_month: data.price_per_month,
+          discount_percentage: data.discount_percentage,
+          available: data.available,
+          bookable: data.bookable,
+          license_plate: data.license_plate,
+          location_id: data.location_id,
+          body_color: data.body_color,
+        });
+      } catch (error) {
+        // Handle error here, you might want to log it or set an error state
+        console.log("error", error);
+        toast.error("Error fetching post");
+      }
+    };
+
+    const fetchLocations = async () => {
       try {
         const response = await fetch("http://localhost:8080/api/locations", {
           headers: {
@@ -104,42 +144,26 @@ export default function Page() {
         });
 
         if (!response.ok) {
-          throw new Error('Failed to fetch data');
+          throw new Error("Failed to fetch data");
         }
 
         const data = await response.json();
+        console.log("locations", data);
         setLocations(data);
       } catch (error) {
         // Handle error here, you might want to log it or set an error state
+        console.log("error", error);
         toast.error("Error fetching locations");
       }
     };
-
-    fetchData();
+    fetchPost();
+    fetchLocations();
   }, []);
-
-
 
   // 1. Define your form.
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
-    defaultValues: {
-      brand: "",
-      brand_model: "",
-      year: undefined,
-      vehicle_type: "",
-      transmission: "manual",
-      fuel_type: "gasoline",
-      price_per_day: undefined,
-      price_per_week: undefined,
-      price_per_month: undefined,
-      discount_percentage: 0,
-      available: true,
-      bookable: true,
-      license_plate: "",
-      location_id: "",
-      body_color: "",
-    },
+    defaultValues: formValues,
   });
 
   // 2. Define a submit handler.
@@ -152,49 +176,47 @@ export default function Page() {
     try {
       const formData = new FormData();
 
-      formData.append("brand", values.brand)
-      formData.append("brand_model", values.brand_model)
-      formData.append("vehicle_type", values.vehicle_type)
-      formData.append("year", values.year.toString())
-      formData.append("transmission", values.transmission)
-      formData.append("fuel_type", values.fuel_type)
-      formData.append("price_per_day", values.price_per_day.toString())
-      formData.append("price_per_week", values.price_per_week.toString())
-      formData.append("price_per_month", values.price_per_month.toString())
-      formData.append("discount_percentage", values.discount_percentage.toString())
-      formData.append("body_color", values.body_color)
-      formData.append("location_id", values.location_id)
-      formData.append("license_plate", values.license_plate)
-      formData.append("bookable", values.bookable ? 'true' : 'false')
-      formData.append("available", values.available ? 'true' : 'false')
+      formData.append("brand", values.brand);
+      formData.append("brand_model", values.brand_model);
+      formData.append("vehicle_type", values.vehicle_type);
+      formData.append("year", values.year.toString());
+      formData.append("transmission", values.transmission);
+      formData.append("fuel_type", values.fuel_type);
+      formData.append("price_per_day", values.price_per_day.toString());
+      formData.append("price_per_week", values.price_per_week.toString());
+      formData.append("price_per_month", values.price_per_month.toString());
+      formData.append("body_color", values.body_color);
+      formData.append("location_id", values.location_id);
+      formData.append("license_plate", values.license_plate);
+      formData.append("bookable", values.bookable ? "true" : "false");
+      formData.append("available", values.available ? "true" : "false");
 
       if (acceptedMainImage !== null) {
-        acceptedMainImage.forEach(element => {
+        acceptedMainImage.forEach((element) => {
           formData.append("main_image", element);
         });
       }
 
       if (acceptedImages !== null) {
-        acceptedImages.forEach(element => {
+        acceptedImages.forEach((element) => {
           formData.append("images", element);
         });
       }
 
-      const response = await api.post("/api/posts", formData, {
+      const response = await api.put(`/api/posts/${slug}`, formData, {
         headers: {
-          'Content-Type': 'multipart/form-data'
-        }
-      })
+          "Content-Type": "multipart/form-data",
+        },
+      });
       // Handle successful submission
-      console.log('Response:', response.data);
-      toast.success('Data submitted successfully!');
+      console.log("Response:", response.data);
+      toast.success("Data submitted successfully!");
 
       // redirect('/my-posts')  // https://stackoverflow.com/questions/76191324/next-13-4-error-next-redirect-in-api-routes
-      router.push("/my-posts")
-
+      router.push("/my-posts");
     } catch (error: unknown) {
-      console.error('Error:', error);
-      toast.error("Error creating post. Check some inputs !")
+      console.error("Error:", error);
+      toast.error("Error creating post. Check some inputs !");
     }
   }
 
@@ -205,7 +227,7 @@ export default function Page() {
   } = useDropzone({
     onDrop: (files) => console.log(files),
     accept: {
-      "image/png": [".png"]
+      "image/png": [".png"],
     },
     maxFiles: 1,
   });
@@ -226,7 +248,7 @@ export default function Page() {
   } = useDropzone({
     onDrop: (files) => console.log(files),
     accept: {
-      "image/png": [".png", ".jpg", ".jpeg"]
+      "image/png": [".png", ".jpg", ".jpeg"],
     },
     maxFiles: 3,
   });
@@ -242,7 +264,7 @@ export default function Page() {
 
   return (
     <>
-      <Title title="Create Post" text="Create any post to rent!" />
+      <Title title="Edit Post" text="edit post" />
       <div className="space-y-8 max-w-lg">
         <Form {...form}>
           <form

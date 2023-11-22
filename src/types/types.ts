@@ -56,7 +56,7 @@ export interface PostType {
   UserID: number;
   MainImage: MainImageType;
   Images: ImageType[];
-  location_id: number;
+  location_id: number | string;
 }
 
 
