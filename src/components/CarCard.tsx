@@ -44,28 +44,72 @@ export function CarCard({ data }: { data: PostType }) {
                     <div className="w-full">
                         <CardTitle className="text-xl italic">{data.brand}</CardTitle>
                         <CardDescription className="text-lg">{data.brand_model}</CardDescription>
+                        <Badge variant="secondary">
+                            {data.available ? "available" : "not available"}
+                        </Badge>
                     </div>
-                    <div className="flex flex-col w-full">
-                        <div className="flex justify-between rounded-md my-1 p-2 bg-green-400">
-                            <Badge variant="outline">
-                                1d
-                            </Badge>
-                            <p>{data.price_per_day}</p>
-
+                    <div className="flex flex-col w-full border-2 rounded-xl  p-2 shadow-md">
+                        <div className="flex justify-between my-1 items-center">
+                            <p className="text-sm">
+                                1 day
+                            </p>
+                            <div className="bg-green-400 flex rounded-md p-1 ">
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    strokeWidth="2"
+                                    className="h-4 w-4 text-muted-foreground"
+                                >
+                                    <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
+                                </svg>
+                                <p>{data.price_per_day}</p>
+                            </div>
                         </div>
-                        <div className="flex justify-between rounded-md my-1 p-2 bg-green-400">
-                            <Badge variant="outline" >
-                                7d
-                            </Badge>
-                            <p>{data.price_per_week}</p>
-
+                        <div className="flex justify-between my-1 items-center">
+                            <p className="text-sm">
+                                7 days
+                            </p>
+                            <div className="bg-green-400 flex rounded-md p-1 ">
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    strokeWidth="2"
+                                    className="h-4 w-4 text-muted-foreground"
+                                >
+                                    <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
+                                </svg>
+                                <p>{data.price_per_week}</p>
+                            </div>
                         </div>
-                        <div className="flex justify-between rounded-md my-1 p-2 bg-green-400">
-                            <Badge variant="outline">
-                                30d
-                            </Badge>
-                            <p>{data.price_per_month}</p>
+                        <div className="flex justify-between my-1 items-center">
+                            <p className="text-sm">
+                                30 days
+                            </p>
 
+
+                            <div className="bg-green-400 flex rounded-md p-1 ">
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    strokeWidth="2"
+                                    className="h-4 w-4 text-muted-foreground"
+                                >
+                                    <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
+                                </svg>
+                                <p>{data.price_per_month}</p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -101,8 +145,8 @@ export function CarCard({ data }: { data: PostType }) {
                     </TableBody>
                 </Table>
             </CardContent>
-            <CardFooter className="flex justify-between">
-                <CarCardButtons data={data}/>
+            <CardFooter>
+                <CarCardButtons data={data} />
             </CardFooter>
         </Card>
     )

@@ -52,7 +52,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
         <Title title="Post Detail" />
         <div className="lg:grid lg:grid-cols-3 gap-4">
           <div className="lg:sticky lg:h-screen lg:top-20 lg:left-0 static">
-            <Image src={data.MainImage.url} alt="pic" width={500} height={500} />
+            <Image className="rounded-xl" src={data.MainImage.url} alt="pic" width={500} height={500} />
             <div className="flex gap-4 my-10">
               <Button variant="outline" className="rounded-xl w-full">
                 <HeartIcon className="w-4 h-4 mr-2" />
