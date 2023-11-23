@@ -76,8 +76,8 @@ const formSchema = z.object({
   license_plate: z.string().min(1, {
     message: "license plate can't be empty.",
   }),
-  location_id: z.string({
-    required_error: "Please select an location.",
+  location_id: z.string().min(1, {
+    message: "location can't be empty.",
   }),
   body_color: z.string(),
   // image: z
@@ -90,148 +90,178 @@ export default function Page({ params }: { params: { slug: string } }) {
   const slug = params.slug;
   const router = useRouter();
   const [locations, setLocations] = useState<LocationType[]>([]);
-  const [post,setPost] = useState<PostType>()
+  const [locationsFetched,setLocationsFetched] = useState(false)  // this is for reamount whole form after fetching locations
 
-  useEffect(() => {
-    const fetchPost = async () => {
-      try {
-        const response = await fetch(
-          `http://localhost:8080/api/posts/${slug}`,
-          {
-            headers: {
-              "Content-Type": "application/json",
-            },
-          }
-        );
 
-        if (!response.ok) {
-          throw new Error("Failed to fetch data");
-        }
 
-        const data: PostType = await response.json();
-        console.log("post", data);
-        setPost(data)
-        form.setValue("brand",data.brand)
-        form.setValue("brand_model",data.brand_model)
-        form.setValue("year",data.year)
-        form.setValue("vehicle_type",data.vehicle_type)
-        form.setValue("transmission",data.transmission)
-        form.setValue("fuel_type",data.fuel_type)
-        form.setValue("price_per_day",data.price_per_day)
-        form.setValue("price_per_week",data.price_per_week)
-        form.setValue("price_per_month",data.price_per_month)
-        form.setValue("discount_percentage",data.discount_percentage)
-        form.setValue("available",data.available)
-        form.setValue("bookable",data.bookable)
-        form.setValue("license_plate",data.license_plate)
-        form.setValue("location_id",data.location_id.toString())
-        form.setValue("body_color",data.body_color)
-      } catch (error) {
-        // Handle error here, you might want to log it or set an error state
-        console.log("error", error);
-        toast.error("Error fetching post");
-      }
-    };
-
-    const fetchLocations = async () => {
-      try {
-        const response = await fetch("http://localhost:8080/api/locations", {
+  const fetchPost = async () => {
+    try {
+      const response = await fetch(
+        `http://localhost:8080/api/posts/${slug}`,
+        {
           headers: {
             "Content-Type": "application/json",
           },
-        });
-
-        if (!response.ok) {
-          throw new Error("Failed to fetch data");
         }
+      );
 
-        const data = await response.json();
-        console.log("locations", data);
-        setLocations(data);
-      } catch (error) {
-        // Handle error here, you might want to log it or set an error state
-        console.log("error", error);
-        toast.error("Error fetching locations");
+      if (!response.ok) {
+        throw new Error("Failed to fetch data");
       }
-    };
-    fetchPost();
-    fetchLocations();
-  }, []);
+
+      const data: PostType = await response.json();
+      console.log("post", data);      
+      form.reset({
+        brand:data.brand,
+        brand_model:data.brand_model,
+        year:data.year,
+        vehicle_type:data.vehicle_type,
+        transmission:data.transmission,
+        fuel_type:data.fuel_type,
+        price_per_day:data.price_per_day,
+        price_per_week:data.price_per_week,
+        price_per_month:data.price_per_month,
+        discount_percentage:data.discount_percentage,
+        available:data.available,
+        bookable:data.bookable,
+        license_plate:data.license_plate,
+        location_id:data.location_id.toString(),
+        body_color:data.body_color,
+      })
+      // form.setValue("brand", data.brand);
+      // form.setValue("brand_model", data.brand_model);
+      // form.setValue("year", data.year);
+      // form.setValue("vehicle_type", data.vehicle_type);
+      // form.setValue("transmission", data.transmission);
+      // form.setValue("fuel_type", data.fuel_type);
+      // form.setValue("price_per_day", data.price_per_day);
+      // form.setValue("price_per_week", data.price_per_week);
+      // form.setValue("price_per_month", data.price_per_month);
+      // form.setValue("discount_percentage", data.discount_percentage);
+      // form.setValue("available", data.available);
+      // form.setValue("bookable", data.bookable);
+      // form.setValue("license_plate", data.license_plate);
+      // form.setValue("location_id", `${data.location_id}`);
+      // form.setValue("body_color", data.body_color);
+      console.log("location id",data.location_id)
+    } catch (error) {
+      // Handle error here, you might want to log it or set an error state
+      console.log("error", error);
+      toast.error("Error fetching post");
+    }
+  };
+
+  const fetchLocations = async () => {
+    try {
+      const response = await fetch("http://localhost:8080/api/locations", {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to fetch data");
+      }
+
+      const data = await response.json();
+      console.log("locations", data);
+      setLocations(data);
+      if (!locationsFetched){
+        setLocationsFetched(true)
+      }
+    } catch (error) {
+      // Handle error here, you might want to log it or set an error state
+      console.log("error", error);
+      toast.error("Error fetching locations");
+    }
+  };
 
   // 1. Define your form.
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      brand: post?.brand,
-      brand_model: post?.brand_model,
-      year: post?.year,
-      vehicle_type: post?.vehicle_type,
-      transmission: post?.transmission,
-      fuel_type: post?.fuel_type,
-      price_per_day: post?.price_per_day,
-      price_per_week: post?.price_per_week,
-      price_per_month: post?.price_per_month,
-      discount_percentage: post?.discount_percentage,
-      available: post?.available,
-      bookable: post?.bookable,
-      license_plate: post?.license_plate,
-      location_id: post?.location_id.toString(),
-      body_color: post?.body_color,
+      brand: "",
+      brand_model: "",
+      year: undefined,
+      vehicle_type: "",
+      transmission: "",
+      fuel_type: "",
+      price_per_day: undefined,
+      price_per_week: undefined,
+      price_per_month: undefined,
+      discount_percentage: 0,
+      available: true,
+      bookable: true,
+      license_plate: "",
+      location_id: "",
+      body_color: "",
     },
+    // values:post,
+    // defaultValues: async () =>
+    //   fetch(`http://localhost:8080/api/posts/${slug}`, {
+    //     headers: {
+    //       "Content-Type": "application/json",
+    //     },
+    //   }),
   });
+
+  useEffect(() => {
+    fetchLocations();
+    fetchPost();
+  }, [locationsFetched]);
 
   // 2. Define a submit handler.
   async function onSubmit(values: z.infer<typeof formSchema>) {
     // Do something with the form values.
     // ✅ This will be type-safe and validated.
 
-    console.log("onsubmit",values);
+    console.log("onsubmit", values);
 
-    try {
-      const formData = new FormData();
+    // try {
+    //   const formData = new FormData();
 
-      formData.append("brand", values.brand);
-      formData.append("brand_model", values.brand_model);
-      formData.append("vehicle_type", values.vehicle_type);
-      formData.append("year", values.year.toString());
-      formData.append("transmission", values.transmission);
-      formData.append("fuel_type", values.fuel_type);
-      formData.append("price_per_day", values.price_per_day.toString());
-      formData.append("price_per_week", values.price_per_week.toString());
-      formData.append("price_per_month", values.price_per_month.toString());
-      formData.append("body_color", values.body_color);
-      formData.append("location_id", values.location_id);
-      formData.append("license_plate", values.license_plate);
-      formData.append("bookable", values.bookable ? "true" : "false");
-      formData.append("available", values.available ? "true" : "false");
+    //   formData.append("brand", values.brand);
+    //   formData.append("brand_model", values.brand_model);
+    //   formData.append("vehicle_type", values.vehicle_type);
+    //   formData.append("year", values.year.toString());
+    //   formData.append("transmission", values.transmission);
+    //   formData.append("fuel_type", values.fuel_type);
+    //   formData.append("price_per_day", values.price_per_day.toString());
+    //   formData.append("price_per_week", values.price_per_week.toString());
+    //   formData.append("price_per_month", values.price_per_month.toString());
+    //   formData.append("body_color", values.body_color);
+    //   formData.append("location_id", values.location_id);
+    //   formData.append("license_plate", values.license_plate);
+    //   formData.append("bookable", values.bookable ? "true" : "false");
+    //   formData.append("available", values.available ? "true" : "false");
 
-      if (acceptedMainImage !== null) {
-        acceptedMainImage.forEach((element) => {
-          formData.append("main_image", element);
-        });
-      }
+    //   if (acceptedMainImage !== null) {
+    //     acceptedMainImage.forEach((element) => {
+    //       formData.append("main_image", element);
+    //     });
+    //   }
 
-      if (acceptedImages !== null) {
-        acceptedImages.forEach((element) => {
-          formData.append("images", element);
-        });
-      }
+    //   if (acceptedImages !== null) {
+    //     acceptedImages.forEach((element) => {
+    //       formData.append("images", element);
+    //     });
+    //   }
 
-      const response = await api.put(`/api/posts/${slug}`, formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      });
-      // Handle successful submission
-      console.log("Response:", response.data);
-      toast.success("Data submitted successfully!");
+    //   const response = await api.put(`/api/posts/${slug}`, formData, {
+    //     headers: {
+    //       "Content-Type": "multipart/form-data",
+    //     },
+    //   });
+    //   // Handle successful submission
+    //   console.log("Response:", response.data);
+    //   toast.success("Data submitted successfully!");
 
-      // redirect('/my-posts')  // https://stackoverflow.com/questions/76191324/next-13-4-error-next-redirect-in-api-routes
-      router.push("/my-posts");
-    } catch (error: unknown) {
-      console.error("Error:", error);
-      toast.error("Error creating post. Check some inputs !");
-    }
+    //   // redirect('/my-posts')  // https://stackoverflow.com/questions/76191324/next-13-4-error-next-redirect-in-api-routes
+    //   router.push("/my-posts");
+    // } catch (error: unknown) {
+    //   console.error("Error:", error);
+    //   toast.error("Error creating post. Check some inputs !");
+    // }
   }
 
   const {
@@ -295,6 +325,7 @@ export default function Page({ params }: { params: { slug: string } }) {
                   <Select
                     onValueChange={field.onChange}
                     defaultValue={field.value}
+                    value={field.value}
                   >
                     <FormControl>
                       <SelectTrigger>
@@ -321,7 +352,11 @@ export default function Page({ params }: { params: { slug: string } }) {
                 <FormItem>
                   <FormLabel>Model</FormLabel>
                   <FormControl>
-                    <Input placeholder="model" {...field} defaultValue={field.value}/>
+                    <Input
+                      placeholder="model"
+                      {...field}
+                      defaultValue={field.value}
+                    />
                   </FormControl>
                   <FormDescription>
                     This is your public display name.
@@ -378,6 +413,7 @@ export default function Page({ params }: { params: { slug: string } }) {
                   <Select
                     onValueChange={field.onChange}
                     defaultValue={field.value}
+                    value={field.value}
                   >
                     <FormControl>
                       <SelectTrigger>
@@ -422,6 +458,7 @@ export default function Page({ params }: { params: { slug: string } }) {
                   <Select
                     onValueChange={field.onChange}
                     defaultValue={field.value}
+                    value={field.value}
                   >
                     <FormControl>
                       <SelectTrigger>
@@ -450,6 +487,7 @@ export default function Page({ params }: { params: { slug: string } }) {
                   <Select
                     onValueChange={field.onChange}
                     defaultValue={field.value}
+                    value={field.value}
                   >
                     <FormControl>
                       <SelectTrigger>
@@ -462,6 +500,15 @@ export default function Page({ params }: { params: { slug: string } }) {
                           {a}
                         </SelectItem>
                       ))}
+                      {/* <SelectItem value="gasoline">
+                        gasoline
+                      </SelectItem>
+                      <SelectItem value="diesel">
+                        diesel
+                      </SelectItem>
+                      <SelectItem value="electric">
+                        electric
+                      </SelectItem> */}
                     </SelectContent>
                   </Select>
                   <FormDescription>Vehicle's fuel type.</FormDescription>
@@ -612,6 +659,7 @@ export default function Page({ params }: { params: { slug: string } }) {
                   <Select
                     onValueChange={field.onChange}
                     defaultValue={field.value}
+                    value={field.value}
                   >
                     <FormControl>
                       <SelectTrigger>
@@ -624,6 +672,15 @@ export default function Page({ params }: { params: { slug: string } }) {
                           {a.Name}
                         </SelectItem>
                       ))}
+                      {/* <SelectItem value={locations[0].ID.toString()}>
+                        a
+                      </SelectItem>
+                      <SelectItem value={locations[1].ID.toString()}>
+                        b
+                      </SelectItem>
+                      <SelectItem value={locations[2].ID.toString()}>
+                        c
+                      </SelectItem> */}
                     </SelectContent>
                   </Select>
 
