@@ -42,6 +42,8 @@ import axios from "axios";
 import { redirect } from "next/navigation";
 import { useRouter } from "next/navigation";
 
+import { updateUser } from "./actions";
+
 const formSchema = z.object({
   brand: z.string().min(2, {
     message: "brand must be at least 2 characters.",
@@ -90,7 +92,9 @@ export default function Page({ params }: { params: { slug: string } }) {
   const slug = params.slug;
   const router = useRouter();
   const [locations, setLocations] = useState<LocationType[]>([]);
-  const [locationsFetched,setLocationsFetched] = useState(false)  // this is for reamount whole form after fetching locations
+
+  // this is for reamount whole form so that the default value of location shows up
+  const [locationsFetched,setLocationsFetched] = useState(false)  
 
 
 
@@ -217,51 +221,52 @@ export default function Page({ params }: { params: { slug: string } }) {
 
     console.log("onsubmit", values);
 
-    // try {
-    //   const formData = new FormData();
+    try {
+      const formData = new FormData();
 
-    //   formData.append("brand", values.brand);
-    //   formData.append("brand_model", values.brand_model);
-    //   formData.append("vehicle_type", values.vehicle_type);
-    //   formData.append("year", values.year.toString());
-    //   formData.append("transmission", values.transmission);
-    //   formData.append("fuel_type", values.fuel_type);
-    //   formData.append("price_per_day", values.price_per_day.toString());
-    //   formData.append("price_per_week", values.price_per_week.toString());
-    //   formData.append("price_per_month", values.price_per_month.toString());
-    //   formData.append("body_color", values.body_color);
-    //   formData.append("location_id", values.location_id);
-    //   formData.append("license_plate", values.license_plate);
-    //   formData.append("bookable", values.bookable ? "true" : "false");
-    //   formData.append("available", values.available ? "true" : "false");
+      formData.append("brand", values.brand);
+      formData.append("brand_model", values.brand_model);
+      formData.append("vehicle_type", values.vehicle_type);
+      formData.append("year", values.year.toString());
+      formData.append("transmission", values.transmission);
+      formData.append("fuel_type", values.fuel_type);
+      formData.append("price_per_day", values.price_per_day.toString());
+      formData.append("price_per_week", values.price_per_week.toString());
+      formData.append("price_per_month", values.price_per_month.toString());
+      formData.append("body_color", values.body_color);
+      formData.append("location_id", values.location_id);
+      formData.append("license_plate", values.license_plate);
+      formData.append("bookable", values.bookable ? "true" : "false");
+      formData.append("available", values.available ? "true" : "false");
 
-    //   if (acceptedMainImage !== null) {
-    //     acceptedMainImage.forEach((element) => {
-    //       formData.append("main_image", element);
-    //     });
-    //   }
+      if (acceptedMainImage !== null) {
+        acceptedMainImage.forEach((element) => {
+          formData.append("main_image", element);
+        });
+      }
 
-    //   if (acceptedImages !== null) {
-    //     acceptedImages.forEach((element) => {
-    //       formData.append("images", element);
-    //     });
-    //   }
+      if (acceptedImages !== null) {
+        acceptedImages.forEach((element) => {
+          formData.append("images", element);
+        });
+      }
 
-    //   const response = await api.put(`/api/posts/${slug}`, formData, {
-    //     headers: {
-    //       "Content-Type": "multipart/form-data",
-    //     },
-    //   });
-    //   // Handle successful submission
-    //   console.log("Response:", response.data);
-    //   toast.success("Data submitted successfully!");
+      const response = await api.put(`/api/posts/${slug}`, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+      // const response = updateUser.bind(formData,slug)
+      // Handle successful submission
+      console.log("Response:", response);
+      toast.success("Data submitted successfully!");
 
-    //   // redirect('/my-posts')  // https://stackoverflow.com/questions/76191324/next-13-4-error-next-redirect-in-api-routes
-    //   router.push("/my-posts");
-    // } catch (error: unknown) {
-    //   console.error("Error:", error);
-    //   toast.error("Error creating post. Check some inputs !");
-    // }
+      //redirect('/my-posts')  // https://stackoverflow.com/questions/76191324/next-13-4-error-next-redirect-in-api-routes
+      router.push("/my-posts");
+    } catch (error: unknown) {
+      console.error("Error:", error);
+      toast.error("Error creating post. Check some inputs !");
+    }
   }
 
   const {

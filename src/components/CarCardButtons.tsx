@@ -8,6 +8,17 @@ import Link from "next/link";
 import { PostType } from "@/types/types";
 import { useAuth } from "@/context/Auth";
 import { UserType } from "../types/types";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
 
 export default function CarCardButtons({ data }: { data: PostType }) {
   const { user } = useAuth();
@@ -37,12 +48,36 @@ export default function CarCardButtons({ data }: { data: PostType }) {
         </Link>
       </Button>
 
-      <Button className="grow bg-red-400 hover:bg-red-300">
-        <>
+      {/* <Button className="grow bg-red-400 hover:bg-red-300">
+        
           Delete
           <TrashIcon className="ml-2 h-4 w-4" />
-        </>
-      </Button>
+        
+      </Button> */}
+
+      <AlertDialog>
+        <AlertDialogTrigger className="grow">
+          <Button className="w-full bg-red-400 hover:bg-red-300">
+            Delete
+            <TrashIcon className="ml-2 h-4 w-4" />
+          </Button>
+        </AlertDialogTrigger>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>
+              Are you absolutely sure to delete this post?
+            </AlertDialogTitle>
+            <AlertDialogDescription>
+              This action cannot be undone. This will permanently delete your
+              post and remove your data from our servers.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel>Cancel</AlertDialogCancel>
+            <AlertDialogAction>Continue</AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </div>
   );
 }
