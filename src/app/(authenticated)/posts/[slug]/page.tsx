@@ -60,12 +60,12 @@ export default async function Page({ params }: { params: { slug: string } }) {
               </Button>
               <Button variant="outline" className="rounded-xl w-full" asChild>
 
-                <Link href={`/posts/${slug}/book`}><LockClosedIcon className="w-4 h-4 mr-2" />Book</Link>
+                <Link href={`/posts/${slug}/make-book`}><LockClosedIcon className="w-4 h-4 mr-2" />Book</Link>
               </Button>
             </div>
             <Button className="rounded-xl w-full" asChild>
 
-              <Link href={`/posts/${slug}/rent`}><KeyIcon className="w-4 h-4 mr-2" />Rent</Link>
+              <Link href={`/posts/${slug}/make-rent`}><KeyIcon className="w-4 h-4 mr-2" />Rent</Link>
             </Button>
           </div>
 

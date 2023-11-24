@@ -134,8 +134,8 @@ export default function Detail({ data }: { data: RentType }) {
                                         <TableCell>{data.RentDetail.decline_reason}</TableCell>
                                     </TableRow>
                                     <TableRow>
-                                        <TableCell className="font-medium">Optional Text</TableCell>
-                                        <TableCell>{data.RentDetail.rent_days}</TableCell>
+                                        <TableCell className="font-medium">Text notes (optional)</TableCell>
+                                        <TableCell>{data.RentDetail.text}</TableCell>
                                     </TableRow>
                                     <TableRow>
                                         <TableCell className="font-medium">Estimated final price</TableCell>

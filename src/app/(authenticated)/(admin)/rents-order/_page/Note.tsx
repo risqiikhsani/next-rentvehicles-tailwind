@@ -23,11 +23,13 @@ import {DocumentTextIcon} from "@heroicons/react/24/solid";
 
 
 export default function Note({ data }: { data: RentType }) {
+    const disabled = data.is_cancelled || data.RentDetail.status == "Done" || data.RentDetail.status == "Declined"
+
     return (
         <>
             <Dialog>
-                <DialogTrigger>
-                <Button variant="outline" size="icon">
+                <DialogTrigger disabled={disabled}>
+                <Button variant="outline" size="icon" disabled={disabled}>
                     <DocumentTextIcon className="h-4 w-4" />
                   </Button>
                 </DialogTrigger>

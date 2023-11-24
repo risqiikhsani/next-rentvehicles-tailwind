@@ -28,28 +28,29 @@ import {
     FormLabel,
     FormMessage,
 } from "@/components/ui/form"
-import { toast } from "@/components/ui/use-toast"
+
 
 const FormSchema = z.object({
-    startDate: z.date({
+    startRentDate: z.date({
       required_error: "Start date is required.",
     }),
-    endDate: z.date({
+    endRentDate: z.date({
       required_error: "End date is required.",
     }),
   }).refine(data => {
-    const { startDate, endDate } = data;
+    const { startRentDate, endRentDate } = data;
   
     // Check if the end date is later than the start date, not equal to it
-    if (startDate && endDate) {
-      return startDate < endDate;
+    if (startRentDate && endRentDate) {
+      return startRentDate < endRentDate;
     }
   
     return true; // If either date is not provided, it's considered valid
   }, {
     message: "End date should be later than the start date.",
-    path: ["endDate"],
+    path: ["endRentDate"],
   });
+  
 
 export default function Page() {
 
@@ -59,30 +60,22 @@ export default function Page() {
     })
 
     function onSubmit(data: z.infer<typeof FormSchema>) {
-        console.log("test")
-        toast({
-            title: "You submitted the following values:",
-            description: (
-                <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-                    <code className="text-white">{JSON.stringify(data, null, 2)}</code>
-                </pre>
-            ),
-        })
+        console.log("onsubmit",data)
     }
 
     return (
         <>
-            <Title title="Rent" text="Rent your favorite items, get a great deal." />
+            <Title title="Book" text="Book your favorite item to rent later, while available." />
 
 
             <Form {...form}>
                 <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
                     <FormField
                         control={form.control}
-                        name="startDate"
+                        name="startRentDate"
                         render={({ field }) => (
                             <FormItem className="flex flex-col">
-                                <FormLabel>Start Date</FormLabel>
+                                <FormLabel>Estimate start rent date</FormLabel>
                                 <Popover>
                                     <PopoverTrigger asChild>
                                         <FormControl>
@@ -123,10 +116,10 @@ export default function Page() {
                     />
                     <FormField
                         control={form.control}
-                        name="endDate"
+                        name="endRentDate"
                         render={({ field }) => (
                             <FormItem className="flex flex-col">
-                                <FormLabel>End Date</FormLabel>
+                                <FormLabel>Estimate end rent date</FormLabel>
                                 <Popover>
                                     <PopoverTrigger asChild>
                                         <FormControl>

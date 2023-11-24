@@ -136,77 +136,45 @@ export function AuthHandler({ children }: Props) {
     fetchData();
   }, []);
 
-  // this below code runs twice per fetch , so 4 fetch ?
-
-  // const fetchData = async () => {
-  //     setLoading(true); // Set loading to true when component mounts or updates
-  //     try {
-  //         const [userDataSuccess, accountDataSuccess] = await Promise.all([
-  //             fetchUserData(),
-  //             fetchAccountData(),
-  //         ]);
-
-  //         if (userDataSuccess && accountDataSuccess) {
-  //             toast.success('Successfully fetching user data and user account data');
-  //             // set user data
-  //             // set user in context/redux
-  //             return router.refresh()
-  //         }
-  //     } catch (error) {
-  //         // Handle any errors that occurred during fetch
-  //         toast.error('Error fetching user data or account data');
-  //         console.error('Error fetching data:', error);
-  //     } finally {
-  //         setLoading(false); // Set loading to false regardless of success or error
-  //     }
-  // };
-
-  // In your code, the fetchData function is called inside the handleLoginSuccess function. Also, you've initialized a call to fetchData inside the useEffect hook without any dependencies array, which means it runs once on the initial render.
-
-  // The fetchData function, in turn, invokes both fetchUserData and fetchAccountData, leading to two fetch calls. Since both of these functions are asynchronous, they will not necessarily complete simultaneously. Therefore, the possibility of running twice might stem from these asynchronous calls.
-
-  // One way to ensure that the fetching only happens once is to refactor the code to fetch user and account data in a sequence rather than concurrently. You can fetch account data only after the user data has been successfully fetched and set.
 
   const fetchData = async () => {
     setLoading(true);
-    try {
-      const userDataSuccess = await fetchUserData();
-      const accountDataSuccess = await fetchAccountData();
+    const userDataSuccess = await fetchUserData();
+    const accountDataSuccess = await fetchAccountData();
 
-      if (userDataSuccess && accountDataSuccess) {
-        toast.success("Successfully fetched user data and account data");
-        return router.refresh();
-      }
-    } catch (error) {
-      toast.error("Error fetching user data or account data");
-      console.error("Error fetching data:", error);
-    } finally {
+    if (userDataSuccess && accountDataSuccess) {
+      toast.success("Successfully fetched user data and account data");
       setLoading(false);
+      return router.refresh();
     }
+    else{
+      toast.error("Error fetching user data / account data");
+      Cookies.remove("accesstoken");
+      setLoading(false);
+      return router.push("/auth/login")
+    }
+    // try {
+    //   const userDataSuccess = await fetchUserData();
+    //   const accountDataSuccess = await fetchAccountData();
+
+    //   if (userDataSuccess && accountDataSuccess) {
+    //     toast.success("Successfully fetched user data and account data");
+    //     return router.refresh();
+    //   }
+    //   else{
+    //     toast.error("Error fetching user data / account data");
+    //     Cookies.remove("accesstoken");
+    //     return router.push("/auth/login")
+    //   }
+    // } catch (error) {
+    //   toast.error("Error fetching user data or account data");
+    //   console.error("Error fetching data:", error);
+    // } finally {
+    //   setLoading(false);
+    // }
   };
 
-  // const fetchData = async () => {
-  //   setLoading(true);
 
-  //   try {
-  //     const userDataSuccess = await fetchUserData();
-
-  //     if (userDataSuccess) {
-  //       const accountDataSuccess = await fetchAccountData();
-  //       if (accountDataSuccess) {
-  //         toast.success("Successfully fetched user data and account data");
-  //         // set user data
-  //         // set user in context/redux
-  //         return router.refresh();
-  //       }
-  //     }
-  //   } catch (error) {
-  //     toast.error("Error fetching user data or account data");
-  //     console.error("Error fetching data:", error);
-  //   } finally {
-  //     setLoading(false);
-  //   }
-  // };
 
 
 

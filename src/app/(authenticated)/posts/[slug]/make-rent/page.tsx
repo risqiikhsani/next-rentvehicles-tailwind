@@ -28,62 +28,85 @@ import {
     FormLabel,
     FormMessage,
 } from "@/components/ui/form"
-import { toast } from "@/components/ui/use-toast"
+import moment from "moment"
+import api from "@/lib/axios"
+import { toast } from "sonner"
+import { useRouter } from "next/navigation"
 
 const FormSchema = z.object({
-    startRentDate: z.date({
+    startDate: z.date({
       required_error: "Start date is required.",
     }),
-    endRentDate: z.date({
+    endDate: z.date({
       required_error: "End date is required.",
     }),
   }).refine(data => {
-    const { startRentDate, endRentDate } = data;
+    const { startDate, endDate } = data;
   
     // Check if the end date is later than the start date, not equal to it
-    if (startRentDate && endRentDate) {
-      return startRentDate < endRentDate;
+    if (startDate && endDate) {
+      return startDate < endDate;
     }
   
     return true; // If either date is not provided, it's considered valid
   }, {
     message: "End date should be later than the start date.",
-    path: ["endRentDate"],
+    path: ["endDate"],
   });
-  
 
-export default function Page() {
-
+export default function Page({ params }: { params: { slug: string } }) {
+    const router = useRouter()
+    const { slug } = params
 
     const form = useForm<z.infer<typeof FormSchema>>({
         resolver: zodResolver(FormSchema),
     })
 
     function onSubmit(data: z.infer<typeof FormSchema>) {
-        console.log("test")
-        toast({
-            title: "You submitted the following values:",
-            description: (
-                <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-                    <code className="text-white">{JSON.stringify(data, null, 2)}</code>
-                </pre>
-            ),
+        console.log("onsubmit",data)
+        const formattedData = {
+            post_id: parseInt(slug), // Assuming slug is a string representation of post_id
+            start_date: moment(data.startDate).toISOString(),
+            end_date: moment(data.endDate).toISOString(),
+        };
+    
+        // Now you have the formatted data to send to your backend
+        console.log("Formatted data", formattedData);
+
+        api.post("/api/rents", formattedData)
+        .then((response) => {
+            // Handle the successful response here
+            console.log("API Response:", response.data);
+            toast.success("Rent created successfully");
+            form.reset()
+            router.push("/rents")
+            // Do something with the response if needed
         })
+        .catch((error) => {
+            // Handle any errors that occur during the API call
+            console.error("API Error:", error);
+            toast.error("Failed to create rent");
+            form.reset()
+
+            // Optionally, you can handle specific error cases here
+        });
+
+
     }
 
     return (
         <>
-            <Title title="Book" text="Book your favorite item to rent later, while available." />
+            <Title title="Rent" text="Rent your favorite items, get a great deal." />
 
-
+            <p>post id is {slug}</p>
             <Form {...form}>
                 <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
                     <FormField
                         control={form.control}
-                        name="startRentDate"
+                        name="startDate"
                         render={({ field }) => (
                             <FormItem className="flex flex-col">
-                                <FormLabel>Estimate start rent date</FormLabel>
+                                <FormLabel>Start Date</FormLabel>
                                 <Popover>
                                     <PopoverTrigger asChild>
                                         <FormControl>
@@ -124,10 +147,10 @@ export default function Page() {
                     />
                     <FormField
                         control={form.control}
-                        name="endRentDate"
+                        name="endDate"
                         render={({ field }) => (
                             <FormItem className="flex flex-col">
-                                <FormLabel>Estimate end rent date</FormLabel>
+                                <FormLabel>End Date</FormLabel>
                                 <Popover>
                                     <PopoverTrigger asChild>
                                         <FormControl>

@@ -12,11 +12,14 @@ import { Button } from "@/components/ui/button";
 
 
 export default function Action({ data }: { data: RentType }) {
+
+    const disabled = data.is_cancelled || data.RentDetail.status == "Done" || data.RentDetail.status == "Declined"
+
     return (
         <>
             <DropdownMenu>
-                <DropdownMenuTrigger>
-                    <Button variant="outline" size="icon">
+                <DropdownMenuTrigger disabled={disabled}>
+                    <Button variant="outline" size="icon" disabled={disabled}>
                         <ChevronDownIcon className="h-4 w-4" />
                     </Button>
                 </DropdownMenuTrigger>
