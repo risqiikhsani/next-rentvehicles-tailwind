@@ -46,6 +46,7 @@ export function CarCard({ data }: { data: PostType }) {
                         <CardDescription className="text-lg">{data.brand_model}</CardDescription>
                         <Badge variant="secondary">
                             {data.available ? "available" : "not available"}
+                            {data.available ? <div className="w-2 h-2 rounded-full bg-green-600 ml-2"></div> : <div className="w-2 h-2 rounded-full ml-2 bg-red-600"></div>}
                         </Badge>
                     </div>
                     <div className="flex flex-col w-full border-2 rounded-xl  p-2 shadow-md">
@@ -53,7 +54,7 @@ export function CarCard({ data }: { data: PostType }) {
                             <p className="text-sm">
                                 1 day
                             </p>
-                            <div className="bg-green-400 flex rounded-md p-1 ">
+                            <div className="flex ">
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
                                     viewBox="0 0 24 24"
@@ -66,14 +67,14 @@ export function CarCard({ data }: { data: PostType }) {
                                 >
                                     <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
                                 </svg>
-                                <p>{data.price_per_day}</p>
+                                <p className="font-semibold text-blue-600 dark:text-slate-100">{data.price_per_day}</p>
                             </div>
                         </div>
                         <div className="flex justify-between my-1 items-center">
                             <p className="text-sm">
                                 7 days
                             </p>
-                            <div className="bg-green-400 flex rounded-md p-1 ">
+                            <div className="flex ">
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
                                     viewBox="0 0 24 24"
@@ -86,7 +87,7 @@ export function CarCard({ data }: { data: PostType }) {
                                 >
                                     <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
                                 </svg>
-                                <p>{data.price_per_week}</p>
+                                <p className="font-semibold text-blue-600 dark:text-slate-100">{data.price_per_week}</p>
                             </div>
                         </div>
                         <div className="flex justify-between my-1 items-center">
@@ -95,7 +96,7 @@ export function CarCard({ data }: { data: PostType }) {
                             </p>
 
 
-                            <div className="bg-green-400 flex rounded-md p-1 ">
+                            <div className="flex ">
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
                                     viewBox="0 0 24 24"
@@ -108,7 +109,7 @@ export function CarCard({ data }: { data: PostType }) {
                                 >
                                     <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
                                 </svg>
-                                <p>{data.price_per_month}</p>
+                                <p className="font-semibold text-blue-600 dark:text-slate-100">{data.price_per_month}</p>
                             </div>
                         </div>
                     </div>

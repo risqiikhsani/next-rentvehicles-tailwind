@@ -1,10 +1,4 @@
-export interface MainImageType {
-  CreatedAt: string;
-  DeletedAt: string | null;
-  ID: number;
-  UpdatedAt: string;
-  url: string;
-}
+
 
 export interface ImageType {
   CreatedAt: string;
@@ -54,7 +48,7 @@ export interface PostType {
   license_plate: string;
   available: boolean;
   UserID: number;
-  MainImage: MainImageType;
+  MainImage: ImageType;
   Images: ImageType[];
   location_id: number | string;
 }
@@ -83,4 +77,41 @@ export interface AccountType {
   email: string;
   email_verified: boolean;
   phone: string;
+}
+
+export interface RentDetailType {
+  ID: number;
+  CreatedAt: string;
+  UpdatedAt: string;
+  DeletedAt: string | null;
+  license_plate: string;
+  pickup_date: string;
+  return_date: string;
+  is_paid: boolean;
+  estimated_final_price: number;
+  estimated_normal_price: number;
+  estimated_saved_price: number;
+  rent_days: number;
+  decline_reason: string;
+  status: string;
+  Images: ImageType[]; // Adjust the type for Images based on its actual structure if known
+  text: string;
+  RentID: number;
+}
+
+export interface RentType {
+  ID: number;
+  CreatedAt: string;
+  UpdatedAt: string;
+  DeletedAt: string | null;
+  user_id: number;
+  post_id: number;
+  start_date: string;
+  end_date: string;
+  payment_method: string;
+  is_cancelled: boolean;
+  cancel_reason: string;
+  discount_voucher: string;
+  readonly: boolean;
+  RentDetail: RentDetailType;
 }

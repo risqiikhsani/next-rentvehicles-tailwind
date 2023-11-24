@@ -120,7 +120,7 @@ export function AuthHandler({ children }: Props) {
       // api.defaults.headers.Authorization = `Bearer ${data.token}`
     }
 
-    fetchData();
+    await fetchData();
   };
 
   const value = {
@@ -169,18 +169,13 @@ export function AuthHandler({ children }: Props) {
 
   const fetchData = async () => {
     setLoading(true);
-
     try {
       const userDataSuccess = await fetchUserData();
+      const accountDataSuccess = await fetchAccountData();
 
-      if (userDataSuccess) {
-        const accountDataSuccess = await fetchAccountData();
-        if (accountDataSuccess) {
-          toast.success("Successfully fetched user data and account data");
-          // set user data
-          // set user in context/redux
-          return router.refresh();
-        }
+      if (userDataSuccess && accountDataSuccess) {
+        toast.success("Successfully fetched user data and account data");
+        return router.refresh();
       }
     } catch (error) {
       toast.error("Error fetching user data or account data");
@@ -189,6 +184,31 @@ export function AuthHandler({ children }: Props) {
       setLoading(false);
     }
   };
+
+  // const fetchData = async () => {
+  //   setLoading(true);
+
+  //   try {
+  //     const userDataSuccess = await fetchUserData();
+
+  //     if (userDataSuccess) {
+  //       const accountDataSuccess = await fetchAccountData();
+  //       if (accountDataSuccess) {
+  //         toast.success("Successfully fetched user data and account data");
+  //         // set user data
+  //         // set user in context/redux
+  //         return router.refresh();
+  //       }
+  //     }
+  //   } catch (error) {
+  //     toast.error("Error fetching user data or account data");
+  //     console.error("Error fetching data:", error);
+  //   } finally {
+  //     setLoading(false);
+  //   }
+  // };
+
+
 
   return (
     <>

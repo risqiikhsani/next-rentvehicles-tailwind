@@ -15,6 +15,7 @@ import {
 import ModeToggle from "./ModeToggle";
 import { BellIcon } from "@heroicons/react/24/solid";
 import { useAuth } from "@/context/Auth";
+import { Badge } from "./ui/badge";
 
 export default function NavBar() {
 
@@ -64,6 +65,8 @@ export default function NavBar() {
                       <DropdownMenuItem className="hover:cursor-pointer" onClick={logoutUser}>Logout</DropdownMenuItem>
                     </DropdownMenuContent>
                   </DropdownMenu>
+
+                  <Badge>{user.role}</Badge>
                 </>
 
               )}

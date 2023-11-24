@@ -24,6 +24,7 @@ import Link from "next/link";
 import Title from "@/components/typography/Title";
 import { PostType } from "@/types/types";
 import { cookies } from 'next/headers'
+import { CarCardAdmin } from "./_page/CarCardAdmin";
 
 
 async function getData() {
@@ -98,7 +99,7 @@ export default async function Home() {
       <div className="flex flex-wrap gap-4">
         {data &&
           data.map((a: PostType, index: number) => (
-            <CarCard data={a} key={index} />
+            <CarCardAdmin data={a} key={index} />
           ))}
       </div>
     </>

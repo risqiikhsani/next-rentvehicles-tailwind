@@ -42,7 +42,7 @@ import axios from "axios";
 import { redirect } from "next/navigation";
 import { useRouter } from "next/navigation";
 
-import { updateUser } from "./actions";
+// import { updateUser } from "./actions";
 
 const formSchema = z.object({
   brand: z.string().min(2, {
