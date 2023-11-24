@@ -27,8 +27,8 @@ export default function Files({ data }: { data: RentType }) {
     return (
         <>
             <Dialog>
-                <DialogTrigger disabled={disabled}>
-                    <Button variant="outline" size="icon" disabled={disabled}>
+                <DialogTrigger disabled={disabled} asChild>
+                    <Button variant="outline" size="icon" >
                         <FolderOpenIcon className="h-4 w-4" />
                     </Button>
                 </DialogTrigger>
