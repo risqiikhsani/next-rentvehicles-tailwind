@@ -24,7 +24,23 @@ import {
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 
+import { useForm, SubmitHandler } from "react-hook-form";
+
+type Inputs = {
+  text: string;
+};
+
 export default function Decline() {
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm<Inputs>();
+  const onSubmit: SubmitHandler<Inputs> = (data) => {
+    console.log("text",data);
+  };
+
   return (
     <>
       <Dialog>
@@ -41,10 +57,11 @@ export default function Decline() {
               delete this file from our servers?
             </DialogDescription>
           </DialogHeader>
+          <form onSubmit={handleSubmit(onSubmit)}>
           <div className="flex items-center space-x-2">
             <div className="grid flex-1 gap-2">
               <Label htmlFor="message-2">Your notes</Label>
-              <Textarea placeholder="Type your message here." id="message-2" />
+              <Textarea placeholder="Type your message here." id="message-2" {...register("text")}/>
               <p className="text-sm text-muted-foreground">
                 Your message will be copied to the support team.
               </p>
@@ -55,6 +72,7 @@ export default function Decline() {
               <Button type="submit">Confirm</Button>
             </DialogClose>
           </DialogFooter>
+          </form>
         </DialogContent>
       </Dialog>
     </>
