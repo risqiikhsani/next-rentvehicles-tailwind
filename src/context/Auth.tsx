@@ -146,13 +146,19 @@ export function AuthHandler({ children }: Props) {
       toast.success("Successfully fetched user data and account data");
       setLoading(false);
       return router.refresh();
-    }
-    else{
+    } else {
       toast.error("Error fetching user data / account data");
-      Cookies.remove("accesstoken");
-      setLoading(false);
-      return router.push("/auth/login")
+      // Check if the access token cookie exists before attempting to remove it
+      const accessToken = Cookies.get("accesstoken");
+      if (accessToken) {
+        Cookies.remove("accesstoken");
+        setLoading(false); // Move setLoading(false) before the return statement
+        return router.push("/auth/login");
+      } else {
+        setLoading(false); // Set loading to false if there's no access token to remove
+      }
     }
+    
     // try {
     //   const userDataSuccess = await fetchUserData();
     //   const accountDataSuccess = await fetchAccountData();

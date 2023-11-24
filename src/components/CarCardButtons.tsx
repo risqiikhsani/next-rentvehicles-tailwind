@@ -28,7 +28,7 @@ export default function CarCardButtons({ data }: { data: PostType }) {
       {user.role == "Basic" && (
         <Button variant="outline" className="grow">
             Favorite
-            <HeartIcon className="mr-2 h-4 w-4" />
+            <HeartIcon className="ml-2 h-4 w-4" />
         </Button>
       )}
 

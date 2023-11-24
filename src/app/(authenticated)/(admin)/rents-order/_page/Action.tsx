@@ -38,7 +38,7 @@ export default function Action({ data }: { data: RentType }) {
           <DropdownMenuLabel>Action</DropdownMenuLabel>
           <DropdownMenuSeparator />
           <DropdownMenuItem>Accept</DropdownMenuItem>
-            <Decline/>
+            <Decline data={data}/>
           <DropdownMenuItem>Ready to pickup</DropdownMenuItem>
           <DropdownMenuItem>Item has been picked up now</DropdownMenuItem>
           <DropdownMenuItem>On Process</DropdownMenuItem>

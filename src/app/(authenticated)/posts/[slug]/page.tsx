@@ -28,6 +28,7 @@ import Review from "@/components/review";
 import { Separator } from "@/components/ui/separator";
 import Link from "next/link";
 import { PostType } from "@/types/types";
+import Buttons from "./_page/Buttons";
 
 async function getData(postId: string) {
   // const res = await fetch('http://localhost:8080/api/posts',{ next: { tags: ['posts'] } })
@@ -53,20 +54,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
         <div className="lg:grid lg:grid-cols-3 gap-4">
           <div className="lg:sticky lg:h-screen lg:top-20 lg:left-0 static">
             <Image className="rounded-xl" src={data.MainImage.url} alt="pic" width={500} height={500} />
-            <div className="flex gap-4 my-10">
-              <Button variant="outline" className="rounded-xl w-full">
-                <HeartIcon className="w-4 h-4 mr-2" />
-                Favorite
-              </Button>
-              <Button variant="outline" className="rounded-xl w-full" asChild>
-
-                <Link href={`/posts/${slug}/make-book`}><LockClosedIcon className="w-4 h-4 mr-2" />Book</Link>
-              </Button>
-            </div>
-            <Button className="rounded-xl w-full" asChild>
-
-              <Link href={`/posts/${slug}/make-rent`}><KeyIcon className="w-4 h-4 mr-2" />Rent</Link>
-            </Button>
+            <Buttons data={data}/>
           </div>
 
           <div className="col-span-2 mt-4 lg:mt-0">

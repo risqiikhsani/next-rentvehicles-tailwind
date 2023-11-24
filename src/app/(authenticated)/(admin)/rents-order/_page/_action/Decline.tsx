@@ -25,20 +25,39 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 
 import { useForm, SubmitHandler } from "react-hook-form";
+import api from "@/lib/axios";
+import { toast } from "sonner";
+import { useRouter } from "next/navigation";
 
 type Inputs = {
   text: string;
 };
 
-export default function Decline() {
+export default function Decline({data}:{data:RentType}) {
+  const router = useRouter()
   const {
     register,
     handleSubmit,
     watch,
     formState: { errors },
   } = useForm<Inputs>();
-  const onSubmit: SubmitHandler<Inputs> = (data) => {
-    console.log("text",data);
+
+
+  const onSubmit: SubmitHandler<Inputs> = async (values) => {
+    const json = {
+      status: "Declined",
+      decline_reason: values.text,
+    };
+  
+    try {
+      const response = await api.put(`/api/rent-details/${data.RentDetail.ID}`, JSON.stringify(json));
+      console.log("response", response);
+      toast.success("Successfully updated rent detail.");
+      router.refresh();
+    } catch (error) {
+      console.log("error", error);
+      toast.error("Error updating rent detail.");
+    }
   };
 
   return (
