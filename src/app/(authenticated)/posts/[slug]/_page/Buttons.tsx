@@ -19,21 +19,26 @@ export default function Buttons({ data }: { data: PostType }) {
                                 Favorite
                             </Button>
 
-                            <Button variant="outline" className="rounded-xl w-full" asChild>
+                            {data.available && <Button variant="outline" className="rounded-xl w-full" asChild >
                                 <Link href={`/posts/${data.ID}/make-book`}><LockClosedIcon className="w-4 h-4 mr-2" />Book</Link>
-                            </Button>
+                            </Button>}
+
                         </div>
-                        <Button className="rounded-xl w-full" asChild>
-                            <Link href={`/posts/${data.ID}/make-rent`}><KeyIcon className="w-4 h-4 mr-2" />Rent</Link>
-                        </Button>
+
+                        {data.available &&
+                            <Button className="rounded-xl w-full" asChild>
+                                <Link href={`/posts/${data.ID}/make-rent`}><KeyIcon className="w-4 h-4 mr-2" />Rent</Link>
+                            </Button>
+                        }
+
                     </>
                 )}
 
             {user.role == "Admin" &&
                 <div className="flex gap-4 my-10">
-                <Button className="rounded-xl w-full" asChild>
-                    <Link href={`/edit-post/${data.ID}`}><KeyIcon className="w-4 h-4 mr-2" />Edit</Link>
-                </Button>
+                    <Button className="rounded-xl w-full" asChild>
+                        <Link href={`/edit-post/${data.ID}`}><KeyIcon className="w-4 h-4 mr-2" />Edit</Link>
+                    </Button>
                 </div>
             }
         </>

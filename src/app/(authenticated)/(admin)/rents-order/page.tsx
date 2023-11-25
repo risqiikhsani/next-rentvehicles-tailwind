@@ -15,17 +15,18 @@ import { ChevronDownIcon } from "@heroicons/react/24/solid";
 import { FolderOpenIcon } from "@heroicons/react/24/solid";
 import { cookies } from 'next/headers'
 import moment from 'moment';
-import formatTimestamp from "@/lib/helpers";
+import { formatTimestamp } from "@/lib/helpers";
 import { ArrowRightIcon } from "@heroicons/react/24/solid";
 import Detail from "./_page/Detail";
 import Files from "./_page/Files";
 import Action from "./_page/Action";
 import Note from "./_page/Note";
+import { Badge } from "@/components/ui/badge";
 
 
 async function getData() {
   // const res = await fetch('http://localhost:8080/api/posts',{ next: { tags: ['posts'] } })
-  const res = await fetch("http://localhost:8080/api/rents", {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/rents`, {
     cache: "no-store",
     headers: {
       "Content-Type": "application/json",
@@ -83,16 +84,20 @@ export default async function Page() {
                 <TableCell>-</TableCell>
                 <TableCell>{a.RentDetail.estimated_final_price}</TableCell>
                 <TableCell>{a.RentDetail.is_paid ? "paid" : "not paid"}</TableCell>
-                <TableCell>{a.RentDetail.status}</TableCell>
-                <TableCell className="text-center">{a.is_cancelled ? "true":"-"}</TableCell>
                 <TableCell>
-                  <Action data={a}/>
+                  <Badge className={a.RentDetail.status == "Declined" ? "bg-red-600 hover:bg-red-700":"bg-green-600 hover:bg-green-700"}>
+                    {a.RentDetail.status}
+                  </Badge>
+                </TableCell>
+                <TableCell className="text-center">{a.is_cancelled ? "true" : "-"}</TableCell>
+                <TableCell>
+                  <Action data={a} />
                 </TableCell>
                 <TableCell>
-                  <Files data={a}/>
+                  <Files data={a} />
                 </TableCell>
                 <TableCell>
-                  <Note data={a}/>
+                  <Note data={a} />
                 </TableCell>
                 <TableCell>
                   <Detail data={a} />

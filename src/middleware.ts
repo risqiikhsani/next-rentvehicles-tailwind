@@ -20,7 +20,7 @@ export function middleware(request: NextRequest) {
 
   const path = request.nextUrl.pathname;
 
-  const publicPath = ["/auth", "/homepage"];
+  const publicPath = ["/auth", "/homepage","/posts"];
   let isPublicPath = false;
 
   for (const publicPathItem of publicPath) {

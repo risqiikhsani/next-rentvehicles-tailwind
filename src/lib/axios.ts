@@ -1,7 +1,7 @@
 import Axios from "axios";
 import Cookies from 'js-cookie'
 
-const BASE_URL = "http://localhost:8080"
+const BASE_URL = process.env.NEXT_PUBLIC_BACKEND_URL
 
 const api = Axios.create({
     baseURL: BASE_URL,

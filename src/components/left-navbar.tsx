@@ -112,7 +112,8 @@ const LeftNavBar = () => {
   return (
     <nav className="top-20 left-0 w-64 sticky h-screen">
      <div className="overflow-y-auto h-screen py-4">
-        {user.role === 'Admin' ? renderUrls(admin_urls) : renderUrls(basic_urls)}
+        {user.role === 'Admin' && renderUrls(admin_urls)}
+        {user.role === 'Basic' && renderUrls(basic_urls)}
       </div>
     </nav>
   );

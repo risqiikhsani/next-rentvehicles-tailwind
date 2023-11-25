@@ -9,48 +9,91 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { RentType } from "@/types/types";
 
 import { ChevronDownIcon } from "@heroicons/react/24/solid";
-import {FolderOpenIcon} from "@heroicons/react/24/solid";
+import { FolderOpenIcon } from "@heroicons/react/24/solid";
+import { cookies } from 'next/headers'
+import moment from 'moment';
+import { formatTimestamp } from "@/lib/helpers";
+import { ArrowRightIcon } from "@heroicons/react/24/solid";
+import { Badge } from "@/components/ui/badge";
+import Detail from "./_page/Detail";
 
-export default function Page() {
+
+async function getData() {
+  // const res = await fetch('http://localhost:8080/api/posts',{ next: { tags: ['posts'] } })
+  const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/rents`, {
+    cache: "no-store",
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": `Bearer ${cookies().get("accesstoken")?.value}`,
+    },
+  });
+
+  if (!res.ok) {
+    // This will activate the closest `error.js` Error Boundary
+    throw new Error("Failed to fetch rent history data");
+  }
+
+  return res.json();
+}
+
+export default async function Page() {
+  const data: RentType[] = await getData();
+
+
+
   return (
     <>
-      <Title title="Rents" text="List all of your rented items"/>
-
+      <Title title="Rent orders" text="List all of your rent orders" />
 
       <Table>
         <TableCaption>A list of your recent invoices.</TableCaption>
         <TableHeader>
           <TableRow>
-            <TableHead className="w-[100px]">Rent ID</TableHead>
+            <TableHead>Rent ID</TableHead>
             <TableHead>Post</TableHead>
             <TableHead>Rent Date</TableHead>
-            <TableHead>Rent Time</TableHead>
-            <TableHead>Days Left</TableHead>
-            <TableHead>Amount</TableHead>
+            <TableHead>Rent Days</TableHead>
+            <TableHead>Remaining Days</TableHead>
+            <TableHead>Total price</TableHead>
             <TableHead>Payment Status</TableHead>
             <TableHead>Rent Status</TableHead>
-            <TableHead className="text-right">Action</TableHead>
+            <TableHead>Cancelled by user</TableHead>
+            <TableHead>Action</TableHead>
+            <TableHead className="text-right">Detail</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
-          <TableRow>
-            <TableCell className="font-medium">INV001</TableCell>
-            <TableCell>Lamborghini Aventador</TableCell>
-            <TableCell>13 june 2023 - 14 june 2023</TableCell>
-            <TableCell>1 day</TableCell>
+          {data &&
+            data.map((a: RentType, index: number) => (
+              <TableRow key={index}>
+                <TableCell className="font-medium">{a.ID}</TableCell>
+                <TableCell>{a.post_id}</TableCell>
+                <TableCell>{`${formatTimestamp(a.start_date)} - ${formatTimestamp(a.end_date)}`}</TableCell>
+                <TableCell>{a.RentDetail.rent_days}</TableCell>
 
-            <TableCell>3</TableCell>
-            <TableCell>$250.00</TableCell>
-            <TableCell>Paid (offline)</TableCell>
-            <TableCell>On going</TableCell>
-            <TableCell className="text-right">
-              <Button variant="outline" size="icon">
-                <ChevronDownIcon className="h-4 w-4" />
-              </Button> 
-            </TableCell>
-          </TableRow>
+                <TableCell>-</TableCell>
+                <TableCell>{a.RentDetail.estimated_final_price}</TableCell>
+                <TableCell>{a.RentDetail.is_paid ? "paid" : "not paid"}</TableCell>
+                <TableCell>
+                  <Badge className={a.RentDetail.status == "Declined" ? "bg-red-600 hover:bg-red-700" : "bg-green-600 hover:bg-green-700"}>
+                    {a.RentDetail.status}
+                  </Badge>
+                </TableCell>
+                <TableCell className="text-center">{a.is_cancelled ? "true" : "-"}</TableCell>
+                <TableCell>
+
+                </TableCell>
+                <TableCell>
+                  <Detail data={a} />
+                </TableCell>
+
+              </TableRow>
+            ))}
+
+          {!data && <TableRow><p>no data found.</p></TableRow>}
         </TableBody>
       </Table>
     </>

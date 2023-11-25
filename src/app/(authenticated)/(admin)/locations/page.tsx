@@ -12,7 +12,7 @@ import { cookies } from "next/headers";
 
 async function getData() {
   // const res = await fetch('http://localhost:8080/api/posts',{ next: { tags: ['posts'] } })
-  const res = await fetch("http://localhost:8080/api/locations", {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/locations`, {
     cache: "no-store",
     headers: {
       "Content-Type": "application/json",

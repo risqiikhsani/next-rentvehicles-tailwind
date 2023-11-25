@@ -32,7 +32,7 @@ import Buttons from "./_page/Buttons";
 
 async function getData(postId: string) {
   // const res = await fetch('http://localhost:8080/api/posts',{ next: { tags: ['posts'] } })
-  const res = await fetch(`http://localhost:8080/api/posts/${postId}`, { cache: 'no-store' })
+  const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/posts/${postId}`, { cache: 'no-store' })
 
   if (!res.ok) {
     // This will activate the closest `error.js` Error Boundary
@@ -54,7 +54,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
         <div className="lg:grid lg:grid-cols-3 gap-4">
           <div className="lg:sticky lg:h-screen lg:top-20 lg:left-0 static">
             <Image className="rounded-xl" src={data.MainImage.url} alt="pic" width={500} height={500} />
-            <Buttons data={data}/>
+            <Buttons data={data} />
           </div>
 
           <div className="col-span-2 mt-4 lg:mt-0">
@@ -207,7 +207,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
                         Available
                       </Badge>
                     </TableCell>
-                    <TableCell className="text-left">{data.available ? "true":"false"}</TableCell>
+                    <TableCell className="text-left">{data.available ? "true" : "false"}</TableCell>
                   </TableRow>
                   <TableRow className="hover:bg-inherit">
                     <TableCell className="font-medium">
@@ -215,7 +215,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
                         Poster
                       </Badge>
                     </TableCell>
-                    <TableCell className="text-left">User</TableCell>
+                    <TableCell className="text-left">{data.UserID}</TableCell>
                   </TableRow>
                 </TableBody>
               </Table>
@@ -228,7 +228,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <Specification data={data}/>
+                  <Specification data={data} />
                 </CardContent>
               </Card>
             </div>

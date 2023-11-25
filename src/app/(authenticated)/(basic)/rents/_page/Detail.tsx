@@ -19,7 +19,6 @@ import {
     TableHeader,
     TableRow,
 } from "@/components/ui/table"
-import { formatTimestamp } from "@/lib/helpers";
 
 
 export default function Detail({ data }: { data: RentType }) {
@@ -49,11 +48,11 @@ export default function Detail({ data }: { data: RentType }) {
                                     </TableRow>
                                     <TableRow>
                                         <TableCell className="font-medium">Created At</TableCell>
-                                        <TableCell>{formatTimestamp(data.CreatedAt)}</TableCell>
+                                        <TableCell>{data.CreatedAt}</TableCell>
                                     </TableRow>
                                     <TableRow>
                                         <TableCell className="font-medium">Updated At</TableCell>
-                                        <TableCell>{formatTimestamp(data.UpdatedAt)}</TableCell>
+                                        <TableCell>{data.UpdatedAt}</TableCell>
                                     </TableRow>
                                     <TableRow>
                                         <TableCell className="font-medium">User</TableCell>
@@ -65,11 +64,11 @@ export default function Detail({ data }: { data: RentType }) {
                                     </TableRow>
                                     <TableRow>
                                         <TableCell className="font-medium">Start Date</TableCell>
-                                        <TableCell>{formatTimestamp(data.start_date)}</TableCell>
+                                        <TableCell>{data.start_date}</TableCell>
                                     </TableRow>
                                     <TableRow>
                                         <TableCell className="font-medium">End Date</TableCell>
-                                        <TableCell>{formatTimestamp(data.end_date)}</TableCell>
+                                        <TableCell>{data.end_date}</TableCell>
                                     </TableRow>
                                     <TableRow>
                                         <TableCell className="font-medium">Payment Method</TableCell>
@@ -104,15 +103,15 @@ export default function Detail({ data }: { data: RentType }) {
                                 <TableBody className="text-left">
                                     <TableRow>
                                         <TableCell className="font-medium">Updated At</TableCell>
-                                        <TableCell>{formatTimestamp(data.RentDetail.UpdatedAt)}</TableCell>
+                                        <TableCell>{data.RentDetail.UpdatedAt}</TableCell>
                                     </TableRow>
                                     <TableRow>
                                         <TableCell className="font-medium">Pickup Date</TableCell>
-                                        <TableCell>{data.RentDetail.pickup_date && formatTimestamp(data.RentDetail.pickup_date)}</TableCell>
+                                        <TableCell>{data.RentDetail.pickup_date}</TableCell>
                                     </TableRow>
                                     <TableRow>
                                         <TableCell className="font-medium">Return Date</TableCell>
-                                        <TableCell>{data.RentDetail.return_date && formatTimestamp(data.RentDetail.return_date)}</TableCell>
+                                        <TableCell>{data.RentDetail.return_date}</TableCell>
                                     </TableRow>
                                     <TableRow>
                                         <TableCell className="font-medium">Is this already paid</TableCell>

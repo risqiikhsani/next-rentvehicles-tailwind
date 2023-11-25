@@ -97,7 +97,7 @@ export default function Page() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("http://localhost:8080/api/locations", {
+        const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/locations`, {
           headers: {
             "Content-Type": "application/json",
           },

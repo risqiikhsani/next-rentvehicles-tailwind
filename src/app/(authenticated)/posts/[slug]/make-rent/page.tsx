@@ -28,10 +28,10 @@ import {
     FormLabel,
     FormMessage,
 } from "@/components/ui/form"
-import moment from "moment"
 import api from "@/lib/axios"
 import { toast } from "sonner"
 import { useRouter } from "next/navigation"
+import { convertToISOString } from "@/lib/helpers"
 
 const FormSchema = z.object({
     startDate: z.date({
@@ -66,8 +66,8 @@ export default function Page({ params }: { params: { slug: string } }) {
         console.log("onsubmit",data)
         const formattedData = {
             post_id: parseInt(slug), // Assuming slug is a string representation of post_id
-            start_date: moment(data.startDate).toISOString(),
-            end_date: moment(data.endDate).toISOString(),
+            start_date: convertToISOString(data.startDate),
+            end_date: convertToISOString(data.endDate),
         };
     
         // Now you have the formatted data to send to your backend
