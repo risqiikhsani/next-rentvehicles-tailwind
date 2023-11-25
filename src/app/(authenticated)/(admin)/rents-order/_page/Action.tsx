@@ -19,6 +19,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import Decline from "./_action/Decline";
+import ReadyToPickup from "./_action/ReadyToPickup";
 
 export default function Action({ data }: { data: RentType }) {
   const disabled =
@@ -39,7 +40,7 @@ export default function Action({ data }: { data: RentType }) {
           <DropdownMenuSeparator />
           <DropdownMenuItem>Accept</DropdownMenuItem>
             <Decline data={data}/>
-          <DropdownMenuItem>Ready to pickup</DropdownMenuItem>
+            <ReadyToPickup data={data}/>
           <DropdownMenuItem>Item has been picked up now</DropdownMenuItem>
           <DropdownMenuItem>On Process</DropdownMenuItem>
           <DropdownMenuItem>Item has been returned now</DropdownMenuItem>

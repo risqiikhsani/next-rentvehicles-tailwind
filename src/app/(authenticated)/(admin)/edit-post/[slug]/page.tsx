@@ -94,44 +94,39 @@ export default function Page({ params }: { params: { slug: string } }) {
   const [locations, setLocations] = useState<LocationType[]>([]);
 
   // this is for reamount whole form so that the default value of location shows up
-  const [locationsFetched,setLocationsFetched] = useState(false)  
-
-
+  const [locationsFetched, setLocationsFetched] = useState(false);
 
   const fetchPost = async () => {
     try {
-      const response = await fetch(
-        `http://localhost:8080/api/posts/${slug}`,
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
+      const response = await fetch(`http://localhost:8080/api/posts/${slug}`, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
 
       if (!response.ok) {
         throw new Error("Failed to fetch data");
       }
 
       const data: PostType = await response.json();
-      console.log("post", data);      
+      console.log("post", data);
       form.reset({
-        brand:data.brand,
-        brand_model:data.brand_model,
-        year:data.year,
-        vehicle_type:data.vehicle_type,
-        transmission:data.transmission,
-        fuel_type:data.fuel_type,
-        price_per_day:data.price_per_day,
-        price_per_week:data.price_per_week,
-        price_per_month:data.price_per_month,
-        discount_percentage:data.discount_percentage,
-        available:data.available,
-        bookable:data.bookable,
-        license_plate:data.license_plate,
-        location_id:data.location_id.toString(),
-        body_color:data.body_color,
-      })
+        brand: data.brand,
+        brand_model: data.brand_model,
+        year: data.year,
+        vehicle_type: data.vehicle_type,
+        transmission: data.transmission,
+        fuel_type: data.fuel_type,
+        price_per_day: data.price_per_day,
+        price_per_week: data.price_per_week,
+        price_per_month: data.price_per_month,
+        discount_percentage: data.discount_percentage,
+        available: data.available,
+        bookable: data.bookable,
+        license_plate: data.license_plate,
+        location_id: data.location_id.toString(),
+        body_color: data.body_color,
+      });
       // form.setValue("brand", data.brand);
       // form.setValue("brand_model", data.brand_model);
       // form.setValue("year", data.year);
@@ -147,7 +142,7 @@ export default function Page({ params }: { params: { slug: string } }) {
       // form.setValue("license_plate", data.license_plate);
       // form.setValue("location_id", `${data.location_id}`);
       // form.setValue("body_color", data.body_color);
-      console.log("location id",data.location_id)
+      console.log("location id", data.location_id);
     } catch (error) {
       // Handle error here, you might want to log it or set an error state
       console.log("error", error);
@@ -170,8 +165,8 @@ export default function Page({ params }: { params: { slug: string } }) {
       const data = await response.json();
       console.log("locations", data);
       setLocations(data);
-      if (!locationsFetched){
-        setLocationsFetched(true)
+      if (!locationsFetched) {
+        setLocationsFetched(true);
       }
     } catch (error) {
       // Handle error here, you might want to log it or set an error state
@@ -220,37 +215,36 @@ export default function Page({ params }: { params: { slug: string } }) {
     // ✅ This will be type-safe and validated.
 
     console.log("onsubmit", values);
+    const formData = new FormData();
 
+    formData.append("brand", values.brand);
+    formData.append("brand_model", values.brand_model);
+    formData.append("vehicle_type", values.vehicle_type);
+    formData.append("year", values.year.toString());
+    formData.append("transmission", values.transmission);
+    formData.append("fuel_type", values.fuel_type);
+    formData.append("price_per_day", values.price_per_day.toString());
+    formData.append("price_per_week", values.price_per_week.toString());
+    formData.append("price_per_month", values.price_per_month.toString());
+    formData.append("body_color", values.body_color);
+    formData.append("location_id", values.location_id);
+    formData.append("license_plate", values.license_plate);
+    formData.append("bookable", values.bookable ? "true" : "false");
+    formData.append("available", values.available ? "true" : "false");
+
+    if (acceptedMainImage !== null) {
+      acceptedMainImage.forEach((element) => {
+        formData.append("main_image", element);
+      });
+    }
+
+    if (acceptedImages !== null) {
+      acceptedImages.forEach((element) => {
+        formData.append("images", element);
+      });
+    }
+    
     try {
-      const formData = new FormData();
-
-      formData.append("brand", values.brand);
-      formData.append("brand_model", values.brand_model);
-      formData.append("vehicle_type", values.vehicle_type);
-      formData.append("year", values.year.toString());
-      formData.append("transmission", values.transmission);
-      formData.append("fuel_type", values.fuel_type);
-      formData.append("price_per_day", values.price_per_day.toString());
-      formData.append("price_per_week", values.price_per_week.toString());
-      formData.append("price_per_month", values.price_per_month.toString());
-      formData.append("body_color", values.body_color);
-      formData.append("location_id", values.location_id);
-      formData.append("license_plate", values.license_plate);
-      formData.append("bookable", values.bookable ? "true" : "false");
-      formData.append("available", values.available ? "true" : "false");
-
-      if (acceptedMainImage !== null) {
-        acceptedMainImage.forEach((element) => {
-          formData.append("main_image", element);
-        });
-      }
-
-      if (acceptedImages !== null) {
-        acceptedImages.forEach((element) => {
-          formData.append("images", element);
-        });
-      }
-
       const response = await api.put(`/api/posts/${slug}`, formData, {
         headers: {
           "Content-Type": "multipart/form-data",

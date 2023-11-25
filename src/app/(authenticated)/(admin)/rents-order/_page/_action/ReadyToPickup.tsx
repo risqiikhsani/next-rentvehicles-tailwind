@@ -28,12 +28,13 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import api from "@/lib/axios";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
+import { Input } from "@/components/ui/input";
 
 type Inputs = {
-  text: string;
+    status: string;
 };
 
-export default function Decline({data}:{data:RentType}) {
+export default function ReadyToPickup({data}:{data:RentType}) {
   const router = useRouter()
   const {
     register,
@@ -46,8 +47,7 @@ export default function Decline({data}:{data:RentType}) {
   const onSubmit: SubmitHandler<Inputs> = async (values) => {
     const formData = new FormData();
 
-    formData.append("decline_reason", values.text);
-    formData.append("status", "Declined");
+    formData.append("status", values.status);
   
     try {
       const response = await api.put(`/api/rent-details/${data.RentDetail.ID}`, formData, {
@@ -69,27 +69,18 @@ export default function Decline({data}:{data:RentType}) {
       <Dialog>
         <DialogTrigger asChild>
           <DropdownMenuItem onSelect={(e) => e.preventDefault()}>
-            Decline
+            Ready to pickup
           </DropdownMenuItem>
         </DialogTrigger>
         <DialogContent>
           <DialogHeader>
-            <DialogTitle>Are you sure absolutely sure?</DialogTitle>
+            <DialogTitle>Ready to pickup.</DialogTitle>
             <DialogDescription>
-              This action cannot be undone. Are you sure you want to permanently
-              delete this file from our servers?
+                Please make sure the car is ready to be used so that the user can pick it up before the rent starts.
             </DialogDescription>
           </DialogHeader>
           <form onSubmit={handleSubmit(onSubmit)}>
-          <div className="flex items-center space-x-2">
-            <div className="grid flex-1 gap-2">
-              <Label htmlFor="message-2">Your notes</Label>
-              <Textarea placeholder="Type your message here." id="message-2" {...register("text")}/>
-              <p className="text-sm text-muted-foreground">
-                Your message will be copied to the support team.
-              </p>
-            </div>
-          </div>
+            <Input type="hidden" {...register("status")} defaultValue="ReadyToPickup"/>
           <DialogFooter>
             <DialogClose asChild className="sm:justify-start">
               <Button type="submit">Confirm</Button>
