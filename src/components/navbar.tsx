@@ -53,7 +53,7 @@ export default function NavBar() {
                   <DropdownMenu>
                     <DropdownMenuTrigger asChild className="hover:cursor-pointer hover:border-solid hover:border-4 hover:border-lime-300">
                       <Avatar>
-                        <AvatarImage src="userdefault2.png" />
+                        <AvatarImage src="/userdefault2.png" />
                         <AvatarFallback>CN</AvatarFallback>
                       </Avatar>
                     </DropdownMenuTrigger>

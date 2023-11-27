@@ -104,7 +104,7 @@ export default function Page() {
             <Hero3 />
             <Separator className="my-6" />
             <div className="flex flex-col items-center justify-center my-20">
-                <div className="flex p-10 rounded-2xl shadow-xl max-w-2xl hover:cursor-pointer transition ease-in-out delay-150 bg-blue-500 hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500 duration-300">
+                <div className="flex p-10 rounded-2xl shadow-xl hover:cursor-pointer transition ease-in-out delay-150 bg-blue-500 hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500 duration-300">
                     <h1 className="text-6xl font-bold text-center my-5">Try searching for our cars!</h1>
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -132,7 +132,7 @@ export default function Page() {
             <Separator className="my-6" />
             <h1 className="text-6xl font-bold align-middle text-center my-5">Customer Reviews</h1>
 
-            <div className="grid grid-cols-3 space-x-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                 {reviews.map((review, index) => (
                     <Review key={index} {...review} />
                 ))}

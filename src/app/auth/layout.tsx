@@ -4,12 +4,13 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     return (
         <>
 
-            <div className="flex w-full">
-                <Image src="/login1.jpg" width={640} height={960} alt="login" className="hidden lg:block rounded-l-2xl" />
-
-                <div className="flex mx-auto items-center justify-center h-screen w-max bg-[url('/login1.jpg')] lg:w-full lg:h-full lg:bg-gradient-to-r from-violet-500 to-fuchsia-500 rounded-2xl lg:rounded-r-2xl lg:rounded-l-none">
-                    <div className="p-4 opacity-90">
-                        {children}
+            <div className="flex items-center justify-center h-screen w-full">
+                <div className="relative ">
+                    <Image src="/login1.jpg" alt="car" className="hidden sm:block w-full h-auto rounded-lg " width={500} height={800}/>
+                    <div className="absolute inset-0 flex items-center justify-center">
+                        <div className="opacity-90 bg-gradient-to-r from-violet-500 to-fuchsia-500 rounded-2xl md:p-8 ">
+                            {children}
+                        </div>
                     </div>
                 </div>
             </div>
