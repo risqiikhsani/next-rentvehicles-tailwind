@@ -19,6 +19,7 @@ import { formatTimestamp } from "@/lib/helpers";
 import { ArrowRightIcon } from "@heroicons/react/24/solid";
 import { Badge } from "@/components/ui/badge";
 import Detail from "./_page/Detail";
+import Action from "./_page/Action";
 
 
 async function getData() {
@@ -84,7 +85,7 @@ export default async function Page() {
                 </TableCell>
                 <TableCell className="text-center">{a.is_cancelled ? "true" : "-"}</TableCell>
                 <TableCell>
-
+                  <Action data={a}/>
                 </TableCell>
                 <TableCell>
                   <Detail data={a} />

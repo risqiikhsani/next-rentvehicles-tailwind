@@ -1,111 +1,51 @@
-"use client";
-
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import * as z from "zod";
-
-import { Button } from "@/components/ui/button";
-import {
-  Form,
-  FormControl,
-  FormDescription,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
 import Title from "@/components/typography/Title";
+import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
+import { AccountType } from "@/types/types";
+import { CheckIcon, InformationCircleIcon, XCircleIcon } from "@heroicons/react/24/solid";
+import { cookies } from 'next/headers'
 
-const FormSchema = z.object({
-  username: z.string().min(2, {
-    message: "Username must be at least 2 characters.",
-  }),
-  email: z.string().email(),
-  phone_number: z.number(),
-});
-
-export default function Page() {
-  const form = useForm<z.infer<typeof FormSchema>>({
-    resolver: zodResolver(FormSchema),
-    defaultValues: {
-      username: "",
-      phone_number: undefined,
-      email: "",
+async function getData() {
+  // const res = await fetch('http://localhost:8080/api/posts',{ next: { tags: ['posts'] } })
+  const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/me/account`, {
+    cache: "no-store",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${cookies().get("accesstoken")?.value}`,
     },
   });
 
-  function onSubmit(data: z.infer<typeof FormSchema>) {
-    // toast({
-    //   title: "You submitted the following values:",
-    //   description: (
-    //     <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-    //       <code className="text-white">{JSON.stringify(data, null, 2)}</code>
-    //     </pre>
-    //   ),
-    // });
+  if (!res.ok) {
+    // This will activate the closest `error.js` Error Boundary
+    throw new Error("Failed to fetch data");
   }
+
+  return res.json();
+}
+
+export default async function Page() {
+
+  const account: AccountType = await getData()
 
   return (
     <>
       <Title title="Account Settings" />
-      <Form {...form}>
-        <form
-          onSubmit={form.handleSubmit(onSubmit)}
-          className="w-2/3 space-y-6"
-        >
-          <FormField
-            control={form.control}
-            name="username"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Username</FormLabel>
-                <FormControl>
-                  <Input placeholder="shadcn" {...field} />
-                </FormControl>
-                <FormDescription>Username of account.</FormDescription>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="email"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Email</FormLabel>
-                <FormControl>
-                  <Input placeholder="email@gmail.com" {...field} />
-                </FormControl>
-                <FormDescription>Email linked to account.</FormDescription>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="phone_number"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Phone number</FormLabel>
-                <FormControl>
-                  <Input placeholder="08100000000" {...field} />
-                </FormControl>
-                <FormDescription>
-                  Phone number linked to account.
-                </FormDescription>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <Button type="submit">Save</Button>
-        </form>
-      </Form>
+      <p className="text-lg font-semibold">Username</p>
+      <p className="font-light">{account.username}</p>
+      <p className="text-lg font-semibold">Email</p>
+      <p className="font-light">{account.email}</p>
+
+      <div className="flex gap-2 items-center">
+        <p className="italic">{account.email_verified ? "email verified" : "email not verified"}</p>
+        {account.email_verified && <CheckIcon className="h-8 w-8 text-blue-500" />}
+      </div>
+
+      <p className="text-lg font-semibold">Phone</p>
+      <p className="font-light">{account.phone == "" ? "you haven't added a phone number yet":account.phone}</p>
       <Separator className="my-6" />
       <h2>Password and Authentication</h2>
       <Button>Change Password</Button>
-      <Separator className="my-6"/>
+      <Separator className="my-6" />
       <h2>TWO-FACTOR AUTHENTICATION</h2>
       <p>
         Protect your account with extra layer of security. Once configured,
@@ -114,5 +54,5 @@ export default function Page() {
       </p>
       <Button>Enable Two-Factor Auth</Button>
     </>
-  );
+  )
 }

@@ -145,7 +145,7 @@ export function AuthHandler({ children }: Props) {
     if (userDataSuccess && accountDataSuccess) {
       toast.success("Successfully fetched user data and account data");
       setLoading(false);
-      return router.refresh();
+      return router.push("/");
     } else {
       toast.error("Error fetching user data / account data");
       // Check if the access token cookie exists before attempting to remove it

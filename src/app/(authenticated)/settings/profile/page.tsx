@@ -1,79 +1,34 @@
-"use client";
-
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import * as z from "zod";
-
-import { Button } from "@/components/ui/button";
-import {
-  Form,
-  FormControl,
-  FormDescription,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-
 import Title from "@/components/typography/Title";
-import { Separator } from "@/components/ui/separator";
+import { UserType } from "@/types/types";
+import { cookies } from "next/headers";
+import UpdateProfile from "./_page/form";
 
-const FormSchema = z.object({
-  name: z.string().min(2, {
-    message: "Username must be at least 2 characters.",
-  }),
-  about: z.string().min(10, {
-    message: "About must be at least 10 characters.",
-  }),
-});
-
-export default function Page() {
-  const form = useForm<z.infer<typeof FormSchema>>({
-    resolver: zodResolver(FormSchema),
-    defaultValues: {
-      name: "",
-      about: "",
+async function getData() {
+  // const res = await fetch('http://localhost:8080/api/posts',{ next: { tags: ['posts'] } })
+  const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/me/user`, {
+    cache: "no-store",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${cookies().get("accesstoken")?.value}`,
     },
   });
 
-  function onSubmit(data: z.infer<typeof FormSchema>) {
-    // toast({
-    //   title: "You submitted the following values:",
-    //   description: (
-    //     <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-    //       <code className="text-white">{JSON.stringify(data, null, 2)}</code>
-    //     </pre>
-    //   ),
-    // });
+  if (!res.ok) {
+    // This will activate the closest `error.js` Error Boundary
+    throw new Error("Failed to fetch data");
   }
+
+  return res.json();
+}
+
+
+export default async function Page() {
+  const user: UserType = await getData()
 
   return (
     <>
       <Title title="Profile Settings" />
-      <Form {...form}>
-        <form
-          onSubmit={form.handleSubmit(onSubmit)}
-          className="w-2/3 space-y-6"
-        >
-          <FormField
-            control={form.control}
-            name="name"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Name</FormLabel>
-                <FormControl>
-                  <Input placeholder="shadcn" {...field} />
-                </FormControl>
-                <FormDescription>Displayed name.</FormDescription>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-
-          <Button type="submit">Save</Button>
-        </form>
-      </Form>
+        <UpdateProfile defaultValue={user}/>
     </>
   );
 }

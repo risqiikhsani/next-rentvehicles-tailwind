@@ -58,6 +58,11 @@ export const carFuelTypes = [
   "electric"
 ]
 
+export const userGender = [
+  "Male",
+  "Female"
+]
+
 export const carTransmission = [
   "automatic",
   "manual",
