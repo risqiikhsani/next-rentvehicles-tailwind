@@ -115,3 +115,12 @@ export interface RentType {
   readonly: boolean;
   RentDetail: RentDetailType;
 }
+
+export interface EstimatedPriceType {
+  estimated_final_price: number;
+  estimated_normal_price: number;
+  estimated_saved_price: number;
+  post_id: number;
+  rent_days: number;
+  voucher_code: string;
+};

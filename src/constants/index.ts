@@ -63,6 +63,12 @@ export const userGender = [
   "Female"
 ]
 
+export const PaymentMethod = [
+  "Paylater",
+  "PayInFront"
+]
+
+
 export const carTransmission = [
   "automatic",
   "manual",

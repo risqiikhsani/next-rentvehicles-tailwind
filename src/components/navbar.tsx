@@ -24,7 +24,8 @@ export default function NavBar() {
   return (
     <header className="w-full fixed top-0 z-10">
       <nav className="w-full bg-white bg-opacity-90 dark:bg-slate-900">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6">
+        {/* <div className="max-w-7xl mx-auto px-4 sm:px-6"> */}
+        <div className="px-4 sm:px-6">
           <div className="flex justify-between items-center py-4">
             <Link href="/">
               <div className="flex justify-center items-center">
@@ -52,7 +53,7 @@ export default function NavBar() {
                   <DropdownMenu>
                     <DropdownMenuTrigger asChild className="hover:cursor-pointer hover:border-solid hover:border-4 hover:border-lime-300">
                       <Avatar>
-                        <AvatarImage src="https://github.com/shadcn.png" />
+                        <AvatarImage src="userdefault2.png" />
                         <AvatarFallback>CN</AvatarFallback>
                       </Avatar>
                     </DropdownMenuTrigger>
