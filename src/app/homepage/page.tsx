@@ -158,11 +158,11 @@ export default function Page() {
 
       {/* <Hero />
       <Hero2 /> */}
-      {/* <div className="w-full max-w-6xl mx-auto px-4 md:px-6 py-24">
-        <div className="text-center">
+      {/* <div className="w-screen mx-auto px-4 md:px-6 py-24"> */}
+        {/* <div className="text-center">
           <LogoCarousel />
-        </div>
-      </div> */}
+        </div> */}
+      {/* </div> */}
       <Separator className="my-6" />
       {/* <Hero3 /> */}
       {/* <div className="relative flex flex-row-reverse items-center">
