@@ -11,7 +11,7 @@ import {
 } from "@/components/ui/table";
 import { RentType } from "@/types/types";
 
-import { ChevronDownIcon } from "@heroicons/react/24/solid";
+import { Bars3Icon, ChevronDownIcon } from "@heroicons/react/24/solid";
 import { FolderOpenIcon } from "@heroicons/react/24/solid";
 import { cookies } from 'next/headers'
 import moment from 'moment';
@@ -22,7 +22,14 @@ import Files from "./_page/Files";
 import Action from "./_page/Action";
 import Note from "./_page/Note";
 import { Badge } from "@/components/ui/badge";
-
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
 
 async function getData() {
   // const res = await fetch('http://localhost:8080/api/posts',{ next: { tags: ['posts'] } })
@@ -55,52 +62,72 @@ export default async function Page() {
         <TableCaption>A list of your recent invoices.</TableCaption>
         <TableHeader>
           <TableRow>
-            <TableHead>Rent ID</TableHead>
-            <TableHead>Post</TableHead>
-            <TableHead>Customer</TableHead>
-            <TableHead>Rent Date</TableHead>
-            <TableHead>Rent Days</TableHead>
-            <TableHead>Remaining Days</TableHead>
-            <TableHead>Total price</TableHead>
-            <TableHead>Payment Status</TableHead>
-            <TableHead>Rent Status</TableHead>
-            <TableHead>Cancelled by user</TableHead>
-            <TableHead>Action</TableHead>
-            <TableHead>Files</TableHead>
-            <TableHead>Note (optional)</TableHead>
-            <TableHead className="text-right">Detail</TableHead>
+            <TableHead className="hidden md:table-cell">Rent ID</TableHead>
+            <TableHead className="hidden md:table-cell">Post</TableHead>
+            <TableHead className="hidden md:table-cell">Customer</TableHead>
+            <TableHead className="hidden md:table-cell">Rent Date</TableHead>
+            <TableHead >Rent Days</TableHead>
+            <TableHead className="hidden md:table-cell">Remaining Days</TableHead>
+            <TableHead >Total price</TableHead>
+            <TableHead className="hidden md:table-cell">Payment Status</TableHead>
+            <TableHead >Rent Status</TableHead>
+            <TableHead className="hidden md:table-cell">Cancelled by user</TableHead>
+
+            <TableHead >Action</TableHead>
+            <TableHead className="hidden md:table-cell">Files</TableHead>
+            <TableHead className="hidden md:table-cell">Note (optional)</TableHead>
+            <TableHead className="text-right hidden md:table-cell">Detail</TableHead>
+            <TableHead className="table-cell md:hidden">More</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
           {data &&
             data.map((a: RentType, index: number) => (
               <TableRow key={index}>
-                <TableCell className="font-medium">{a.ID}</TableCell>
-                <TableCell>{a.post_id}</TableCell>
-                <TableCell>{a.user_id}</TableCell>
-                <TableCell>{`${formatTimestamp(a.start_date)} - ${formatTimestamp(a.end_date)}`}</TableCell>
+                <TableCell className="font-medium hidden md:table-cell">{a.ID}</TableCell>
+                <TableCell className="hidden md:table-cell">{a.post_id}</TableCell>
+                <TableCell className="hidden md:table-cell">{a.user_id}</TableCell>
+                <TableCell className="hidden md:table-cell">{`${formatTimestamp(a.start_date)} - ${formatTimestamp(a.end_date)}`}</TableCell>
                 <TableCell>{a.RentDetail.rent_days}</TableCell>
 
-                <TableCell>-</TableCell>
-                <TableCell>{a.RentDetail.estimated_final_price}</TableCell>
-                <TableCell>{a.RentDetail.is_paid ? "paid" : "not paid"}</TableCell>
+                <TableCell className="hidden md:table-cell">-</TableCell>
+                <TableCell >{a.RentDetail.estimated_final_price}</TableCell>
+                <TableCell className="hidden md:table-cell">{a.RentDetail.is_paid ? "paid" : "not paid"}</TableCell>
                 <TableCell>
-                  <Badge className={a.RentDetail.status == "Declined" ? "bg-red-600 hover:bg-red-700":"bg-green-600 hover:bg-green-700"}>
+                  <Badge className={a.RentDetail.status == "Declined" ? "bg-red-600 hover:bg-red-700" : "bg-green-600 hover:bg-green-700"}>
                     {a.RentDetail.status}
                   </Badge>
                 </TableCell>
-                <TableCell className="text-center">{a.is_cancelled ? "true" : "-"}</TableCell>
-                <TableCell>
+                <TableCell className="text-center hidden md:table-cell">{a.is_cancelled ? "true" : "-"}</TableCell>
+
+                <TableCell >
                   <Action data={a} />
                 </TableCell>
-                <TableCell>
+                <TableCell className="hidden md:table-cell">
                   <Files data={a} />
                 </TableCell>
-                <TableCell>
+                <TableCell className="hidden md:table-cell">
                   <Note data={a} />
                 </TableCell>
-                <TableCell>
+                <TableCell className="hidden md:table-cell">
                   <Detail data={a} />
+                </TableCell>
+                <TableCell className="table-cell md:hidden" >
+                  <DropdownMenu >
+                    <DropdownMenuTrigger asChild >
+                      <Button variant="outline" size="icon">
+                        <Bars3Icon className="w-4 h-4" />
+                      </Button>
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent>
+                      <DropdownMenuLabel>More</DropdownMenuLabel>
+                      <DropdownMenuSeparator />
+                      <DropdownMenuItem>Detail</DropdownMenuItem>
+                      <DropdownMenuItem>Files</DropdownMenuItem>
+                      <DropdownMenuItem>Note</DropdownMenuItem>
+
+                    </DropdownMenuContent>
+                  </DropdownMenu>
                 </TableCell>
               </TableRow>
             ))}

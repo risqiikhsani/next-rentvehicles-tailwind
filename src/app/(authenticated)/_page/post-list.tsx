@@ -58,9 +58,9 @@ export default async function PostList() {
     <>
       <Title title="Home" text="Find anything to rent!" />
 
-      <div className="flex flex-col md:flex-row items-center my-5 gap-2">
+      <div className="flex flex-col md:flex-row items-center my-5 md:justify-between gap-2">
         <Search />
-        <div className="gap-2 flex w-full justify-between">
+        <div className="gap-2 flex w-full md:w-fit justify-between md:justify-normal">
           <Filter />
           <Sort />
         </div>

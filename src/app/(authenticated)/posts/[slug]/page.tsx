@@ -51,14 +51,57 @@ export default async function Page({ params }: { params: { slug: string } }) {
     return (
       <>
         <Title title="Post Detail" />
-        <div className="lg:grid lg:grid-cols-3 gap-4">
-          <div className="lg:sticky lg:h-screen lg:top-20 lg:left-0 static">
-            <Image className="rounded-xl" src={data.MainImage.url} alt="pic" width={500} height={500} />
-            <Buttons data={data} />
+        <div className="grid md:grid-cols-3 gap-4 ">
+          <div className="relative">
+            <div className="md:sticky top-20 left-0 ">
+              <Table className="block md:hidden w-full my-2">
+                <TableBody>
+                  <TableRow className="hover:bg-inherit">
+                    <TableCell className="font-medium">
+                      <Badge variant="outline" className="my-2">
+                        Brand
+                      </Badge>
+                    </TableCell>
+                    <TableCell className="text-left text-xl">{data.brand}</TableCell>
+                  </TableRow>
+                  <TableRow className="hover:bg-inherit">
+                    <TableCell className="font-medium">
+                      <Badge variant="outline" className="my-2">
+                        Model
+                      </Badge>
+                    </TableCell>
+                    <TableCell className="text-left text-xl">{data.brand_model}</TableCell>
+                  </TableRow>
+                  <TableRow className="hover:bg-inherit">
+                    <TableCell className="font-medium">
+                      <Badge variant="outline" className="my-2">
+                        Year
+                      </Badge>
+                    </TableCell>
+                    <TableCell className="text-left">{data.year}</TableCell>
+                  </TableRow>
+                  <TableRow className="hover:bg-inherit">
+                    <TableCell className="font-medium">
+                      <Badge variant="outline" className="my-2">
+                        Type
+                      </Badge>
+                    </TableCell>
+                    <TableCell className="text-left">{data.vehicle_type}</TableCell>
+                  </TableRow>
+                </TableBody>
+              </Table>
+              <Image className="rounded-xl" src={data.MainImage.url} alt="pic" width={500} height={500} />
+              <div className="hidden md:block">
+                <Buttons data={data} />
+              </div>
+
+            </div>
           </div>
 
-          <div className="col-span-2 mt-4 lg:mt-0">
-            <Table className="max-w-sm">
+
+          <div className="col-span-2 mt-0 overflow-y-auto ">
+
+            <Table className="max-w-sm hidden md:block">
               <TableBody>
                 <TableRow className="hover:bg-inherit">
                   <TableCell className="font-medium">
@@ -95,30 +138,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
               </TableBody>
             </Table>
 
-            {/* <div className="flex gap-2 items-center">
-    <Badge variant="outline" className="my-2">
-      Brand
-    </Badge>
-    <h1 className="font-bold text-xl ml-4">Lamborghini</h1>
-  </div>
-  <div className="flex gap-2 items-center">
-    <Badge variant="outline" className="my-2">
-      Model
-    </Badge>
-    <h3 className="font-bold text-xl ml-4">Aventador</h3>
-  </div>
-  <div className="flex gap-2 items-center">
-    <Badge variant="outline" className="my-2">
-      Year
-    </Badge>
-    <h3 className="font-bold text-xl ml-4">2015</h3>
-  </div>
-  <div className="flex gap-2 items-center">
-    <Badge variant="outline" className="my-2">
-      Type
-    </Badge>
-    <h3 className="font-bold text-xl ml-4">Sport</h3>
-  </div> */}
+
 
             <div className="flex flex-col justify-end gap-4">
               <div className="grid gap-4 md:grid-cols-1 lg:grid-cols-3 my-4">
@@ -231,6 +251,10 @@ export default async function Page({ params }: { params: { slug: string } }) {
                   <Specification data={data} />
                 </CardContent>
               </Card>
+            </div>
+
+            <div className="block md:hidden">
+              <Buttons data={data} />
             </div>
           </div>
         </div>

@@ -17,7 +17,7 @@ export default function Page() {
     <>
       <Title title="Bookings" text="List all of your booked items"/>
 
-
+{/* 
       <Table>
         <TableCaption>A list of your recent invoices.</TableCaption>
         <TableHeader>
@@ -50,7 +50,7 @@ export default function Page() {
             </TableCell>
           </TableRow>
         </TableBody>
-      </Table>
+      </Table> */}
     </>
   );
 }

@@ -7,7 +7,7 @@ export default function Appearance() {
   return (
 
     <>
-      <div className="flex gap-2">
+      <div className="flex flex-col md:flex-row gap-2">
         <div className="items-center rounded-md border-2 border-muted p-1 hover:bg-accent hover:text-accent-foreground hover:cursor-pointer">
           <div className="space-y-2 rounded-sm bg-[#ecedef] p-2">
             <div className="space-y-2 rounded-md bg-white p-2 shadow-sm">

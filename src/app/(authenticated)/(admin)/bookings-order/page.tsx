@@ -18,7 +18,7 @@ export default function Page() {
       <Title title="Booking orders" text="List all of your booking orders"/>
 
 
-      <Table>
+      {/* <Table>
         <TableCaption>A list of your recent invoices.</TableCaption>
         <TableHeader>
           <TableRow>
@@ -52,7 +52,7 @@ export default function Page() {
             </TableCell>
           </TableRow>
         </TableBody>
-      </Table>
+      </Table> */}
     </>
   );
 }

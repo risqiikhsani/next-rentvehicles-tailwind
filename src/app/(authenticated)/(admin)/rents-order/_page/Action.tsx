@@ -21,7 +21,11 @@ import {
 import Decline from "./_action/Decline";
 import ReadyToPickup from "./_action/ReadyToPickup";
 
-export default function Action({ data }: { data: RentType }) {
+interface ActionProps {
+  data: RentType
+}
+
+export default function Action({data}: ActionProps) {
   const disabled =
     data.is_cancelled ||
     data.RentDetail.status == "Done" ||

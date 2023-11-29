@@ -26,7 +26,7 @@ export default function Detail({ data }: { data: RentType }) {
     return (
         <>
             <Dialog>
-                <DialogTrigger>
+                <DialogTrigger asChild>
                     <Button variant="outline" size="icon">
                         <ArrowRightIcon className="h-4 w-4" />
                     </Button>
@@ -37,7 +37,7 @@ export default function Detail({ data }: { data: RentType }) {
                         <DialogDescription>
                             <Table>
                                 <TableHeader className="text-left">
-                                    <TableRow>
+                                    <TableRow className="bg-cyan-300">
                                         <TableHead >name</TableHead>
                                         <TableHead >data</TableHead>
                                     </TableRow>
@@ -96,7 +96,7 @@ export default function Detail({ data }: { data: RentType }) {
                         <DialogDescription>
                             <Table>
                                 <TableHeader className="text-left">
-                                    <TableRow>
+                                    <TableRow className="bg-cyan-300">
                                         <TableHead>name</TableHead>
                                         <TableHead>data</TableHead>
                                     </TableRow>

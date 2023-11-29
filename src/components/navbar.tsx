@@ -24,6 +24,7 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
+import LeftNavBarMobile from "./Left-navbar-mobile";
 
 
 export default function NavBar() {
@@ -45,7 +46,7 @@ export default function NavBar() {
               <SheetHeader>
                 <SheetTitle>Menu</SheetTitle>
                 <SheetDescription>
-                  test
+                  <LeftNavBarMobile/>
                 </SheetDescription>
               </SheetHeader>
             </SheetContent>
@@ -72,7 +73,7 @@ export default function NavBar() {
           ) : (
             <>
               <ModeToggle />
-              <Button variant="outline">
+              <Button variant="outline" size="icon">
                 <BellIcon className="w-4 h-4" />
               </Button>
 

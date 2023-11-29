@@ -38,7 +38,7 @@ import Buttons from "./Buttons"
 
 export function CarCardAdmin({ data }: { data: PostType }) {
     return (
-        <Card className="flex hover:border-solid hover:border-2 hover:border-indigo-600 flex-row items-center gap-2 px-5">
+        <Card className="flex hover:border-solid hover:border-2 hover:border-indigo-600 flex-col md:flex-row items-center gap-2 p-5">
 
 
             <div className="w-full">

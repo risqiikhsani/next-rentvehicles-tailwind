@@ -19,19 +19,21 @@ import {
     TableHeader,
     TableRow,
 } from "@/components/ui/table"
-import {DocumentTextIcon} from "@heroicons/react/24/solid";
+import { DocumentTextIcon } from "@heroicons/react/24/solid";
 
-
-export default function Note({ data }: { data: RentType }) {
+interface NoteProps {
+    data: RentType; // Replace 'any' with the appropriate type for your 'data'
+}
+export default function Note({ data }: NoteProps) {
     const disabled = data.is_cancelled || data.RentDetail.status == "Done" || data.RentDetail.status == "Declined"
 
     return (
         <>
             <Dialog>
                 <DialogTrigger disabled={disabled} asChild>
-                <Button variant="outline" size="icon" >
-                    <DocumentTextIcon className="h-4 w-4" />
-                  </Button>
+                    <Button variant="outline" size="icon" >
+                        <DocumentTextIcon className="h-4 w-4" />
+                    </Button>
                 </DialogTrigger>
                 <DialogContent className="lg:max-w-screen-lg overflow-y-scroll max-h-screen">
                     <DialogHeader>

@@ -60,7 +60,7 @@ export default async function Home() {
         </Button>
       </div>
 
-      <div className="flex justify-between items-center my-5">
+      {/* <div className="flex justify-between items-center my-5">
         <div className="flex gap-4">
           <Input id="search" type="text" placeholder="search" />
           <Button>Search</Button>
@@ -92,7 +92,7 @@ export default async function Home() {
             <SelectItem value="system">System</SelectItem>
           </SelectContent>
         </Select>
-      </div>
+      </div> */}
 
       <Separator className="my-6" />
 
