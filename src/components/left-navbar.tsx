@@ -45,18 +45,19 @@ const LeftNavBar = () => {
       <div className="overflow-y-auto h-screen py-4">
         {user.role === 'Admin' && renderUrls(admin_urls)}
         {user.role === 'Basic' && renderUrls(basic_urls)}
-        <Separator/>
-        <Accordion type="single" collapsible>
+        <Separator />
+        {user.ID != 0 && <Accordion type="single" collapsible>
           <AccordionItem value="item-1">
             <AccordionTrigger className="flex justify-normal gap-2 p-8 text-base">
-              <Cog6ToothIcon className="w-5 h-5"/>
-                Settings
+              <Cog6ToothIcon className="w-5 h-5" />
+              Settings
             </AccordionTrigger>
             <AccordionContent>
               {renderUrls(setting_urls)}
             </AccordionContent>
           </AccordionItem>
-        </Accordion>
+        </Accordion>}
+
       </div>
     </nav>
   );

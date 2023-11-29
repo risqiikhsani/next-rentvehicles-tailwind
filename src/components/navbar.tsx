@@ -36,21 +36,24 @@ export default function NavBar() {
         {/* <div className="max-w-7xl mx-auto px-4 sm:px-6"> */}
 
         <div className="flex items-center p-4 gap-2">
+          {user.ID != 0 && (
           <Sheet>
-            <SheetTrigger asChild className="block md:hidden">
-              <Button variant="outline" >
-                <Bars3Icon className="w-4 h-4" />
-              </Button>
-            </SheetTrigger>
-            <SheetContent side="left" >
-              <SheetHeader>
-                <SheetTitle>Menu</SheetTitle>
-                <SheetDescription>
-                  <LeftNavBarMobile/>
-                </SheetDescription>
-              </SheetHeader>
-            </SheetContent>
-          </Sheet>
+          <SheetTrigger asChild className="block md:hidden">
+            <Button variant="outline">
+              <Bars3Icon className="w-4 h-4" />
+            </Button>
+          </SheetTrigger>
+          <SheetContent side="left" >
+            <SheetHeader>
+              <SheetTitle>Menu</SheetTitle>
+              <SheetDescription>
+                <LeftNavBarMobile/>
+              </SheetDescription>
+            </SheetHeader>
+          </SheetContent>
+        </Sheet>
+          )}
+
           <Link href="/">
             <div className="flex justify-center items-center">
               <Image
