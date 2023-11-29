@@ -55,7 +55,8 @@ export const carTypes = [
 export const carFuelTypes = [
   "gasoline",
   "diesel",
-  "electric"
+  "electric",
+  "hybrid electric"
 ]
 
 export const userGender = [

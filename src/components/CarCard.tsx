@@ -116,7 +116,9 @@ export function CarCard({ data }: { data: PostType }) {
                 </div>
             </CardHeader>
             <CardContent>
+                <div className="h-[200px] flex items-center w-full">
                 <Image src={data.MainImage.url} width={920} height={360} alt="car" className="rounded-xl" />
+                </div>
                 <Table className="max-w-sm my-2">
                     <TableBody>
                         <TableRow className="hover:bg-inherit">

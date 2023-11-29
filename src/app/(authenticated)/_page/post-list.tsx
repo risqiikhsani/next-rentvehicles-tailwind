@@ -29,6 +29,7 @@ import Title from "@/components/typography/Title";
 import { PostType } from "@/types/types";
 import { Suspense } from "react";
 import PostSkeleton from "@/components/spinner/post-skeleton";
+import Search from "./search";
 
 async function getData() {
   const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
@@ -53,58 +54,26 @@ export default async function PostList() {
   return (
     <>
       <Title title="Home" text="Find anything to rent!" />
-      <div className="flex justify-between items-center my-5">
 
-        <div className="flex gap-4">
-          <Input id="search" type="text" placeholder="search" />
-          <Button>Search</Button>
+
+      <Search>
+        <Separator className="my-6" />
+        <div className="flex flex-wrap gap-4 ">
+          <Suspense fallback={<>
+            <PostSkeleton />
+            <PostSkeleton />
+            <PostSkeleton />
+            <PostSkeleton />
+            <PostSkeleton />
+            <PostSkeleton />
+          </>}>
+            {data && data.map((a: PostType, index: number) => (
+              <CarCard data={a} key={index} />
+            ))}
+          </Suspense>
         </div>
+      </Search>
 
-        <Dialog>
-          <DialogTrigger className="px-2 py-1 border-solid border-2 flex rounded-md border-slate-200">
-            <AdjustmentsHorizontalIcon className="m-auto h-4 w-4 mr-2" />
-            Filter
-          </DialogTrigger>
-          <DialogContent>
-            <DialogHeader>
-              <DialogTitle>Filter</DialogTitle>
-              <DialogDescription>
-                This action cannot be undone. This will permanently delete your
-                account and remove your data from our servers.
-              </DialogDescription>
-            </DialogHeader>
-          </DialogContent>
-        </Dialog>
-
-        <Select>
-          <SelectTrigger className="w-[100px]" id="sort">
-            <SelectValue placeholder="Sort" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="light">Light</SelectItem>
-            <SelectItem value="dark">Dark</SelectItem>
-            <SelectItem value="system">System</SelectItem>
-          </SelectContent>
-        </Select>
-      </div>
-
-
-      <Separator className="my-6" />
-
-      <div className="flex flex-wrap gap-4 ">
-        <Suspense fallback={<>
-          <PostSkeleton/>
-          <PostSkeleton/>
-          <PostSkeleton/>
-          <PostSkeleton/>
-          <PostSkeleton/>
-          <PostSkeleton/>
-        </>}>
-        {data && data.map((a: PostType,index: number) => (
-          <CarCard data={a} key={index}/>
-        ))}
-        </Suspense>
-      </div>
     </>
   );
 }
