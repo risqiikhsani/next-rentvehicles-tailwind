@@ -39,7 +39,7 @@ import CarCardButtons from "./CarCardButtons"
 export function CarCard({ data }: { data: PostType }) {
     return (
         <Card className="w-[300px] hover:border-solid hover:border-2 hover:border-indigo-600">
-            <CardHeader>
+            <CardHeader className="h-[200px]">
                 <div className="flex">
                     <div className="w-full">
                         <CardTitle className="text-xl italic">{data.brand}</CardTitle>

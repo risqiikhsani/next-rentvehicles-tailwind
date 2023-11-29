@@ -30,50 +30,62 @@ import { PostType } from "@/types/types";
 import { Suspense } from "react";
 import PostSkeleton from "@/components/spinner/post-skeleton";
 import Search from "./search";
+import Filter from "./filter";
+import Sort from "./sort";
 
 async function getData() {
-  const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
+  const delay = (ms: number) =>
+    new Promise((resolve) => setTimeout(resolve, ms));
 
   await delay(2000); // Introduce a delay of 2 seconds before fetching data
   // const res = await fetch('http://localhost:8080/api/posts',{ next: { tags: ['posts'] } })
-  const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/posts`, { cache: 'no-store' })
+  const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/posts`, {
+    cache: "no-store",
+  });
 
   if (!res.ok) {
     // This will activate the closest `error.js` Error Boundary
-    throw new Error('Failed to fetch data')
+    throw new Error("Failed to fetch data");
   }
 
-  return res.json()
+  return res.json();
 }
 
-
-
 export default async function PostList() {
-  const data: PostType[] = await getData()
+  const data: PostType[] = await getData();
 
   return (
     <>
       <Title title="Home" text="Find anything to rent!" />
 
+      <div className="flex flex-col md:flex-row items-center my-5 gap-2">
+        <Search />
+        <div className="gap-2 flex w-full justify-between">
+          <Filter />
+          <Sort />
+        </div>
+      </div>
 
-      <Search>
-        <Separator className="my-6" />
-        <div className="flex flex-wrap gap-4 ">
-          <Suspense fallback={<>
-            <PostSkeleton />
-            <PostSkeleton />
-            <PostSkeleton />
-            <PostSkeleton />
-            <PostSkeleton />
-            <PostSkeleton />
-          </>}>
-            {data && data.map((a: PostType, index: number) => (
+      <Separator className="my-6" />
+      <div className="flex flex-wrap gap-4 ">
+        <Suspense
+          fallback={
+            <>
+              <PostSkeleton />
+              <PostSkeleton />
+              <PostSkeleton />
+              <PostSkeleton />
+              <PostSkeleton />
+              <PostSkeleton />
+            </>
+          }
+        >
+          {data &&
+            data.map((a: PostType, index: number) => (
               <CarCard data={a} key={index} />
             ))}
-          </Suspense>
-        </div>
-      </Search>
-
+        </Suspense>
+      </div>
     </>
   );
 }
