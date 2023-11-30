@@ -101,7 +101,7 @@ export default function Page() {
     <div className="w-full">
       {/* <Image src="/bmw2.jpg" height="900" width="600" alt="bmw" className="block w-full h-screen md:hidden"/> */}
       <AnimatedFramerY>
-        <div className="relative flex flex-col  md:flex-row-reverse items-center h-screen ">
+        <div className="relative flex flex-col  md:flex-row-reverse items-center h-screen p-4 md:p-0 ">
 
           <Image
             src="/hero-bg.png"
@@ -139,7 +139,7 @@ export default function Page() {
       <Separator className="block md:hidden my-4"/>
 
       <AnimatedFramerY>
-        <div className="relative flex flex-col  md:flex-row items-center h-screen overflow-hidden ">
+        <div className="relative flex flex-col  md:flex-row items-center h-screen overflow-hidden p-4 md:p-0">
 
           <Image
             src="/hero-bg2.png"
@@ -236,7 +236,7 @@ export default function Page() {
 
 
       <AnimatedFramerY>
-        <div className="relative flex flex-col  md:flex-row-reverse items-center h-screen bg-orange-100 dark:bg-inherit p-2 md:gap-20">
+        <div className="relative flex flex-col  md:flex-row-reverse items-center h-screen p-4 md:p-0 md:gap-20">
           <Image
             src="/hero-bg.png"
             alt="hero"
@@ -261,7 +261,7 @@ export default function Page() {
             />
           </div>
           <AnimatedFramerX>
-            <div>
+            <div className="md:bg-red-100 md:p-20 md:rounded-r-full">
               <h1 className="hero__title">
                 Rent Car Starting at $20 / day !
               </h1>
@@ -274,7 +274,7 @@ export default function Page() {
 
         </div>
       </AnimatedFramerY>
-      <div className="flex flex-col items-center justify-center p-2 md:h-screen md:bg-red-100 dark:bg-inherit">
+      <div className="flex flex-col items-center justify-center p-2 md:h-screen md:bg-green-100 dark:bg-inherit">
         <div className="h-fit flex justify-center  md:items-center p-2 md:p-10 rounded-2xl shadow-xl hover:cursor-pointer transition ease-in-out delay-150 bg-blue-500 hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500 duration-300">
           <h1 className="text-lg md:text-6xl font-bold text-center my-5">
             Try searching for our cars!
