@@ -1,5 +1,5 @@
 import Footer from '@/components/footer'
-import Hero from '@/components/hero'
+
 import Navbar from '@/components/navbar'
 import Sidebar from '@/components/sidebar'
 import '@/styles/globals.css'
@@ -33,7 +33,7 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <Navbar />
-          <main className="container mx-auto mt-20 flex">
+          <main className="mt-20 w-full">
             {children}
           </main>
           <Footer />

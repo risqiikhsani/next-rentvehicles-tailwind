@@ -36,32 +36,32 @@ function Review({ user, review_stars, review_title, review_text }: ReviewProps) 
     };
 
     return (
-        <div className="bg-white p-4 rounded-lg shadow-md mb-4 max-w-lg">
-            <div className="text-gray-700">
-                <div className='flex items-center'>
-                    <Avatar>
-                        <AvatarImage src="https://github.com/shadcn.png" />
-                        <AvatarFallback>CN</AvatarFallback>
-                    </Avatar>
+        <div className="p-4 rounded-lg shadow-md mb-4 max-w-lg">
+
+            <div className='flex items-center'>
+                <Avatar>
+                    <AvatarImage src="https://github.com/shadcn.png" />
+                    <AvatarFallback>CN</AvatarFallback>
+                </Avatar>
 
 
-                    <div className="ml-4">
-                        <p className="text-sm">{user.name}</p>
-                        <p className="text-sm">{user.address}</p>
-                    </div>
+                <div className="ml-4">
+                    <p className="text-sm">{user.name}</p>
+                    <p className="text-sm">{user.address}</p>
                 </div>
-
-                <Separator className='my-2' />
-
-                <p className="text-lg font-semibold">{review_title}</p>
-                <div className="flex items-center">
-                    {/* Display star rating */}
-                    <div className="flex">
-                        {renderStars()}
-                    </div>
-                </div>
-                <p className="mt-2">{review_text}</p>
             </div>
+
+            <Separator className='my-2' />
+
+            <p className="text-lg font-semibold">{review_title}</p>
+            <div className="flex items-center">
+                {/* Display star rating */}
+                <div className="flex">
+                    {renderStars()}
+                </div>
+            </div>
+            <p className="mt-2">{review_text}</p>
+
         </div>
     );
 }

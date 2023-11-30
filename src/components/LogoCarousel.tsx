@@ -24,10 +24,10 @@ export default function LogoCarousel() {
   ];
 
   return (
-    <div className="w-screen inline-flex flex-nowrap overflow-hidden [mask-image:_linear-gradient(to_right,transparent_0,_black_128px,_black_calc(100%-128px),transparent_100%)]">
+    <div className="w-full inline-flex overflow-hidden [mask-image:_linear-gradient(to_right,transparent_0,_black_128px,_black_calc(100%-128px),transparent_100%)]">
       <ul className="flex items-center justify-center md:justify-start [&_li]:mx-8 [&_img]:max-w-none animate-infinite-scroll">
         {logos.map((logo, index) => (
-          <Image src={logo.src} alt={logo.alt} key={index} />
+          <Image src={logo.src} alt={logo.alt} key={index} width="300" height="300"/>
         ))}
       </ul>
       <ul
@@ -35,7 +35,7 @@ export default function LogoCarousel() {
         aria-hidden="true"
       >
         {logos.map((logo, index) => (
-          <Image src={logo.src} alt={logo.alt} key={index} />
+          <Image src={logo.src} alt={logo.alt} key={index} width="300" height="300" />
         ))}
       </ul>
     </div>

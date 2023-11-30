@@ -1,14 +1,15 @@
-import Hero from "@/components/hero";
 import Review from "@/components/review";
 import { Separator } from "@/components/ui/separator";
 
 import { useState } from "react";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/solid";
-import Hero2 from "@/components/hero2";
 import LogoCarousel from "@/components/LogoCarousel";
 import Carousel from "@/components/carousel";
-import Hero3 from "@/components/hero3";
 import Image from "next/image";
+import { motion } from "framer-motion"
+import AnimatedFramerY from "@/components/animatedFramerY";
+import AnimatedFramerX from "@/components/animatedFramerX";
+
 
 const reviews = [
   {
@@ -97,110 +98,128 @@ const carouselImages = [
 
 export default function Page() {
   return (
-    <div>
-      <div className="relative flex flex-col  md:flex-row-reverse items-center ">
-        <Image
-          src="/hero-bg.png"
-          alt="hero"
-          width="800"
-          height="800"
-          className="w-max h-max"
-        />
-        <div className="absolute w-full h-full flex md:justify-end top-0 md:items-end">
+    <div className="w-full px-4">
+      <AnimatedFramerY>
+        <div className="relative flex flex-col  md:flex-row-reverse items-center ">
+
           <Image
-            src="/hero.png"
-            alt="car"
-            width="500"
-            height="500"
-            className="w-max h-max md:pb-10 md:pr-64 pt-10 md:pt-0"
+            src="/hero-bg.png"
+            alt="hero"
+            width="800"
+            height="800"
+            className="w-max h-max"
           />
+          <div className="absolute w-full h-full flex md:justify-end top-0 md:items-end">
+            <Image
+              src="/hero.png"
+              alt="car"
+              width="500"
+              height="500"
+              className="w-max h-max md:pb-10 md:pr-64 pt-10 md:pt-0"
+            />
+          </div>
+
+          <AnimatedFramerX>
+            <div>
+              <h1 className="hero__title">
+                Find, book, rent a car—quick and super easy!
+              </h1>
+
+              <p className="hero__subtitle">
+                Streamline your car rental experience with our effortless booking
+                process.
+              </p>
+            </div>
+          </AnimatedFramerX>
+
         </div>
-        <div>
-          <h1 className="hero__title">
-            Find, book, rent a car—quick and super easy!
-          </h1>
+      </AnimatedFramerY>
 
-          <p className="hero__subtitle">
-            Streamline your car rental experience with our effortless booking
-            process.
-          </p>
-        </div>
-      </div>
+      <AnimatedFramerY>
 
-
-      <div className="relative flex flex-col md:flex-row items-center">
-        <Image
-          src="/hero-bg2.png"
-          alt="hero"
-          width="800"
-          height="800"
-          className="w-max h-max"
-        />
-        <div className="absolute w-full h-full flex top-0 md:items-end">
+        <div className="relative flex flex-col md:flex-row items-center">
           <Image
-            src="/hero2.png"
-            alt="car"
-            width="500"
-            height="500"
-            className="w-max h-max md:pb-10 md:pl-20 pt-10 md:pt-0"
+            src="/hero-bg2.png"
+            alt="hero"
+            width="800"
+            height="800"
+            className="w-max h-max"
           />
-        </div>
-        <div>
-          <h1 className="hero__title2">
-            Choose more than 50 cars in our garage!
-          </h1>
+          <div className="absolute w-full h-full flex top-0 md:items-end">
+            <Image
+              src="/hero2.png"
+              alt="car"
+              width="500"
+              height="500"
+              className="w-max h-max md:pb-10 md:pl-20 pt-10 md:pt-0"
+            />
+          </div>
+          <AnimatedFramerX>
+            <div>
+              <h1 className="hero__title">
+                Choose more than 50 cars in our garage!
+              </h1>
 
-          <p className="hero__subtitle2">
-            Find any type of cars that you like , including sport cars.
-          </p>
-        </div>
-      </div>
+              <p className="hero__subtitle">
+                Find any type of cars that you like , including sport cars.
+              </p>
+            </div>
+          </AnimatedFramerX>
 
-      {/* <Hero />
-      <Hero2 /> */}
-      {/* <div className="w-screen mx-auto px-4 md:px-6 py-24"> */}
-        {/* <div className="text-center">
+        </div>
+
+      </AnimatedFramerY>
+  
+      <div className="w-full md:px-6 py-24">
+        <div className="text-center">
           <LogoCarousel />
-        </div> */}
-      {/* </div> */}
+        </div>
+      </div>
       <Separator className="my-6" />
-      {/* <Hero3 /> */}
-      {/* <div className="relative flex flex-row-reverse items-center">
-        <Image
-          src="/hero-bg.png"
-          alt="hero"
-          width="800"
-          height="800"
-          className="w-max h-max"
-        />
-        <div className="absolute w-full h-full flex justify-end items-end gap-20 ">
+      <AnimatedFramerY>
+        <div className="relative flex flex-col  md:flex-row-reverse items-center ">
           <Image
-            src="/best-price.png"
+            src="/hero-bg.png"
             alt="hero"
-            width={300}
-            height={300}
-            className="py-10"
+            width="800"
+            height="800"
+            className="w-max h-max"
           />
-          <Image
-            src="/best-quality.png"
-            alt="hero"
-            width={300}
-            height={300}
-            className="h-max w-max"
-          />
-        </div>
-        <div>
-          <h1 className="hero__title">Rent Car Starting at $20 / day !</h1>
+          <div className="absolute w-full h-full flex md:justify-end top-0 md:items-end">
+            <Image
+              src="/best-price.png"
+              alt="car"
+              width="300"
+              height="300"
+              className="w-max h-max pt-10 "
+            />
+            <Image
+              src="/best-quality.png"
+              alt="car"
+              width="300"
+              height="300"
+              className="pt-10 h-fit w-32 md:w-max md:h-max"
+            />
+          </div>
+          <AnimatedFramerX>
+            <div>
+              <h1 className="hero__title">
+                Rent Car Starting at $20 / day !
+              </h1>
 
-          <p className="hero__subtitle">
-            Get the best price for best quality compared to other renters
-          </p>
+              <p className="hero__subtitle">
+                Get the best price for best quality compared to other renters
+              </p>
+            </div>
+          </AnimatedFramerX>
+
         </div>
-      </div> */}
+      </AnimatedFramerY>
+
       <Separator className="my-6" />
       <div className="flex flex-col items-center justify-center my-20">
-        <div className="flex p-10 rounded-2xl shadow-xl hover:cursor-pointer transition ease-in-out delay-150 bg-blue-500 hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500 duration-300">
-          <h1 className="md:text-6xl font-bold text-center my-5">
+        <div className="h-fit flex justify-center  md:items-center p-2 md:p-10 rounded-2xl shadow-xl hover:cursor-pointer transition ease-in-out delay-150 bg-blue-500 hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500 duration-300">
+          <h1 className="text-lg md:text-6xl font-bold text-center my-5">
             Try searching for our cars!
           </h1>
           <svg
@@ -209,7 +228,7 @@ export default function Page() {
             viewBox="0 0 24 24"
             strokeWidth={1.5}
             stroke="currentColor"
-            className="w-40 h-40"
+            className="w-20 h-20 md:w-40 md:h-40 mx-auto"
           >
             <path
               strokeLinecap="round"
@@ -234,9 +253,11 @@ export default function Page() {
         Customer Reviews
       </h1>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-3 place-items-center">
         {reviews.map((review, index) => (
+          <AnimatedFramerX key={index}>
           <Review key={index} {...review} />
+          </AnimatedFramerX>
         ))}
       </div>
     </div>

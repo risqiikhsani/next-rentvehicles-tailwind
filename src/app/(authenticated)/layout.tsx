@@ -4,9 +4,10 @@ import LeftNavBar from "@/components/left-navbar";
 export default function Layout({ children }: { children: React.ReactNode }) {
     return (
         <>
-            <LeftNavBar />
-            <div className='flex-1 p-4'>
-                {/* <NextBreadcrumb
+            <div className="md:container md:mx-auto flex">
+                <LeftNavBar />
+                <div className='flex-1 p-4'>
+                    {/* <NextBreadcrumb
                     homeElement={'Home'}
                     separator={<span> | </span>}
                     activeClasses='text-slate-800'
@@ -14,8 +15,10 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                     listClasses='mx-2 '
                     capitalizeLinks
                 /> */}
-                {children}
+                    {children}
+                </div>
             </div>
+
         </>
     )
 }
