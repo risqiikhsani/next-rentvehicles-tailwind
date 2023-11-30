@@ -101,14 +101,14 @@ export default function Page() {
     <div className="w-full">
       {/* <Image src="/bmw2.jpg" height="900" width="600" alt="bmw" className="block w-full h-screen md:hidden"/> */}
       <AnimatedFramerY>
-        <div className="relative flex flex-col  md:flex-row-reverse items-center h-screen bg-sky-100 p-2 dark:bg-inherit">
+        <div className="relative flex flex-col  md:flex-row-reverse items-center h-screen ">
 
           <Image
             src="/hero-bg.png"
             alt="hero"
             width="800"
             height="800"
-            className="w-max h-max"
+            className="w-max h-max md:h-full md:w-full"
           />
           <div className="absolute w-full h-full flex md:justify-end top-0 md:items-center">
             <Image
@@ -121,7 +121,7 @@ export default function Page() {
           </div>
 
           <AnimatedFramerX>
-            <div>
+            <div className="md:bg-red-100 md:p-20 md:rounded-r-full">
               <h1 className="hero__title">
                 Find, book, rent a car—quick and super easy!
               </h1>
@@ -136,15 +136,17 @@ export default function Page() {
         </div>
       </AnimatedFramerY>
 
+      <Separator className="block md:hidden my-4"/>
+
       <AnimatedFramerY>
-        <div className="relative flex flex-col  md:flex-row items-center h-screen p-2 bg-amber-100 dark:bg-inherit overflow-hidden md:gap-20">
+        <div className="relative flex flex-col  md:flex-row items-center h-screen overflow-hidden ">
 
           <Image
             src="/hero-bg2.png"
             alt="hero"
             width="800"
             height="800"
-            className="w-max h-max"
+            className="w-max h-max md:h-full md:w-full"
           />
           <div className="absolute w-full h-full flex md:justify-start top-0 md:items-center">
             <Image
@@ -157,7 +159,7 @@ export default function Page() {
           </div>
 
           <AnimatedFramerX>
-            <div >
+            <div className="md:bg-red-100 md:p-20 md:rounded-l-full">
               <h1 className="hero__title">
                 Choose more than 50 cars in our garage!
               </h1>
@@ -170,7 +172,7 @@ export default function Page() {
 
         </div>
       </AnimatedFramerY>
-
+      <Separator className="block md:hidden my-4"/>
 
       {/* <AnimatedFramerY>
 
