@@ -3,7 +3,7 @@ import Image from "next/image";
 export default function Layout({ children }: { children: React.ReactNode }) {
     return (
         <>
-            <div className="md:flex md:items-center justify-center h-screen w-full">
+            <div className="md:flex md:items-center justify-center w-full">
                 <div className="md:relative">
                     <Image src="/login1.jpg" alt="car" className="hidden sm:block w-full h-auto rounded-lg " width={500} height={800}/>
                     <div className="md:absolute inset-0 flex items-center justify-center">
