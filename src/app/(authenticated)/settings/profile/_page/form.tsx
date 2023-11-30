@@ -23,6 +23,8 @@ import { UserType } from "@/types/types";
 import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { userGender } from "@/constants";
+import { toast } from "sonner";
+import { useRouter } from "next/navigation";
 
 const FormSchema = z.object({
     publicUsername: z.string().regex(/^[a-zA-Z0-9_]{4,16}$/, {
@@ -34,7 +36,7 @@ const FormSchema = z.object({
 });
 
 export default function UpdateProfile({ defaultValue }: { defaultValue: UserType }) {
-
+    const router = useRouter();
 
     const form = useForm<z.infer<typeof FormSchema>>({
         resolver: zodResolver(FormSchema),
@@ -49,6 +51,15 @@ export default function UpdateProfile({ defaultValue }: { defaultValue: UserType
 
     function onSubmit(data: z.infer<typeof FormSchema>) {
         console.log("onsubmit", data)
+        try {
+            const response = api.put("/api/me/user",JSON.stringify(data))
+            console.log("response",response)
+            toast.success("Successfully updated profile user")
+            router.push("/")
+        } catch (error) {
+            console.log("error",error)
+            toast.error("Error updating profile user")
+        }
     }
 
     const { isDirty } = form.formState;

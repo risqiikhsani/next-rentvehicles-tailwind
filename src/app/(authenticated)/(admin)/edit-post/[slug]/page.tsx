@@ -228,6 +228,7 @@ export default function Page({ params }: { params: { slug: string } }) {
     formData.append("price_per_month", values.price_per_month.toString());
     formData.append("body_color", values.body_color);
     formData.append("location_id", values.location_id);
+    formData.append("discount_percentage", values.discount_percentage.toString());
     formData.append("license_plate", values.license_plate);
     formData.append("bookable", values.bookable ? "true" : "false");
     formData.append("available", values.available ? "true" : "false");

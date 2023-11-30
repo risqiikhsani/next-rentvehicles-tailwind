@@ -161,10 +161,11 @@ export default async function Page({ params }: { params: { slug: string } }) {
                     </svg>
                   </CardHeader>
                   <CardContent>
-                    <p className="text-2xl font-bold">{data.price_per_day}</p>
-                    <p className="text-xs text-muted-foreground">
-                      +20.1% from last month
-                    </p>
+                    <p className="text-2xl font-bold">{data.price_per_day_after_discount}</p>
+                    {data.discount_percentage != 0 && <p className="font-light line-through">{data.price_per_day}</p>}
+                    {data.discount_percentage != 0 && <p className="text-xs text-muted-foreground">
+                      Discount {data.discount_percentage} %
+                    </p>}
                   </CardContent>
                 </Card>
                 <Card>
@@ -186,10 +187,11 @@ export default async function Page({ params }: { params: { slug: string } }) {
                     </svg>
                   </CardHeader>
                   <CardContent>
-                    <p className="text-2xl font-bold">{data.price_per_week}</p>
-                    <p className="text-xs text-muted-foreground">
-                      +20.1% from last month
-                    </p>
+                    <p className="text-2xl font-bold">{data.price_per_week_after_discount}</p>
+                    {data.discount_percentage != 0 && <p className="font-light line-through">{data.price_per_week}</p>}
+                    {data.discount_percentage != 0 && <p className="text-xs text-muted-foreground">
+                      Discount {data.discount_percentage} %
+                    </p>}
                   </CardContent>
                 </Card>
                 <Card>
@@ -211,10 +213,11 @@ export default async function Page({ params }: { params: { slug: string } }) {
                     </svg>
                   </CardHeader>
                   <CardContent>
-                    <p className="text-2xl font-bold">{data.price_per_month}</p>
-                    <p className="text-xs text-muted-foreground">
-                      +20.1% from last month
-                    </p>
+                    <p className="text-2xl font-bold">{data.price_per_month_after_discount}</p>
+                    {data.discount_percentage != 0 && <p className="font-light line-through ">{data.price_per_month}</p>}
+                    {data.discount_percentage != 0 && <p className="text-xs text-muted-foreground">
+                      Discount {data.discount_percentage} %
+                    </p>}
                   </CardContent>
                 </Card>
               </div>
