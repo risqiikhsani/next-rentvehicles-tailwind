@@ -98,9 +98,10 @@ const carouselImages = [
 
 export default function Page() {
   return (
-    <div className="w-full px-4">
+    <div className="w-full">
+      {/* <Image src="/bmw2.jpg" height="900" width="600" alt="bmw" className="block w-full h-screen md:hidden"/> */}
       <AnimatedFramerY>
-        <div className="relative flex flex-col  md:flex-row-reverse items-center ">
+        <div className="relative flex flex-col  md:flex-row-reverse items-center h-screen bg-sky-100 p-2 dark:bg-inherit">
 
           <Image
             src="/hero-bg.png"
@@ -109,13 +110,13 @@ export default function Page() {
             height="800"
             className="w-max h-max"
           />
-          <div className="absolute w-full h-full flex md:justify-end top-0 md:items-end">
+          <div className="absolute w-full h-full flex md:justify-end top-0 md:items-center">
             <Image
               src="/hero.png"
               alt="car"
               width="500"
               height="500"
-              className="w-max h-max md:pb-10 md:pr-64 pt-10 md:pt-0"
+              className="w-max h-max md:pr-64 pt-10 "
             />
           </div>
 
@@ -136,8 +137,8 @@ export default function Page() {
       </AnimatedFramerY>
 
       <AnimatedFramerY>
+        <div className="relative flex flex-col  md:flex-row items-center h-screen p-2 bg-amber-100 dark:bg-inherit overflow-hidden md:gap-20">
 
-        <div className="relative flex flex-col md:flex-row items-center">
           <Image
             src="/hero-bg2.png"
             alt="hero"
@@ -145,7 +146,43 @@ export default function Page() {
             height="800"
             className="w-max h-max"
           />
-          <div className="absolute w-full h-full flex top-0 md:items-end">
+          <div className="absolute w-full h-full flex md:justify-start top-0 md:items-center">
+            <Image
+              src="/hero2.png"
+              alt="car"
+              width="500"
+              height="500"
+              className="w-max h-max md:pl-64"
+            />
+          </div>
+
+          <AnimatedFramerX>
+            <div >
+              <h1 className="hero__title">
+                Choose more than 50 cars in our garage!
+              </h1>
+
+              <p className="hero__subtitle">
+                Find any type of cars that you like , including sport cars.
+              </p>
+            </div>
+          </AnimatedFramerX>
+
+        </div>
+      </AnimatedFramerY>
+
+
+      {/* <AnimatedFramerY>
+
+        <div className="relative flex flex-col md:flex-row items-center h-screen bg-red-100">
+          <Image
+            src="/hero-bg2.png"
+            alt="hero"
+            width="800"
+            height="800"
+            className="w-max h-max ml-2"
+          />
+          <div className="absolute w-full h-full flex top-0 md:items-center">
             <Image
               src="/hero2.png"
               alt="car"
@@ -168,16 +205,36 @@ export default function Page() {
 
         </div>
 
-      </AnimatedFramerY>
-  
-      <div className="w-full md:px-6 py-24">
+      </AnimatedFramerY> */}
+
+
+      <div className="w-full h-screen p-2">
+        <h1 className="hero__title text-center">
+          Choose from the best brands in the world !
+        </h1>
+        <p className="hero__subtitle text-center">
+          We have so many brands to choose from.
+        </p>
         <div className="text-center">
           <LogoCarousel />
         </div>
       </div>
-      <Separator className="my-6" />
+
+      <div className="relative hidden md:block">
+        <Image src="/bmw.jpg" height="900" width="1980" alt="bmw" className="hidden md:block md:w-full md:h-fit " />
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white text-center bg-sky-500 opacity-80 md:p-20 rounded-xl">
+          <h1 className="hero__title">
+            Find your favorite car now !
+          </h1>
+          <p className="hero__subtitle">
+            We provide you a lot of types of cars.
+          </p>
+        </div>
+      </div>
+
+
       <AnimatedFramerY>
-        <div className="relative flex flex-col  md:flex-row-reverse items-center ">
+        <div className="relative flex flex-col  md:flex-row-reverse items-center h-screen bg-orange-100 dark:bg-inherit p-2 md:gap-20">
           <Image
             src="/hero-bg.png"
             alt="hero"
@@ -185,20 +242,20 @@ export default function Page() {
             height="800"
             className="w-max h-max"
           />
-          <div className="absolute w-full h-full flex md:justify-end top-0 md:items-end">
+          <div className="absolute w-full h-full flex md:justify-end top-0 md:items-center">
             <Image
               src="/best-price.png"
               alt="car"
               width="300"
               height="300"
-              className="w-max h-max pt-10 "
+              className="w-max h-max "
             />
             <Image
               src="/best-quality.png"
               alt="car"
               width="300"
               height="300"
-              className="pt-10 h-fit w-32 md:w-max md:h-max"
+              className="h-fit w-32 md:w-max md:h-max"
             />
           </div>
           <AnimatedFramerX>
@@ -215,9 +272,7 @@ export default function Page() {
 
         </div>
       </AnimatedFramerY>
-
-      <Separator className="my-6" />
-      <div className="flex flex-col items-center justify-center my-20">
+      <div className="flex flex-col items-center justify-center p-2 md:h-screen md:bg-red-100 dark:bg-inherit">
         <div className="h-fit flex justify-center  md:items-center p-2 md:p-10 rounded-2xl shadow-xl hover:cursor-pointer transition ease-in-out delay-150 bg-blue-500 hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500 duration-300">
           <h1 className="text-lg md:text-6xl font-bold text-center my-5">
             Try searching for our cars!
@@ -242,24 +297,29 @@ export default function Page() {
         </p>
       </div>
 
-      <Separator className="my-6" />
-      <h1 className="text-6xl font-bold align-middle text-center my-5">
-        Customer Photos
-      </h1>
-      <Carousel images={carouselImages} />
-
-      <Separator className="my-6" />
-      <h1 className="text-6xl font-bold align-middle text-center my-5">
-        Customer Reviews
-      </h1>
-
-      <div className="grid grid-cols-1 md:grid-cols-3 place-items-center">
-        {reviews.map((review, index) => (
-          <AnimatedFramerX key={index}>
-          <Review key={index} {...review} />
-          </AnimatedFramerX>
-        ))}
+      <div className="md:h-screen flex flex-col justify-center gap-4">
+        <h1 className="text-6xl font-bold align-middle text-center">
+          Customer Photos
+        </h1>
+        <Carousel images={carouselImages} />
       </div>
+
+
+      <Separator className="my-6" />
+      <div className="p-2">
+        <h1 className="text-6xl font-bold align-middle text-center my-5 px-2">
+          Customer Reviews
+        </h1>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 place-items-center">
+          {reviews.map((review, index) => (
+            <AnimatedFramerX key={index}>
+              <Review key={index} {...review} />
+            </AnimatedFramerX>
+          ))}
+        </div>
+      </div>
+
     </div>
   );
 }

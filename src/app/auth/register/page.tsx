@@ -96,7 +96,6 @@ export default function Page() {
             }
 
             toast.success("Successfully created an account.");
-
             form.reset();
         } catch (error) {
             toast.error("Error occurred while processing");

@@ -17,7 +17,7 @@ export default function AnimatedFramerX({
             controls.start({
                 x: 0,
                 opacity: 1,
-                rotate:0,
+                rotate:0,                       
                 transition: { duration: 2 },
             });
         }

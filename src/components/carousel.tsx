@@ -38,7 +38,7 @@ export default function Carousel({ images }: ImageProps) {
                 height={600}
                 src={s}
                 alt={`Image ${s + 1}`}
-                className="rounded-3xl object-contain mx-auto"
+                className="md:rounded-3xl object-contain mx-auto"
               />
             </div>
           );
