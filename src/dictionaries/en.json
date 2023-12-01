@@ -1,0 +1,49 @@
+{
+    "homepage":{
+        "hero_title":"Find, book, rent a car—quick and super easy!",
+        "hero_description":"Streamline your car rental experience with our effortless booking process.",
+        "hero2_title":"Choose more than 50 cars in our garage!",
+        "hero2_description":"Find any type of cars that you like , including sport cars.",
+        "logo_title":"Choose from the best brands in the world !",
+        "logo_description":"We have so many brands to choose from.",
+        "pic_title":"Find your favorite car now !",
+        "pic_description":"We provide you a lot of types of cars.",
+        "hero3_title":"Rent Car Starting at $20 / day !",
+        "hero3_description":"Get the best price for best quality compared to other renters",
+        "button_title":"Try searching for our cars!",
+        "button_description":"Search cars and see the prices for free, without making an account!",
+        "customer_photos":"Customer Photos",
+        "customer_reviews":"Customer Reviews"
+    },
+    "auth":{
+        "login_title":"Login",
+        "login_description":"Enter your username and password !",
+        "register":"Register",
+        "register_description":"Create your account."
+    },
+    "home":{
+        "title":"Home",
+        "description":"Find anything to rent!"
+    },
+    "dashboard":{
+        "title":"Dashboard",
+        "description":"See and maintain your business"
+    },
+    "my_post":{
+        "title":"My Post",
+        "description":"List all of my posts."
+    },
+    "rent_orders":{
+        "title":"Rent Orders",
+        "description":"List all of my rent orders."
+    },
+    "booking_orders":{
+        "title":"Booking Orders",
+        "description":"List all of my booking orders."
+    },
+    "locations":{
+        "title":"Locations",
+        "description":"Set up your rent business locations."
+    }
+    
+}

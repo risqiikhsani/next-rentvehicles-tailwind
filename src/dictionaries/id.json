@@ -1,0 +1,49 @@
+{
+    "homepage":{
+        "hero_title":"Temukan, pesan, sewa mobil—cepat dan super mudah!",
+        "hero_description":"Sederhanakan pengalaman sewa mobil Anda dengan proses pemesanan yang mudah.",
+        "hero2_title":"Pilih dari lebih dari 50 mobil di garasi kami!",
+        "hero2_description":"Temukan berbagai jenis mobil yang Anda suka, termasuk mobil sport.",
+        "logo_title":"Pilih dari merek terbaik di dunia!",
+        "logo_description":"Kami memiliki begitu banyak merek untuk dipilih.",
+        "pic_title":"Temukan mobil favorit Anda sekarang!",
+        "pic_description":"Kami menyediakan berbagai jenis mobil.",
+        "hero3_title":"Sewa Mobil Mulai dari $20 / hari!",
+        "hero3_description":"Dapatkan harga terbaik untuk kualitas terbaik dibandingkan dengan penyewaan lainnya",
+        "button_title":"Coba cari mobil kami!",
+        "button_description":"Cari mobil dan lihat harga secara gratis, tanpa membuat akun!",
+        "customer_photos":"Foto Pelanggan",
+        "customer_reviews":"Ulasan Pelanggan"
+    },
+    "auth":{
+        "login_title":"Masuk",
+        "login_description":"Masukkan username dan password !",
+        "register":"Daftar",
+        "register_description":"Buat akun."
+    },
+    "home":{
+        "title":"Home",
+        "description":"Cari apapun untuk di rental !"
+    },
+    "dashboard":{
+        "title":"Dasbor",
+        "description":"Lihat dan kelola bisnis Anda"
+    },
+    "my_post":{
+        "title":"Postingan Saya",
+        "description":"Daftar semua postingan saya."
+    },
+    "rent_orders":{
+        "title":"Pesanan Sewa",
+        "description":"Daftar semua pesanan sewa saya."
+    },
+    "booking_orders":{
+        "title":"Daftar Booking",
+        "description":"Daftar semua post saya yang telah di booking."
+    },
+    "locations":{
+        "title":"Lokasi",
+        "description":"Atur lokasi bisnis sewa Anda."
+    }
+    
+}

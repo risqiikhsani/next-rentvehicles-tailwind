@@ -40,7 +40,7 @@ function Review({ user, review_stars, review_title, review_text }: ReviewProps) 
 
             <div className='flex items-center'>
                 <Avatar>
-                    <AvatarImage src="https://github.com/shadcn.png" />
+                    <AvatarImage src="/others/userdefault.png" />
                     <AvatarFallback>CN</AvatarFallback>
                 </Avatar>
 
