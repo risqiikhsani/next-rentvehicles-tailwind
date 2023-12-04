@@ -8,10 +8,10 @@ export default function Sort() {
           <SelectValue placeholder="Sort" />
         </SelectTrigger>
         <SelectContent className="overflow-y-auto max-h-[30rem]">
-          <SelectItem value="light">Lowest Price</SelectItem>
-          <SelectItem value="dark">Highest Price</SelectItem>
-          <SelectItem value="system">New date</SelectItem>
-          <SelectItem value="system">Old date</SelectItem>
+          <SelectItem value="lowest_price">Lowest Price</SelectItem>
+          <SelectItem value="highest_price">Highest Price</SelectItem>
+          <SelectItem value="new_date">New date</SelectItem>
+          <SelectItem value="old_date">Old date</SelectItem>
         </SelectContent>
       </Select>
     </>
