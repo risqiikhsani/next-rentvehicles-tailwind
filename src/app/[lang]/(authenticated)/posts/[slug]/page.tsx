@@ -33,6 +33,7 @@ import Buttons from "./_page/Buttons";
 import { Locale } from "@/i18n.config";
 import { getDictionary } from "@/lib/dictionary";
 import localeCurrency from "@/lib/currency";
+import Images from "./_page/images";
 
 
 async function getData(postId: string) {
@@ -123,7 +124,7 @@ export default async function Page({
                 height={500}
               />
 
-              <div className="flex overflow-x-auto w-fit">
+              {/* <div className="flex overflow-x-auto w-fit">
               {data.Images && data.Images.map((a,i) => (
                 <Image
                   key={i}
@@ -134,7 +135,9 @@ export default async function Page({
                   height={500}
                 />
               ))}
-              </div>
+              </div> */}
+
+              <Images data={data}/>
               
               <div className="hidden md:block">
                 <Buttons data={data} />

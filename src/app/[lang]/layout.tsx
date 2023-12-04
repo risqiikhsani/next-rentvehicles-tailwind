@@ -1,4 +1,4 @@
-
+import "yet-another-react-lightbox/styles.css";
 
 
 import Sidebar from '@/components/sidebar'
