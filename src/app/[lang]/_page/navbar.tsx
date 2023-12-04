@@ -95,7 +95,13 @@ export default function NavBar({ lang }: { lang: Locale }) {
                   <Badge className="block md:hidden">{user.role}</Badge>
                   <DropdownMenuSeparator />
                   <DropdownMenuItem asChild className="hover:cursor-pointer">
+                    <CustomLink lang={lang} href={`/settings/account`}>Account</CustomLink>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem asChild className="hover:cursor-pointer">
                     <CustomLink lang={lang} href={`/settings/profile`}>Profile</CustomLink>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem asChild className="hover:cursor-pointer">
+                    <CustomLink lang={lang} href={`/settings/theme`}>Theme</CustomLink>
                   </DropdownMenuItem>
                   <DropdownMenuItem
                     className="hover:cursor-pointer"

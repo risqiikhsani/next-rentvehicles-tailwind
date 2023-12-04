@@ -127,7 +127,7 @@ export default async function Page({
               alt="car"
               width="500"
               height="500"
-              className="w-max h-max md:pr-64 pt-10 "
+              className="w-max h-max pt-10 "
             />
           </div>
 
@@ -164,7 +164,7 @@ export default async function Page({
               alt="car"
               width="500"
               height="500"
-              className="w-max h-max md:pl-64"
+              className="w-max h-max"
             />
           </div>
 

@@ -44,6 +44,28 @@
     "locations":{
         "title":"Lokasi",
         "description":"Atur lokasi bisnis sewa Anda."
-    }
-    
+    },
+    "post_detail": {
+        "title": "Detail Postingan",
+        "description": "Lihat detail postingan.",
+        "brand": "Merek",
+        "model": "Model",
+        "year": "Tahun",
+        "car_type": "Tipe Mobil",
+        "available_color": "Warna Tersedia",
+        "license_plate": "Nomor Plat",
+        "transmission": "Transmisi",
+        "fuel_type": "Jenis Bahan Bakar",
+        "condition": "Kondisi",
+        "price_per_day": "Harga per hari",
+        "price_per_week": "Harga per minggu",
+        "price_per_month": "Harga per bulan",
+        "available": "Tersedia",
+        "poster": "Pemilik",
+        "seats": "Kursi",
+        "estimate_max_people": "Perkiraan maksimum orang",
+        "specification":"Spesifikasi",
+        "details":"Detail",
+        "day":"hari"
+    }    
 }

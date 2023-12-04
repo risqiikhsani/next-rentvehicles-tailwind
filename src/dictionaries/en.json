@@ -44,6 +44,29 @@
     "locations":{
         "title":"Locations",
         "description":"Set up your rent business locations."
+    },
+    "post_detail":{
+        "title":"Post Detail",
+        "description":"View post details.",
+        "brand":"Brand",
+        "model":"Model",
+        "year":"Year",
+        "car_type":"Car Type",
+        "available_color":"Available Color",
+        "license_plate":"License Plate",
+        "transmission":"Transmission",
+        "fuel_type":"Fuel Type",
+        "condition":"Condition",
+        "price_per_day":"Price per day",
+        "price_per_week":"Price per week",
+        "price_per_month":"Price per month",
+        "available":"Available",
+        "poster":"Poster",
+        "seats":"Seats",
+        "estimate_max_people":"Estimate max people",
+        "specification":"Specification",
+        "details":"Details",
+        "day":"day"
     }
     
 }

@@ -44,11 +44,11 @@ const LeftNavBar = ({ lang }: { lang: Locale }) => {
   };
 
   return (
-    <nav className="top-20 left-0 w-64 sticky h-screen hidden md:block">
+    <nav className="top-20 left-0 w-64 sticky h-screen hidden md:block ">
       <div className="overflow-y-auto h-screen py-4">
         {user.role === 'Admin' && renderUrls(admin_urls)}
         {user.role === 'Basic' && renderUrls(basic_urls)}
-        <Separator />
+        {/* <Separator />
         {user.ID != 0 && <Accordion type="single" collapsible>
           <AccordionItem value="item-1">
             <AccordionTrigger className="flex justify-normal gap-2 p-8 text-base">
@@ -59,7 +59,7 @@ const LeftNavBar = ({ lang }: { lang: Locale }) => {
               {renderUrls(setting_urls)}
             </AccordionContent>
           </AccordionItem>
-        </Accordion>}
+        </Accordion>} */}
 
       </div>
     </nav>

@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@formatjs/intl": "^2.9.9",
     "@formatjs/intl-localematcher": "^0.5.2",
     "@heroicons/react": "^2.0.18",
     "@hookform/resolvers": "^3.3.1",
