@@ -7,6 +7,7 @@ import {
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuSeparator,
+  DropdownMenuShortcut,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { ChevronDownIcon } from "@heroicons/react/24/solid";
@@ -34,7 +35,7 @@ type Inputs = {
     status: string;
 };
 
-export default function ReadyToPickup({data}:{data:RentType}) {
+export default function ReadyToPickup({text,data}:{text:string,data:RentType}) {
   const router = useRouter()
   const {
     register,
@@ -69,7 +70,8 @@ export default function ReadyToPickup({data}:{data:RentType}) {
       <Dialog>
         <DialogTrigger asChild>
           <DropdownMenuItem onSelect={(e) => e.preventDefault()}>
-            Ready to pickup
+            {text}
+            <DropdownMenuShortcut>⇧⌘Q</DropdownMenuShortcut>
           </DropdownMenuItem>
         </DialogTrigger>
         <DialogContent>

@@ -67,7 +67,7 @@ export const CarCard = async({ data,lang }: { data: PostType,lang:Locale }) => {
                 <div className="flex flex-col w-full border-2 rounded-xl  p-2 shadow-md">
                     <div className="flex justify-between my-1 items-center">
                         <p className="text-sm">
-                            1 {dictionary['post_detail'].day}
+                            1 {dictionary.post_detail.day}
                         </p>
                         <div className="flex flex-col items-center">
                             <p className="font-semibold text-blue-600 dark:text-slate-100">{localeCurrency(data.price_per_day_after_discount,lang)}</p>
@@ -76,7 +76,7 @@ export const CarCard = async({ data,lang }: { data: PostType,lang:Locale }) => {
                     </div>
                     <div className="flex justify-between my-1 items-center">
                         <p className="text-sm">
-                            7 {dictionary['post_detail'].day}
+                            7 {dictionary.post_detail.day}
                         </p>
                         <div className="flex flex-col items-center">
                             <p className="font-semibold text-blue-600 dark:text-slate-100">{localeCurrency(data.price_per_week_after_discount,lang)}</p>
@@ -85,7 +85,7 @@ export const CarCard = async({ data,lang }: { data: PostType,lang:Locale }) => {
                     </div>
                     <div className="flex justify-between my-1 items-center">
                         <p className="text-sm">
-                            30 {dictionary['post_detail'].day}
+                            30 {dictionary.post_detail.day}
                         </p>
 
 
@@ -106,7 +106,7 @@ export const CarCard = async({ data,lang }: { data: PostType,lang:Locale }) => {
                         <TableRow className="hover:bg-inherit">
                             <TableCell className="font-medium">
                                 <Badge variant="outline" className="my-2">
-                                    {dictionary['post_detail'].car_type}
+                                    {dictionary.post_detail.car_type}
                                 </Badge>
                             </TableCell>
                             <TableCell className="text-left">{data.vehicle_type}</TableCell>
@@ -114,7 +114,7 @@ export const CarCard = async({ data,lang }: { data: PostType,lang:Locale }) => {
                         <TableRow className="hover:bg-inherit">
                             <TableCell className="font-medium">
                                 <Badge variant="outline" className="my-2">
-                                {dictionary['post_detail'].transmission}
+                                {dictionary.post_detail.transmission}
                                 </Badge>
                             </TableCell>
                             <TableCell className="text-left">{data.transmission}</TableCell>
@@ -122,7 +122,7 @@ export const CarCard = async({ data,lang }: { data: PostType,lang:Locale }) => {
                         <TableRow className="hover:bg-inherit">
                             <TableCell className="font-medium">
                                 <Badge variant="outline" className="my-2">
-                                {dictionary['post_detail'].fuel_type}
+                                {dictionary.post_detail.fuel_type}
                                 </Badge>
                             </TableCell>
                             <TableCell className="text-left">{data.fuel_type}</TableCell>

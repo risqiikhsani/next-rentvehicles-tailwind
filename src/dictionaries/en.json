@@ -67,6 +67,34 @@
         "specification":"Specification",
         "details":"Details",
         "day":"day"
+    },
+    "rent_history":{
+        "title":"Rent history",
+        "description":"List of your rent history"
+    },
+    "booking_history":{
+        "title":"Booking history",
+        "description":"List of your booking history"
+    },
+    "favorite":{
+        "title":"Favorite",
+        "description":"List of your favorite cars"
+    },
+    "make_rent":{
+        "title":"Rent",
+        "description":"Rent your favorite item,get a great deal",
+        "form":{
+            "payment_method":"Payment method",
+            "start_date":"Start date",
+            "end_date":"End date"
+        },
+        "price":{
+            "estimate_price":"Estimate price",
+            "total_days":"Total days",
+            "normal_price":"Normal price (total)",
+            "saved_price":"Saved price",
+            "final_price":"Final price (total)"
+        }
     }
     
 }

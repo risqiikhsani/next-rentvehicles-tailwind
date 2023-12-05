@@ -62,7 +62,7 @@ export default async function PostList({lang}:{lang:Locale}) {
 
   return (
     <>
-      <Title title={dict['home'].title} text={dict['home'].description} />
+      <Title title={dict.home.title} text={dict.home.description} />
 
       <div className="flex flex-col md:flex-row items-center my-5 md:justify-between gap-2">
         <Search />

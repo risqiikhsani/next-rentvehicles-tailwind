@@ -68,8 +68,8 @@ export default async function Page({
     return (
       <>
         <Title
-          title={dictionary["post_detail"].title}
-          text={dictionary["post_detail"].description}
+          title={dictionary.post_detail.title}
+          text={dictionary.post_detail.description}
         />
         <div className="grid md:grid-cols-3 gap-4 ">
           <div className="relative">
@@ -79,7 +79,7 @@ export default async function Page({
                   <TableRow className="hover:bg-inherit">
                     <TableCell className="font-medium">
                       <Badge variant="outline" className="my-2">
-                        {dictionary["post_detail"].brand}
+                        {dictionary.post_detail.brand}
                       </Badge>
                     </TableCell>
                     <TableCell className="text-left text-xl">
@@ -89,7 +89,7 @@ export default async function Page({
                   <TableRow className="hover:bg-inherit">
                     <TableCell className="font-medium">
                       <Badge variant="outline" className="my-2">
-                        {dictionary["post_detail"].model}
+                        {dictionary.post_detail.model}
                       </Badge>
                     </TableCell>
                     <TableCell className="text-left text-xl">
@@ -99,7 +99,7 @@ export default async function Page({
                   <TableRow className="hover:bg-inherit">
                     <TableCell className="font-medium">
                       <Badge variant="outline" className="my-2">
-                        {dictionary["post_detail"].year}
+                        {dictionary.post_detail.year}
                       </Badge>
                     </TableCell>
                     <TableCell className="text-left">{data.year}</TableCell>
@@ -107,7 +107,7 @@ export default async function Page({
                   <TableRow className="hover:bg-inherit">
                     <TableCell className="font-medium">
                       <Badge variant="outline" className="my-2">
-                        {dictionary["post_detail"].car_type}
+                        {dictionary.post_detail.car_type}
                       </Badge>
                     </TableCell>
                     <TableCell className="text-left">
@@ -151,7 +151,7 @@ export default async function Page({
                 <TableRow className="hover:bg-inherit">
                   <TableCell className="font-medium">
                     <Badge variant="outline" className="my-2">
-                      {dictionary["post_detail"].brand}
+                      {dictionary.post_detail.brand}
                     </Badge>
                   </TableCell>
                   <TableCell className="text-left text-xl">
@@ -161,7 +161,7 @@ export default async function Page({
                 <TableRow className="hover:bg-inherit">
                   <TableCell className="font-medium">
                     <Badge variant="outline" className="my-2">
-                      {dictionary["post_detail"].model}
+                      {dictionary.post_detail.model}
                     </Badge>
                   </TableCell>
                   <TableCell className="text-left text-xl">
@@ -171,7 +171,7 @@ export default async function Page({
                 <TableRow className="hover:bg-inherit">
                   <TableCell className="font-medium">
                     <Badge variant="outline" className="my-2">
-                      {dictionary["post_detail"].year}
+                      {dictionary.post_detail.year}
                     </Badge>
                   </TableCell>
                   <TableCell className="text-left">{data.year}</TableCell>
@@ -179,7 +179,7 @@ export default async function Page({
                 <TableRow className="hover:bg-inherit">
                   <TableCell className="font-medium">
                     <Badge variant="outline" className="my-2">
-                      {dictionary["post_detail"].car_type}
+                      {dictionary.post_detail.car_type}
                     </Badge>
                   </TableCell>
                   <TableCell className="text-left">
@@ -194,20 +194,9 @@ export default async function Page({
                 <Card>
                   <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                     <CardTitle className="text-sm font-medium">
-                      {dictionary["post_detail"].price_per_day} (1 day)
+                      {dictionary.post_detail.price_per_day} (1 day)
                     </CardTitle>
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      className="h-4 w-4 text-muted-foreground"
-                    >
-                      <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
-                    </svg>
+
                   </CardHeader>
                   <CardContent>
                     <p className="text-2xl font-bold">
@@ -228,20 +217,8 @@ export default async function Page({
                 <Card>
                   <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                     <CardTitle className="text-sm font-medium">
-                      {dictionary["post_detail"].price_per_week} (7 days)
+                      {dictionary.post_detail.price_per_week} (7 days)
                     </CardTitle>
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      className="h-4 w-4 text-muted-foreground"
-                    >
-                      <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
-                    </svg>
                   </CardHeader>
                   <CardContent>
                     <p className="text-2xl font-bold">
@@ -262,20 +239,8 @@ export default async function Page({
                 <Card>
                   <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                     <CardTitle className="text-sm font-medium">
-                      {dictionary["post_detail"].price_per_month} (30 days)
+                      {dictionary.post_detail.price_per_month} (30 days)
                     </CardTitle>
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      className="h-4 w-4 text-muted-foreground"
-                    >
-                      <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
-                    </svg>
                   </CardHeader>
                   <CardContent>
                     <p className="text-2xl font-bold">
@@ -300,7 +265,7 @@ export default async function Page({
                   <TableRow className="hover:bg-inherit">
                     <TableCell className="font-medium">
                       <Badge variant="outline" className="my-2">
-                        {dictionary["post_detail"].available}
+                        {dictionary.post_detail.available}
                       </Badge>
                     </TableCell>
                     <TableCell className="text-left">
@@ -310,7 +275,7 @@ export default async function Page({
                   <TableRow className="hover:bg-inherit">
                     <TableCell className="font-medium">
                       <Badge variant="outline" className="my-2">
-                        {dictionary["post_detail"].poster}
+                        {dictionary.post_detail.poster}
                       </Badge>
                     </TableCell>
                     <TableCell className="text-left">{data.UserID}</TableCell>
@@ -321,10 +286,10 @@ export default async function Page({
               <Card>
                 <CardHeader>
                   <CardTitle>
-                    {dictionary["post_detail"].specification}
+                    {dictionary.post_detail.specification}
                   </CardTitle>
                   <CardDescription>
-                    {dictionary["post_detail"].details}
+                    {dictionary.post_detail.details}
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
@@ -339,7 +304,7 @@ export default async function Page({
                       </Avatar>
                       <div className="ml-4 space-y-1">
                         <p className="text-sm font-medium leading-none">
-                          {dictionary["post_detail"].transmission}
+                          {dictionary.post_detail.transmission}
                         </p>
                         <p className="text-sm text-muted-foreground">
                           Learn more about transmission.
@@ -359,7 +324,7 @@ export default async function Page({
                       </Avatar>
                       <div className="ml-4 space-y-1">
                         <p className="text-sm font-medium leading-none">
-                          {dictionary["post_detail"].fuel_type}
+                          {dictionary.post_detail.fuel_type}
                         </p>
                         <p className="text-sm text-muted-foreground">
                           Learn more about fuel types.
@@ -379,7 +344,7 @@ export default async function Page({
                       </Avatar>
                       <div className="ml-4 space-y-1">
                         <p className="text-sm font-medium leading-none">
-                          {dictionary["post_detail"].seats}
+                          {dictionary.post_detail.seats}
                         </p>
                         <p className="text-sm text-muted-foreground">
                           How many seats inside
@@ -397,7 +362,7 @@ export default async function Page({
                       </Avatar>
                       <div className="ml-4 space-y-1">
                         <p className="text-sm font-medium leading-none">
-                          {dictionary["post_detail"].estimate_max_people}
+                          {dictionary.post_detail.estimate_max_people}
                         </p>
                         <p className="text-sm text-muted-foreground">
                           Max number of people fits in

@@ -7,6 +7,7 @@ import {
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuSeparator,
+  DropdownMenuShortcut,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { ChevronDownIcon } from "@heroicons/react/24/solid";
@@ -33,7 +34,7 @@ type Inputs = {
   text: string;
 };
 
-export default function Decline({data}:{data:RentType}) {
+export default function Decline({text,data}:{text:string,data:RentType}) {
   const router = useRouter()
   const {
     register,
@@ -69,7 +70,8 @@ export default function Decline({data}:{data:RentType}) {
       <Dialog>
         <DialogTrigger asChild>
           <DropdownMenuItem onSelect={(e) => e.preventDefault()}>
-            Decline
+            {text}
+            <DropdownMenuShortcut>⇧⌘Q</DropdownMenuShortcut>
           </DropdownMenuItem>
         </DialogTrigger>
         <DialogContent>
