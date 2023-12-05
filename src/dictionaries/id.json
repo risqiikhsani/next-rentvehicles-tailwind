@@ -21,6 +21,10 @@
     "register": "Daftar",
     "register_description": "Buat akun."
   },
+  "setup_user": {
+    "title": "Selamat datang",
+    "description": "Lengkapi akun profile anda."
+  },
   "home": {
     "title": "Home",
     "description": "Cari apapun untuk di rental !"

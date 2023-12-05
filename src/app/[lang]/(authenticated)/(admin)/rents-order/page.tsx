@@ -17,6 +17,8 @@ import { formatTimestamp } from "@/lib/helpers";
 import { cookies } from 'next/headers';
 import ActionNew from "./_page/ActionNew";
 import Detail from "./_page/Detail";
+import { HoverCardPost } from "@/components/hover-card-post";
+import { HoverCardUser } from "@/components/hover-card-user";
 
 async function getData() {
   // const res = await fetch('http://localhost:8080/api/posts',{ next: { tags: ['posts'] } })
@@ -72,8 +74,12 @@ export default async function Page({params}:{params:{lang:Locale}}) {
             data.map((a: RentType, index: number) => (
               <TableRow key={index}>
                 <TableCell className="font-medium hidden md:table-cell">{a.ID}</TableCell>
-                <TableCell className="hidden md:table-cell">{a.post_id}</TableCell>
-                <TableCell className="hidden md:table-cell">{a.user_id}</TableCell>
+                <TableCell className="hidden md:table-cell">
+                  <HoverCardPost id={a.post_id.toString()}/>
+                </TableCell>
+                <TableCell className="hidden md:table-cell">
+                  <HoverCardUser id={a.user_id.toString()}/>
+                </TableCell>
                 <TableCell className="hidden md:table-cell">{`${formatTimestamp(a.start_date)} - ${formatTimestamp(a.end_date)}`}</TableCell>
                 <TableCell>{a.RentDetail.rent_days}</TableCell>
 

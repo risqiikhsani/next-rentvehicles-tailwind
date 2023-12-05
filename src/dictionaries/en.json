@@ -21,6 +21,10 @@
         "register":"Register",
         "register_description":"Create your account."
     },
+    "setup_user":{
+        "title":"Welcome",
+        "description":"Setup your user profile and account."
+    },
     "home":{
         "title":"Home",
         "description":"Find anything to rent!"

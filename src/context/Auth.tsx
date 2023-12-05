@@ -24,11 +24,13 @@ export interface IAuthContext {
   logoutUser: () => void;
   user: UserType;
   account: AccountType;
+  fetchData: () => void;
 }
 
 const authContextDefaultValues: IAuthContext = {
   handleLoginSuccess: (data: any) => {},
   logoutUser: () => {},
+  fetchData: () => {},
   user: {
     ID: 0,
     CreatedAt: "",
@@ -114,29 +116,6 @@ export function AuthHandler({ children }: Props) {
     return router.refresh();
   };
 
-  const handleLoginSuccess = async (data: any) => {
-    if (data.token) {
-      Cookies.set("accesstoken", data.token, { expires: 60 });
-      // api.defaults.headers.Authorization = `Bearer ${data.token}`
-    }
-
-    await fetchData();
-  };
-
-  const value = {
-    handleLoginSuccess,
-    logoutUser,
-    user,
-    account,
-  };
-
-  useEffect(() => {
-    console.log(user);
-    console.log(account);
-    fetchData();
-  }, []);
-
-
   const fetchData = async () => {
     setLoading(true);
     const userDataSuccess = await fetchUserData();
@@ -179,6 +158,32 @@ export function AuthHandler({ children }: Props) {
     //   setLoading(false);
     // }
   };
+
+
+  const handleLoginSuccess = async (data: any) => {
+    if (data.token) {
+      Cookies.set("accesstoken", data.token, { expires: 60 });
+      // api.defaults.headers.Authorization = `Bearer ${data.token}`
+    }
+
+    await fetchData();
+  };
+
+  const value = {
+    handleLoginSuccess,
+    logoutUser,
+    user,
+    account,
+    fetchData,
+  };
+
+  useEffect(() => {
+    console.log(user);
+    console.log(account);
+    fetchData();
+  }, []);
+
+
 
 
 
