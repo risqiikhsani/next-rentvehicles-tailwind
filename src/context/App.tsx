@@ -16,6 +16,7 @@ import CarLoader from "@/components/spinner/car-loader";
 import Loader2 from "@/components/spinner/Loader2";
 import CircleLoader from "@/components/spinner/circle-loader";
 import { AccountType, FavoriteType, UserType } from "@/types/types";
+import { useAuth } from "./Auth";
 
 
 
@@ -39,6 +40,7 @@ interface Props {
 
 export function AppHandler({ children }: Props) {
   const [favorites,setFavorites] = useState(AppCtxDefaultValue.favorites);
+  const {user} = useAuth()
 
   // const dispatch = useAppDispatch();
   const router = useRouter();
@@ -46,21 +48,34 @@ export function AppHandler({ children }: Props) {
   const fetchFavorites = async (): Promise<boolean> => {
     try {
       // get user
-      const response = await api.get("api/favorite");
-      const data = response.data;
+      const response = await api.get(`api/favorites`);
+      const data:FavoriteType[] = response.data;
       setFavorites(data);
       // Set user data
 
       return true;
     } catch (error) {
-      toast.error("Error fetching user data");
+      toast.error("Error fetching favorite");
       console.error("Error:", error);
       return false;
     }
   };
 
+  const fetchData = async () => {
+    const fetchedFavorites = await fetchFavorites();
+
+    if (fetchedFavorites ) {
+      toast.success("Success fetching app")
+    } else {
+      toast.error("Error fetching app");
+    }
+    
+  };
+
   useEffect(() => {
-    fetchFavorites();
+    if(user.ID != 0 ){
+      fetchData()
+    }
   }, []);
 
   const value = {

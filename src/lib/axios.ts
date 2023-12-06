@@ -9,12 +9,15 @@ const api = Axios.create({
         Accept: "application/json",
         "Content-Type": "application/json",
       },
+      // withCredentials: true,
 });
 
 // Add a request interceptor
 api.interceptors.request.use(
     function (config) {
+      
       // Do something before request is sent
+      
   
       const access_token = Cookies.get('accesstoken')
       if (access_token) {

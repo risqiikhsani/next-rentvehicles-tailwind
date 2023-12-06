@@ -147,25 +147,6 @@ export function AuthHandler({ children }: Props) {
       }
     }
     
-    // try {
-    //   const userDataSuccess = await fetchUserData();
-    //   const accountDataSuccess = await fetchAccountData();
-
-    //   if (userDataSuccess && accountDataSuccess) {
-    //     toast.success("Successfully fetched user data and account data");
-    //     return router.refresh();
-    //   }
-    //   else{
-    //     toast.error("Error fetching user data / account data");
-    //     Cookies.remove("accesstoken");
-    //     return router.push("/auth/login")
-    //   }
-    // } catch (error) {
-    //   toast.error("Error fetching user data or account data");
-    //   console.error("Error fetching data:", error);
-    // } finally {
-    //   setLoading(false);
-    // }
   };
 
 

@@ -1,85 +1,39 @@
 
-import { Badge } from "@/components/ui/badge";
-import { Button, buttonVariants } from "@/components/ui/button";
-import Image from "next/image";
-import Link from "next/link";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { AdjustmentsHorizontalIcon } from "@heroicons/react/24/solid";
 
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import { Separator } from "@/components/ui/separator";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
-import Review from "@/components/review";
 import Title from "@/components/typography/Title";
 import { Locale } from "@/i18n.config";
 import { getDictionary } from "@/lib/dictionary";
+import { FavoriteType } from "@/types/types";
+import { cookies } from 'next/headers';
 
 
+async function getData() {
+  // const res = await fetch('http://localhost:8080/api/posts',{ next: { tags: ['posts'] } })
+  const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/favorites`, {
+    cache: "no-store",
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": `Bearer ${cookies().get("accesstoken")?.value}`,
+    },
+  });
+
+  if (!res.ok) {
+    // This will activate the closest `error.js` Error Boundary
+    throw new Error("Failed to fetch rent history data");
+  }
+
+  return res.json();
+}
 
 export default async function Page({params}:{params:{lang:Locale}}) {
   const dict = await getDictionary(params.lang)
+  const data: FavoriteType[] = await getData();
   return (
     <>
     <Title title={dict.favorite.title} text={dict.favorite.description}/>
-      <div className="flex justify-between items-center my-5">
-        <div className="flex gap-4">
-          <Input id="search" type="text" placeholder="search" />
-          <Button>Search</Button>
-        </div>
-
-
-
-        <Dialog>
-          <DialogTrigger className="px-2 py-1 border-solid border-2 flex rounded-md border-slate-200">
-            {/* <Button id="filter" className="rounded-3xl">
-              <AdjustmentsHorizontalIcon className="mr-2 h-4 w-4" />
-              Filter
-            </Button> */}
-            <AdjustmentsHorizontalIcon className="m-auto h-4 w-4 mr-2" />
-            Filter
-          </DialogTrigger>
-          <DialogContent>
-            <DialogHeader>
-              <DialogTitle>Filter</DialogTitle>
-              <DialogDescription>
-                This action cannot be undone. This will permanently delete your
-                account and remove your data from our servers.
-              </DialogDescription>
-            </DialogHeader>
-          </DialogContent>
-        </Dialog>
-
-        <Select>
-          <SelectTrigger className="w-[100px]" id="sort">
-            <SelectValue placeholder="Sort" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="light">Light</SelectItem>
-            <SelectItem value="dark">Dark</SelectItem>
-            <SelectItem value="system">System</SelectItem>
-          </SelectContent>
-        </Select>
-      </div>
-
-      <Separator className="my-6" />
-
-      <div className="flex flex-wrap gap-4 justify-center">
- 
-      </div>
+      {data.map((a) => (
+        <p>{a.PostID} , {a.UserID}</p>
+      ))}
     </>
   );
 }
