@@ -2,37 +2,13 @@
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { AdjustmentsHorizontalIcon } from "@heroicons/react/24/solid";
 
 import Loader from "@/components/spinner/Loader";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
-import { Label } from "@/components/ui/label";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 import { useState } from "react";
 
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { useCallback } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
-import {
-  carFuelTypes,
-  carTransmission,
-  carTypes,
-  manufacturers,
-} from "@/constants";
-import Filter from "./filter";
-import Sort from "./sort";
-
 interface SearchInput {
   text: string;
 }
@@ -45,12 +21,28 @@ export default function Search() {
     formState: { errors },
     reset,
   } = useForm<SearchInput>();
+  const router = useRouter()
+  const pathname = usePathname()
+  const searchParams = useSearchParams()!
+ 
+  // Get a new searchParams string by merging the current
+  // searchParams with a provided key/value pair
+  const createQueryString = useCallback(
+    (name: string, value: string) => {
+      const params = new URLSearchParams(searchParams)
+      params.set(name, value)
+ 
+      return params.toString()
+    },
+    [searchParams]
+  )
 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
   const onSubmit: SubmitHandler<SearchInput> = async (data) => {
-    console.log("Submitted data:", data);
+    console.log("Submitted data:", );
+    router.push(pathname + '?' + createQueryString('search', data.text))
   };
 
   return (

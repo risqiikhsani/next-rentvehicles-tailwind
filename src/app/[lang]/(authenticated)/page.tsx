@@ -3,12 +3,13 @@ import { Locale } from "@/i18n.config";
 
 interface Props {
   params: { lang: Locale }
+  searchParams?: { [key: string]: string | string[] | undefined }
 }
 
-export default async function Home({params}:Props) {
+export default async function Home({ params, searchParams }: Props) {
   return (
     <>
-        <PostList lang={params.lang}/>
+      <PostList lang={params.lang} searchParams={searchParams}/>
     </>
 
   );
