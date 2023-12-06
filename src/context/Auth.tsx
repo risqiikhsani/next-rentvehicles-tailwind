@@ -25,8 +25,6 @@ export interface IAuthContext {
   user: UserType;
   account: AccountType;
   fetchData: () => void;
-  fetchFavorites: () => void;
-  favorites:FavoriteType[];
 }
 
 const authContextDefaultValues: IAuthContext = {
@@ -55,9 +53,7 @@ const authContextDefaultValues: IAuthContext = {
     email: "",
     email_verified: false,
     phone: "",
-  },
-  fetchFavorites: () => {},
-  favorites:[],
+  }
 };
 
 export const AuthContext = createContext<IAuthContext>(
@@ -72,7 +68,7 @@ export function AuthHandler({ children }: Props) {
   const [user, setUser] = useState(authContextDefaultValues.user);
   const [account, setAccount] = useState(authContextDefaultValues.account);
   const [loading, setLoading] = useState(true);
-  const [favorites,setFavorites] = useState(authContextDefaultValues.favorites);
+
 
   // const dispatch = useAppDispatch();
   const router = useRouter();
@@ -109,21 +105,7 @@ export function AuthHandler({ children }: Props) {
     }
   };
 
-  const fetchFavorites = async (): Promise<boolean> => {
-    try {
-      // get user
-      const response = await api.get("api/favorite");
-      const data = response.data;
-      setFavorites(data);
-      // Set user data
 
-      return true;
-    } catch (error) {
-      toast.error("Error fetching user data");
-      console.error("Error:", error);
-      return false;
-    }
-  };
 
   const logoutUser = () => {
     Cookies.remove("accesstoken");
@@ -140,11 +122,7 @@ export function AuthHandler({ children }: Props) {
 
 
 
-  useEffect(() => {
-    console.log(user);
-    console.log(account);
-    fetchData();
-  }, []);
+
 
 
   const fetchData = async () => {
@@ -206,8 +184,6 @@ export function AuthHandler({ children }: Props) {
     user,
     account,
     fetchData,
-    favorites,
-    fetchFavorites,
   };
 
   useEffect(() => {
