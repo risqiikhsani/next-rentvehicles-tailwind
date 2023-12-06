@@ -36,7 +36,7 @@ export default async function Page({params}:{params:{lang:Locale}}) {
 
   const location = (data: LocationType) => {
     return (
-      <Card className="m-10" key={data.ID}>
+      <Card className="m-10 hover:border hover:border-blue-400" key={data.ID}>
         <CardHeader>
           <CardTitle>{data.Name}</CardTitle>
           <CardDescription>{data.Description}</CardDescription>
@@ -56,7 +56,7 @@ export default async function Page({params}:{params:{lang:Locale}}) {
 
   return (
     <>
-      <Title title={dict['locations'].title} text={dict['locations'].description} />
+      <Title title={dict.locations.title} text={dict.locations.description} />
       {data && data.map((a, index) => location(a))}
     </>
   );

@@ -20,6 +20,8 @@ import { ArrowRightIcon } from "@heroicons/react/24/solid";
 import { Badge } from "@/components/ui/badge";
 import Detail from "./_page/Detail";
 import Action from "./_page/Action";
+import { Locale } from "@/i18n.config";
+import { getDictionary } from "@/lib/dictionary";
 
 
 async function getData() {
@@ -40,14 +42,14 @@ async function getData() {
   return res.json();
 }
 
-export default async function Page() {
+export default async function Page({params}:{params:{lang:Locale}}) {
   const data: RentType[] = await getData();
-
+  const dict = await getDictionary(params.lang)
 
 
   return (
     <>
-      <Title title="Rent orders" text="List all of your rent orders" />
+      <Title title={dict.rent_history.title} text={dict.rent_history.description} />
 
       <Table>
         <TableCaption>A list of your recent invoices.</TableCaption>

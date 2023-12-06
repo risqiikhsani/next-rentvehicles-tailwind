@@ -53,7 +53,7 @@ export default async function Home({params}:{params:{lang:Locale}}) {
 
   return (
     <>
-      <Title title={dict['my_post'].title} text={dict['my_post'].description} />
+      <Title title={dict.my_post.title} text={dict.my_post.description} />
       <div className="flex justify-between items-center my-5">
         <Button variant="outline" asChild>
           <Link href="/create-post">
@@ -102,7 +102,7 @@ export default async function Home({params}:{params:{lang:Locale}}) {
       <div className="flex flex-wrap gap-4">
         {data &&
           data.map((a: PostType, index: number) => (
-            <CarCardAdmin data={a} key={index} />
+            <CarCardAdmin data={a} key={index} lang={params.lang}/>
           ))}
       </div>
     </>

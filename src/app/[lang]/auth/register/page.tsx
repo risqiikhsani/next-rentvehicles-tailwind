@@ -18,8 +18,8 @@ export default async function Page({params}:{params:{lang:Locale}}) {
     return (
             <Card className="w-[350px]">
                 <CardHeader>
-                    <CardTitle>{dict['auth'].register}</CardTitle>
-                    <CardDescription>{dict['auth'].register_description}</CardDescription>
+                    <CardTitle>{dict.auth.register}</CardTitle>
+                    <CardDescription>{dict.auth.register_description}</CardDescription>
                 </CardHeader>
                 <RegisterForm/>
             </Card>

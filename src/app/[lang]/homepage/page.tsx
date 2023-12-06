@@ -134,11 +134,11 @@ export default async function Page({
           <AnimatedFramerX>
             <div className="md:bg-red-100 md:p-20 md:rounded-r-full">
               <h1 className="hero__title">
-                {dict['homepage'].hero_title}
+                {dict.homepage.hero_title}
               </h1>
 
               <p className="hero__subtitle">
-                {dict['homepage'].hero_description}
+                {dict.homepage.hero_description}
               </p>
             </div>
           </AnimatedFramerX>
@@ -171,11 +171,11 @@ export default async function Page({
           <AnimatedFramerX>
             <div className="md:bg-red-100 md:p-20 md:rounded-l-full">
               <h1 className="hero__title">
-                {dict['homepage'].hero2_title}
+                {dict.homepage.hero2_title}
               </h1>
 
               <p className="hero__subtitle">
-                {dict['homepage'].hero2_title}
+                {dict.homepage.hero2_title}
               </p>
             </div>
           </AnimatedFramerX>
@@ -222,10 +222,10 @@ export default async function Page({
 
       <div className="w-full h-screen p-2">
         <h1 className="hero__title text-center">
-          {dict['homepage'].logo_title}
+          {dict.homepage.logo_title}
         </h1>
         <p className="hero__subtitle text-center">
-          {dict['homepage'].logo_description}
+          {dict.homepage.logo_description}
         </p>
         <div className="text-center">
           <LogoCarousel />
@@ -236,10 +236,10 @@ export default async function Page({
         <Image src="/homepage_pictures/bmw.jpg" height="900" width="1980" alt="bmw" className="hidden md:block md:w-full md:h-fit " />
         <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white text-center bg-sky-500 opacity-80 md:p-20 rounded-xl">
           <h1 className="hero__title">
-            {dict['homepage'].pic_title}
+            {dict.homepage.pic_title}
           </h1>
           <p className="hero__subtitle">
-            {dict['homepage'].pic_description}
+            {dict.homepage.pic_description}
           </p>
         </div>
       </div>
@@ -273,11 +273,11 @@ export default async function Page({
           <AnimatedFramerX>
             <div className="md:bg-red-100 md:p-20 md:rounded-r-full">
               <h1 className="hero__title">
-                {dict['homepage'].hero3_title}
+                {dict.homepage.hero3_title}
               </h1>
 
               <p className="hero__subtitle">
-                {dict['homepage'].hero3_title}
+                {dict.homepage.hero3_title}
               </p>
             </div>
           </AnimatedFramerX>
@@ -287,7 +287,7 @@ export default async function Page({
       <div className="flex flex-col items-center justify-center p-2 md:h-screen md:bg-green-100 dark:bg-inherit">
         <div className="h-fit flex justify-center  md:items-center p-2 md:p-10 rounded-2xl shadow-xl hover:cursor-pointer transition ease-in-out delay-150 bg-blue-500 hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500 duration-300">
           <h1 className="text-lg md:text-6xl font-bold text-center my-5">
-            {dict['homepage'].button_title}
+            {dict.homepage.button_title}
           </h1>
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -305,13 +305,13 @@ export default async function Page({
           </svg>
         </div>
         <p className="my-10 md:text-3xl font-light">
-          {dict['homepage'].button_description}
+          {dict.homepage.button_description}
         </p>
       </div>
 
       <div className="md:h-screen flex flex-col justify-center gap-4">
         <h1 className="text-6xl font-bold align-middle text-center">
-          {dict['homepage'].customer_photos}
+          {dict.homepage.customer_photos}
         </h1>
         <Carousel images={carouselImages} />
       </div>
@@ -320,7 +320,7 @@ export default async function Page({
       <Separator className="my-6" />
       <div className="p-2">
         <h1 className="text-6xl font-bold align-middle text-center my-5 px-2">
-          {dict['homepage'].customer_reviews}
+          {dict.homepage.customer_reviews}
         </h1>
 
         <div className="grid grid-cols-1 md:grid-cols-3 place-items-center">

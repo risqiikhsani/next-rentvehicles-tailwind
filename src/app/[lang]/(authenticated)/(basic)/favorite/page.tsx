@@ -25,13 +25,16 @@ import {
 } from "@/components/ui/dialog";
 import Review from "@/components/review";
 import Title from "@/components/typography/Title";
+import { Locale } from "@/i18n.config";
+import { getDictionary } from "@/lib/dictionary";
 
 
 
-export default function Favorite() {
+export default async function Page({params}:{params:{lang:Locale}}) {
+  const dict = await getDictionary(params.lang)
   return (
     <>
-    <Title title="Favorite" text="List all of your favorite items"/>
+    <Title title={dict.favorite.title} text={dict.favorite.description}/>
       <div className="flex justify-between items-center my-5">
         <div className="flex gap-4">
           <Input id="search" type="text" placeholder="search" />

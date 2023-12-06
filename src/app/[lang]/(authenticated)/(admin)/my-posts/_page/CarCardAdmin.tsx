@@ -34,9 +34,15 @@ import { Badge } from "@/components/ui/badge"
 import { PostType } from "@/types/types"
 import Link from "next/link"
 import Buttons from "./Buttons"
+import { Locale } from "@/i18n.config"
+import { getDictionary } from "@/lib/dictionary"
+import localeCurrency from "@/lib/currency"
 
 
-export function CarCardAdmin({ data }: { data: PostType }) {
+export async function CarCardAdmin({ data,lang }: { data: PostType,lang:Locale }) {
+
+    const dictionary = await getDictionary(lang)
+
     return (
         <Card className="flex hover:border-solid hover:border-2 hover:border-indigo-600 flex-col md:flex-row items-center gap-2 p-5">
 
@@ -50,72 +56,36 @@ export function CarCardAdmin({ data }: { data: PostType }) {
                 </Badge>
             </div>
             <div className="flex flex-col w-full border-2 rounded-xl  p-2 shadow-md">
-                <div className="flex justify-between my-1 items-center">
-                    <p className="text-sm">
-                        1 day
-                    </p>
-                    <div className="flex rounded-md gap-2 items-center ">
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth="2"
-                            className="h-4 w-4 text-muted-foreground"
-                        >
-                            <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
-                        </svg>
-                        <p className="font-semibold text-blue-600 dark:text-slate-100">{data.price_per_day_after_discount}</p>
-                        {data.discount_percentage != 0 && <p className="font-light line-through text-sm">{data.price_per_day}</p>}
+                    <div className="flex justify-between my-1 items-center">
+                        <p className="text-sm">
+                            1 {dictionary['post_detail'].day}
+                        </p>
+                        <div className="flex flex-col items-center">
+                            <p className="font-semibold text-blue-600 dark:text-slate-100">{localeCurrency(data.price_per_day_after_discount,lang)}</p>
+                            {data.discount_percentage != 0 &&<p className="font-light line-through text-sm">{localeCurrency(data.price_per_day,lang)}</p>}
+                        </div>
                     </div>
-                </div>
-                <div className="flex justify-between my-1 items-center">
-                    <p className="text-sm">
-                        7 days
-                    </p>
-                    <div className="flex rounded-md gap-2 items-center ">
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth="2"
-                            className="h-4 w-4 text-muted-foreground"
-                        >
-                            <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
-                        </svg>
-                        <p className="font-semibold text-blue-600 dark:text-slate-100">{data.price_per_week_after_discount}</p>
-                        {data.discount_percentage != 0 && <p className="font-light line-through text-sm">{data.price_per_week}</p>}
+                    <div className="flex justify-between my-1 items-center">
+                        <p className="text-sm">
+                            7 {dictionary['post_detail'].day}
+                        </p>
+                        <div className="flex flex-col items-center">
+                            <p className="font-semibold text-blue-600 dark:text-slate-100">{localeCurrency(data.price_per_week_after_discount,lang)}</p>
+                            {data.discount_percentage != 0 &&<p className="font-light line-through text-sm">{localeCurrency(data.price_per_week,lang)}</p>}
+                        </div>
                     </div>
-                </div>
-                <div className="flex justify-between my-1 items-center">
-                    <p className="text-sm">
-                        30 days
-                    </p>
+                    <div className="flex justify-between my-1 items-center">
+                        <p className="text-sm">
+                            30 {dictionary['post_detail'].day}
+                        </p>
 
 
-                    <div className="flex rounded-md gap-2 items-center ">
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth="2"
-                            className="h-4 w-4 text-muted-foreground"
-                        >
-                            <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
-                        </svg>
-                        <p className="font-semibold text-blue-600 dark:text-slate-100">{data.price_per_month_after_discount}</p>
-                        {data.discount_percentage != 0 && <p className="font-light line-through text-sm">{data.price_per_month}</p>}
+                        <div className="flex flex-col items-center">
+                            <p className="font-semibold text-blue-600 dark:text-slate-100">{localeCurrency(data.price_per_month_after_discount,lang)}</p>
+                            {data.discount_percentage != 0 &&<p className="font-light line-through text-sm">{localeCurrency(data.price_per_month,lang)}</p>}
+                        </div>
                     </div>
                 </div>
-            </div>
 
             <div className="min-w-[200px]">
                 <Image src={data.MainImage.url} width={920} height={360} alt="car" className="rounded-xl" />

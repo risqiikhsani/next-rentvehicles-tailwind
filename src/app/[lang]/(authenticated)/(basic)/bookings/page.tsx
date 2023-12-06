@@ -9,13 +9,19 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { Locale } from "@/i18n.config";
+import { getDictionary } from "@/lib/dictionary";
 
 import { ChevronDownIcon } from "@heroicons/react/24/solid";
 
-export default function Page() {
+export default async function Page({params}:{params:{lang:Locale}}) {
+
+  const dict = await getDictionary(params.lang)
+
+
   return (
     <>
-      <Title title="Bookings" text="List all of your booked items"/>
+      <Title title={dict.booking_history.title} text={dict.booking_history.description}/>
 
 {/* 
       <Table>

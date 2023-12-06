@@ -15,7 +15,7 @@ export default async function Dashboard({params}:{params:{lang:Locale}}) {
   const dict = await getDictionary(params.lang)
   return (
     <>
-      <Title title={dict['dashboard'].title} text={dict['dashboard'].description} />
+      <Title title={dict.dashboard.title} text={dict.dashboard.description} />
       <div className="space-y-4 md:p-8" >
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
           <Card>

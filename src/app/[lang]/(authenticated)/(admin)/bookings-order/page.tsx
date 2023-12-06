@@ -19,7 +19,7 @@ export default async function Page({params}:{params:{lang:Locale}}) {
   const dict = await getDictionary(params.lang)
   return (
     <>
-      <Title title={dict['booking_orders'].title} text={dict['booking_orders'].description}/>
+      <Title title={dict.booking_orders.title} text={dict.booking_orders.description}/>
 
 
         {/* <Table>

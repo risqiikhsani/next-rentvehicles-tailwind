@@ -23,8 +23,8 @@ export default async function Page({params}:{params:{lang:Locale}}) {
   return (
       <Card className="w-[350px]">
         <CardHeader>
-          <CardTitle>{dict['auth'].login_title}</CardTitle>
-          <CardDescription>{dict['auth'].login_description}</CardDescription>
+          <CardTitle>{dict.auth.login_title}</CardTitle>
+          <CardDescription>{dict.auth.login_description}</CardDescription>
         </CardHeader>
         <LoginForm/>
       </Card>
