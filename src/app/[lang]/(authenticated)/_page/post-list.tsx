@@ -32,7 +32,7 @@ import PostSkeleton from "@/components/spinner/post-skeleton";
 import Search from "./search";
 import Filter from "./filter";
 import Sort from "./sort";
-import { CarCard } from "./CarCard";
+import { CarCard } from "@/components/CarCard";
 import { Locale } from "@/i18n.config";
 import { getDictionary } from "@/lib/dictionary";
 
