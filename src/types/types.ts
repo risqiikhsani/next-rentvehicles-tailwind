@@ -124,3 +124,12 @@ export interface EstimatedPriceType {
   rent_days: number;
   voucher_code: string;
 };
+
+export interface FavoriteType {
+  ID: number;
+  CreatedAt: string;
+  UpdatedAt: string;
+  DeletedAt: string | null;
+  UserID: number;
+  PostID: number;
+}

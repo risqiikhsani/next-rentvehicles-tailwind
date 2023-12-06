@@ -15,7 +15,7 @@ import { toast } from "sonner";
 import CarLoader from "@/components/spinner/car-loader";
 import Loader2 from "@/components/spinner/Loader2";
 import CircleLoader from "@/components/spinner/circle-loader";
-import { AccountType, UserType } from "@/types/types";
+import { AccountType, FavoriteType, UserType } from "@/types/types";
 
 
 
@@ -24,6 +24,7 @@ export interface IAuthContext {
   logoutUser: () => void;
   user: UserType;
   account: AccountType;
+  favorites: FavoriteType[];
 }
 
 const authContextDefaultValues: IAuthContext = {
@@ -52,6 +53,7 @@ const authContextDefaultValues: IAuthContext = {
     email_verified: false,
     phone: "",
   },
+  favorites:[],
 };
 
 export const AuthContext = createContext<IAuthContext>(
@@ -66,9 +68,11 @@ export function AuthHandler({ children }: Props) {
   const [user, setUser] = useState(authContextDefaultValues.user);
   const [account, setAccount] = useState(authContextDefaultValues.account);
   const [loading, setLoading] = useState(true);
+  const [favorites,setFavorites] = useState(authContextDefaultValues.favorites);
 
   // const dispatch = useAppDispatch();
   const router = useRouter();
+
   const fetchUserData = async (): Promise<boolean> => {
     try {
       // get user
@@ -101,6 +105,22 @@ export function AuthHandler({ children }: Props) {
     }
   };
 
+  const fetchFavorites = async (): Promise<boolean> => {
+    try {
+      // get user
+      const response = await api.get("api/favorite");
+      const data = response.data;
+      setFavorites(data);
+      // Set user data
+
+      return true;
+    } catch (error) {
+      toast.error("Error fetching user data");
+      console.error("Error:", error);
+      return false;
+    }
+  };
+
   const logoutUser = () => {
     Cookies.remove("accesstoken");
     // delete api.defaults.headers.Authorization
@@ -128,6 +148,7 @@ export function AuthHandler({ children }: Props) {
     logoutUser,
     user,
     account,
+    favorites,
   };
 
   useEffect(() => {
