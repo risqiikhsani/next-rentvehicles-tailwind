@@ -1,38 +1,28 @@
 import Image from "next/image";
 
-import { HeartIcon } from "@heroicons/react/24/solid";
-import { KeyIcon } from "@heroicons/react/24/solid";
-import { LockClosedIcon } from "@heroicons/react/24/solid";
+import Title from "@/components/typography/Title";
 import {
   Table,
   TableBody,
-  TableCaption,
   TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
+  TableRow
 } from "@/components/ui/table";
-import Title from "@/components/typography/Title";
 
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Badge } from "@/components/ui/badge";
 import {
   Card,
   CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
-  CardTitle,
+  CardTitle
 } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import Review from "@/components/review";
 import { Separator } from "@/components/ui/separator";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import Link from "next/link";
+import { Locale } from "@/i18n.config";
+import localeCurrency from "@/lib/currency";
+import { getDictionary } from "@/lib/dictionary";
 import { PostType } from "@/types/types";
 import Buttons from "./_page/Buttons";
-import { Locale } from "@/i18n.config";
-import { getDictionary } from "@/lib/dictionary";
-import localeCurrency from "@/lib/currency";
 import Images from "./_page/images";
 
 
@@ -137,9 +127,10 @@ export default async function Page({
               ))}
               </div> */}
 
-              <Images data={data}/>
-              
+              <Images data={data} />
+
               <div className="hidden md:block">
+                <Separator className="my-4"/>
                 <Buttons data={data} />
               </div>
             </div>
@@ -200,11 +191,11 @@ export default async function Page({
                   </CardHeader>
                   <CardContent>
                     <p className="text-2xl font-bold">
-                      {localeCurrency(data.price_per_day_after_discount,params.lang)}
+                      {localeCurrency(data.price_per_day_after_discount, params.lang)}
                     </p>
                     {data.discount_percentage != 0 && (
                       <p className="font-light line-through">
-                        {localeCurrency(data.price_per_day,params.lang)}
+                        {localeCurrency(data.price_per_day, params.lang)}
                       </p>
                     )}
                     {data.discount_percentage != 0 && (
@@ -222,11 +213,11 @@ export default async function Page({
                   </CardHeader>
                   <CardContent>
                     <p className="text-2xl font-bold">
-                      {localeCurrency(data.price_per_week_after_discount,params.lang)}
+                      {localeCurrency(data.price_per_week_after_discount, params.lang)}
                     </p>
                     {data.discount_percentage != 0 && (
                       <p className="font-light line-through">
-                        {localeCurrency(data.price_per_week,params.lang)}
+                        {localeCurrency(data.price_per_week, params.lang)}
                       </p>
                     )}
                     {data.discount_percentage != 0 && (
@@ -396,6 +387,7 @@ export default async function Page({
             </div>
 
             <div className="block md:hidden">
+              <Separator className="my-4" />
               <Buttons data={data} />
             </div>
           </div>
