@@ -29,7 +29,9 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 
 const formSchema = z.object({
-    username: z.string().min(6, "Username must be at least 6 characters."),
+    username: z.string()
+        .regex(/^[a-zA-Z0-9]+$/, "Username can only contain letters and numbers.")
+        .min(6, "Username must be at least 6 characters."),
     email: z.string().email({ message: "Invalid email format." }),
     password: z.string().min(6, "Password must be at least 6 characters."),
     password2: z.string(),
@@ -39,7 +41,6 @@ const formSchema = z.object({
     message: "Passwords do not match.",
     path: ["password2"]
 });
-
 
 export default function RegisterForm() {
 

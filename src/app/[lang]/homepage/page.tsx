@@ -112,7 +112,7 @@ export default async function Page({
 
       {/* <Image src="/bmw2.jpg" height="900" width="600" alt="bmw" className="block w-full h-screen md:hidden"/> */}
       <AnimatedFramerY>
-        <div className="relative flex flex-col  md:flex-row-reverse items-center h-screen p-4 md:p-0 ">
+        <div className="relative flex flex-col  md:flex-row-reverse items-center justify-center h-screen p-4 md:p-0 ">
 
           <Image
             src="/homepage_pictures/hero-bg.png"
@@ -127,12 +127,12 @@ export default async function Page({
               alt="car"
               width="500"
               height="500"
-              className="w-max h-max pt-10 "
+              className="w-max h-max pt-10 md:pr-40"
             />
           </div>
 
           <AnimatedFramerX>
-            <div className="md:bg-red-100 md:p-20 md:rounded-r-full">
+            <div className="md:bg-red-100 md:p-20 md:rounded-r-full md:dark:bg-red-700">
               <h1 className="hero__title">
                 {dict.homepage.hero_title}
               </h1>
@@ -149,7 +149,7 @@ export default async function Page({
       <Separator className="block md:hidden my-4" />
 
       <AnimatedFramerY>
-        <div className="relative flex flex-col  md:flex-row items-center h-screen overflow-hidden p-4 md:p-0">
+        <div className="relative flex flex-col  md:flex-row items-center justify-center h-screen overflow-hidden p-4 md:p-0">
 
           <Image
             src="/homepage_pictures/hero-bg2.png"
@@ -164,12 +164,12 @@ export default async function Page({
               alt="car"
               width="500"
               height="500"
-              className="w-max h-max"
+              className="w-max h-max pt-10 md:pl-40"
             />
           </div>
 
           <AnimatedFramerX>
-            <div className="md:bg-red-100 md:p-20 md:rounded-l-full">
+            <div className="md:bg-red-100 md:p-20 md:rounded-l-full md:dark:bg-red-700">
               <h1 className="hero__title">
                 {dict.homepage.hero2_title}
               </h1>
@@ -182,45 +182,8 @@ export default async function Page({
 
         </div>
       </AnimatedFramerY>
-      <Separator className="block md:hidden my-4" />
-
-      {/* <AnimatedFramerY>
-
-        <div className="relative flex flex-col md:flex-row items-center h-screen bg-red-100">
-          <Image
-            src="/hero-bg2.png"
-            alt="hero"
-            width="800"
-            height="800"
-            className="w-max h-max ml-2"
-          />
-          <div className="absolute w-full h-full flex top-0 md:items-center">
-            <Image
-              src="/hero2.png"
-              alt="car"
-              width="500"
-              height="500"
-              className="w-max h-max md:pb-10 md:pl-20 pt-10 md:pt-0"
-            />
-          </div>
-          <AnimatedFramerX>
-            <div>
-              <h1 className="hero__title">
-                Choose more than 50 cars in our garage!
-              </h1>
-
-              <p className="hero__subtitle">
-                Find any type of cars that you like , including sport cars.
-              </p>
-            </div>
-          </AnimatedFramerX>
-
-        </div>
-
-      </AnimatedFramerY> */}
-
-
-      <div className="w-full h-screen p-2">
+      <Separator className="block md:hidden" />
+      <div className="w-full h-screen flex flex-col items-center justify-center overflow-hidden">
         <h1 className="hero__title text-center">
           {dict.homepage.logo_title}
         </h1>
@@ -231,7 +194,6 @@ export default async function Page({
           <LogoCarousel />
         </div>
       </div>
-
       <div className="relative hidden md:block">
         <Image src="/homepage_pictures/bmw.jpg" height="900" width="1980" alt="bmw" className="hidden md:block md:w-full md:h-fit " />
         <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white text-center bg-sky-500 opacity-80 md:p-20 rounded-xl">
@@ -246,32 +208,32 @@ export default async function Page({
 
 
       <AnimatedFramerY>
-        <div className="relative flex flex-col  md:flex-row-reverse items-center h-screen p-4 md:p-0 md:gap-20">
+        <div className="relative flex flex-col  md:flex-row-reverse items-center justify-center h-screen p-4 md:p-0 ">
           <Image
             src="/homepage_pictures/hero-bg.png"
             alt="hero"
             width="800"
             height="800"
-            className="w-max h-max"
+            className="w-max h-max md:h-full md:w-full"
           />
-          <div className="absolute w-full h-full flex md:justify-end top-0 md:items-center">
+          <div className="absolute w-full h-full flex md:justify-end top-0 md:items-center pt-32">
             <Image
               src="/homepage_pictures/best-price.png"
               alt="car"
               width="300"
               height="300"
-              className="w-max h-max "
+              className="w-max h-max pt-10 md:pr-40"
             />
             <Image
               src="/homepage_pictures/best-quality.png"
               alt="car"
               width="300"
               height="300"
-              className="h-fit w-32 md:w-max md:h-max"
+              className="h-fit w-32 pt-10 md:w-max md:h-max md:pr-40"
             />
           </div>
           <AnimatedFramerX>
-            <div className="md:bg-red-100 md:p-20 md:rounded-r-full">
+            <div className="md:bg-red-100 md:p-20 md:rounded-r-full md:dark:bg-red-700">
               <h1 className="hero__title">
                 {dict.homepage.hero3_title}
               </h1>
@@ -308,6 +270,8 @@ export default async function Page({
           {dict.homepage.button_description}
         </p>
       </div>
+
+
 
       <div className="md:h-screen flex flex-col justify-center gap-4">
         <h1 className="text-6xl font-bold align-middle text-center">

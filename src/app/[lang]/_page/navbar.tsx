@@ -57,14 +57,15 @@ export default function NavBar({ lang }: { lang: Locale }) {
             </Sheet>
           )}
           <CustomLink lang={lang} href="/">
-            <div className="flex justify-center items-center">
+            <div className="flex justify-center items-center gap-2">
               <Image
-                src="/logo.svg"
+                src="/logo.png"
                 alt="logo"
-                width={118}
-                height={18}
+                width={40}
+                height={40}
                 className="object-contain"
               />
+              <h2 className="font-extrabold text-2xl">NovaCars</h2>
             </div>
           </CustomLink>
           <div className="grow"></div>

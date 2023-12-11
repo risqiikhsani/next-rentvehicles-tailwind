@@ -45,7 +45,7 @@ export default function RootLayout({
           <main className="mt-20 w-full">
             {children}
           </main>
-          <Footer/>
+          <Footer lang={params.lang}/>
           <Toaster position="top-center" richColors/>
         </ThemeProvider>
         </AuthHandler>
