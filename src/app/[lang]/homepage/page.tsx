@@ -127,7 +127,7 @@ export default async function Page({
               alt="car"
               width="500"
               height="500"
-              className="w-max h-max pt-10 md:pr-40"
+              className="w-max h-max pt-10 md:pr-20"
             />
           </div>
 
@@ -164,7 +164,7 @@ export default async function Page({
               alt="car"
               width="500"
               height="500"
-              className="w-max h-max pt-10 md:pl-40"
+              className="w-max h-max pt-10 md:pl-20"
             />
           </div>
 
@@ -222,14 +222,14 @@ export default async function Page({
               alt="car"
               width="300"
               height="300"
-              className="w-max h-max pt-10 md:pr-40"
+              className="w-max h-max pt-10 md:pr-10"
             />
             <Image
               src="/homepage_pictures/best-quality.png"
               alt="car"
               width="300"
               height="300"
-              className="h-fit w-32 pt-10 md:w-max md:h-max md:pr-40"
+              className="h-fit w-32 pt-10 md:w-max md:h-max md:pr-20"
             />
           </div>
           <AnimatedFramerX>
