@@ -11,6 +11,10 @@ import { Locale } from "@/i18n.config";
 import { getDictionary } from "@/lib/dictionary";
 import { LocationType } from "@/types/types";
 import { cookies } from "next/headers";
+import CardLocation from "./_page/card-location";
+import { Button } from "@/components/ui/button";
+import { PlusIcon } from "@heroicons/react/24/solid";
+import Link from "next/link";
 
 async function getData() {
   // const res = await fetch('http://localhost:8080/api/posts',{ next: { tags: ['posts'] } })
@@ -34,30 +38,26 @@ export default async function Page({params}:{params:{lang:Locale}}) {
   const data: LocationType[] = await getData();
   const dict = await getDictionary(params.lang)
 
-  const location = (data: LocationType) => {
-    return (
-      <Card className="m-10 hover:border hover:border-blue-400" key={data.ID}>
-        <CardHeader>
-          <CardTitle>{data.Name}</CardTitle>
-          <CardDescription>{data.Description}</CardDescription>
-        </CardHeader>
-        <CardContent>
-          <p>address = {data.Address}</p>
-          <p>city = {data.City}</p>
-          <p>street name = {data.StreetName}</p>
-          <p>post code = {data.PostCode}</p>
-        </CardContent>
-        <CardFooter>
-          <p>Card Footer</p>
-        </CardFooter>
-      </Card>
-    );
-  };
+
 
   return (
     <>
       <Title title={dict.locations.title} text={dict.locations.description} />
-      {data && data.map((a, index) => location(a))}
+      <div className="flex justify-between items-center my-5">
+        <Button variant="outline" asChild>
+          <Link href="/create-location">
+            <PlusIcon className="h-4 w-4 mr-2" />
+            Create Location{" "}
+          </Link>
+        </Button>
+      </div>
+      
+      <div className="grid md:grid-cols-2 gap-2 justify-items-center">
+      {data && data.map((a, index) => 
+        <CardLocation key={index} data={a}/>
+      )}
+      </div>
+
     </>
   );
 }

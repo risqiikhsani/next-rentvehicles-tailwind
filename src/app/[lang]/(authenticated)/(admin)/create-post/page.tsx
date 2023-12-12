@@ -585,7 +585,7 @@ export default function Page() {
                     <SelectContent>
                       {locations.map((a: LocationType) => (
                         <SelectItem key={a.ID} value={a.ID.toString()}>
-                          {a.Name}
+                          {a.name}
                         </SelectItem>
                       ))}
                     </SelectContent>

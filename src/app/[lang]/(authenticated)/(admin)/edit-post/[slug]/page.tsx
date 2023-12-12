@@ -98,7 +98,7 @@ export default function Page({ params }: { params: { slug: string } }) {
 
   const fetchPost = async () => {
     try {
-      const response = await fetch(`http://localhost:8080/api/posts/${slug}`, {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/posts/${slug}`, {
         headers: {
           "Content-Type": "application/json",
         },
@@ -152,7 +152,7 @@ export default function Page({ params }: { params: { slug: string } }) {
 
   const fetchLocations = async () => {
     try {
-      const response = await fetch("http://localhost:8080/api/locations", {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/locations`, {
         headers: {
           "Content-Type": "application/json",
         },
@@ -669,7 +669,7 @@ export default function Page({ params }: { params: { slug: string } }) {
                     <SelectContent>
                       {locations.map((a: LocationType) => (
                         <SelectItem key={a.ID} value={a.ID.toString()}>
-                          {a.Name}
+                          {a.name}
                         </SelectItem>
                       ))}
                       {/* <SelectItem value={locations[0].ID.toString()}>

@@ -13,14 +13,14 @@ export interface LocationType {
   CreatedAt: string;
   UpdatedAt: string;
   DeletedAt: string | null;
-  Name: string;
-  Description: string;
-  StreetName: string;
-  Address: string;
-  PostCode: string;
-  City: string;
-  Latitude: string;
-  Longitude: string;
+  name: string;
+  description: string;
+  street_name: string;
+  address: string;
+  post_code: string;
+  city: string;
+  latitude: string;
+  longitude: string;
   UserID: number;
 }
 
