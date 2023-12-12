@@ -97,7 +97,7 @@ export default async function PostList({ lang, searchParams }: { lang: Locale, s
       <Title title={dict.home.title} text={dict.home.description} />
 
       <Suspense fallback={<p>Loading...</p>}>
-        <div className="flex flex-col md:flex-row items-center my-5 md:justify-between gap-2">
+        <div className="flex flex-col md:flex-row my-5 md:justify-between gap-2">
           <Search />
           <div className="gap-2 flex w-full md:w-fit justify-between md:justify-normal">
             <Filter />
@@ -107,7 +107,7 @@ export default async function PostList({ lang, searchParams }: { lang: Locale, s
       </Suspense>
 
       <Separator className="my-6" />
-      <div className="flex flex-wrap gap-4 ">
+      <div className="grid md:grid-cols-3 gap-4 justify-items-center">
         <Suspense
           fallback={
             <>

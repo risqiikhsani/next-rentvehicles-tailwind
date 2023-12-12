@@ -44,14 +44,14 @@ import { useRouter } from 'next/navigation'
 
 
 const formSchema = z.object({
-  brand: z.string().min(2, {
-    message: "brand must be at least 2 characters.",
+  brand: z.string().min(1, {
+    message: "brand can't be empty.",
   }),
-  brand_model: z.string().min(2, {
-    message: "model must be at least 2 characters.",
+  brand_model: z.string().min(1, {
+    message: "model can't be empty.",
   }),
-  vehicle_type: z.string().min(2, {
-    message: "type must be at least 2 characters.",
+  vehicle_type: z.string().min(1, {
+    message: "type can't be empty.",
   }),
   year: z.coerce.number().min(4, {
     message: "year must be at least 4 characters.",
@@ -77,8 +77,8 @@ const formSchema = z.object({
   license_plate: z.string().min(1, {
     message: "license plate can't be empty.",
   }),
-  location_id: z.string({
-    required_error: "Please select an location.",
+  location_id: z.string().min(1, {
+    message: "Location can't be empty.",
   }),
   body_color: z.string(),
   // image: z

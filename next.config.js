@@ -10,6 +10,17 @@ const nextConfig = {
             port: '8080',
             // pathname: '/image/upload/**',
           },
+          {
+            protocol: 'http',
+            hostname: 'localhost',
+            port: '80',
+            // pathname: '/image/upload/**',
+          },
+          {
+            protocol: 'https',
+            hostname: 'rentvehicles-server.switzcool.cloud',
+            // pathname: '/image/upload/**',
+          },
         ],
       },
 }
