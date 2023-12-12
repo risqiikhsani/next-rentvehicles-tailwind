@@ -183,7 +183,7 @@ export default async function Page({
         </div>
       </AnimatedFramerY>
       <Separator className="block md:hidden" />
-      <div className="w-full h-screen flex flex-col items-center justify-center overflow-hidden">
+      <div className="w-full h-screen flex flex-col items-center justify-center overflow-hidden dark:bg-sky-300">
         <h1 className="hero__title text-center">
           {dict.homepage.logo_title}
         </h1>

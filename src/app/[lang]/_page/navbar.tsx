@@ -35,7 +35,7 @@ export default function NavBar({ lang }: { lang: Locale }) {
 
   return (
     <header className="w-full fixed top-0 z-10">
-      <nav className="w-full bg-white bg-opacity-40 dark:bg-slate-900">
+      <nav className="w-full bg-white dark:bg-slate-900">
         {/* <div className="max-w-7xl mx-auto px-4 sm:px-6"> */}
 
         <div className="flex items-center p-4 gap-2">
@@ -65,7 +65,7 @@ export default function NavBar({ lang }: { lang: Locale }) {
                 height={40}
                 className="object-contain"
               />
-              <h2 className="font-extrabold text-2xl">NovaCars</h2>
+              <h2 className="font-extrabold md:text-2xl">NovaCars</h2>
             </div>
           </CustomLink>
           <div className="grow"></div>

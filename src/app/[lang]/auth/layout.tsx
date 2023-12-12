@@ -1,12 +1,13 @@
 import CustomLink from "@/components/CustomLink";
+import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { Locale } from "@/i18n.config";
 import Image from "next/image";
 
-export default function Layout({ children,params }: { children: React.ReactNode,params:{lang:Locale} }) {
+export default function Layout({ children, params }: { children: React.ReactNode, params: { lang: Locale } }) {
     return (
         <>
-            <div className="md:flex md:items-center justify-center w-full">
+            {/* <div className="md:flex md:items-center justify-center w-full">
                 <div className="md:relative">
                     <Image src="/others/login.jpg" alt="car" className="hidden sm:block w-full h-auto rounded-lg " width={500} height={800} />
                     <div className="md:absolute inset-0 flex items-center justify-center">
@@ -19,11 +20,33 @@ export default function Layout({ children,params }: { children: React.ReactNode,
                                     <Separator orientation="vertical" />
                                     <CustomLink lang={params.lang} href="/auth/forgot-password">Forgot Password</CustomLink>
                                 </div>
-                                {children}
+                                <div className="w-full">
+                                    {children}
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
+            </div> */}
+            <div className="flex flex-col gap-2 w-full ">
+                <div className="flex gap-2 justify-center">
+                    <Button variant="link" asChild>
+                        <CustomLink lang={params.lang} href="/auth/login">Login</CustomLink>
+                    </Button>
+
+                    <Button variant="link" asChild>
+                        <CustomLink lang={params.lang} href="/auth/register">Sign Up</CustomLink>
+                    </Button>
+
+                    <Button variant="link" asChild>
+                        <CustomLink lang={params.lang} href="/auth/forgot-password">Forgot Password</CustomLink>
+                    </Button>
+
+                </div>
+                <div className="flex justify-center items-center">
+                    {children}
+                </div>
+
             </div>
         </>
     )

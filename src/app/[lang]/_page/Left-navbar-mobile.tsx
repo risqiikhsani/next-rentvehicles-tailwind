@@ -50,18 +50,6 @@ const LeftNavBarMobile = ({ lang }: { lang: Locale }) => {
         <>
             {user.role === 'Admin' && renderUrls(admin_urls)}
             {user.role === 'Basic' && renderUrls(basic_urls)}
-            <Separator />
-            {user.ID != 0 && <Accordion type="single" collapsible>
-                <AccordionItem value="item-1">
-                    <AccordionTrigger className="flex justify-normal gap-2 p-8 text-base">
-                        <Cog6ToothIcon className="w-5 h-5" />
-                        Settings
-                    </AccordionTrigger>
-                    <AccordionContent>
-                        {renderUrls(setting_urls)}
-                    </AccordionContent>
-                </AccordionItem>
-            </Accordion>}
 
         </>
     );

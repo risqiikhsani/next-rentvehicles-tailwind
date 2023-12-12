@@ -21,7 +21,7 @@ const Footer = async ({lang}:{lang:Locale}) => (
             <h2 className="font-extrabold text-2xl">NovaCars</h2>
           </div>
         </CustomLink>
-        <p className='text-base text-gray-700'>
+        <p className='text-base'>
           NovaCars 2023 <br />
           All Rights Reserved &copy;
         </p>
@@ -36,7 +36,6 @@ const Footer = async ({lang}:{lang:Locale}) => (
                 <Link
                   key={link.title}
                   href={link.url}
-                  className="text-gray-500"
                 >
                   {link.title}
                 </Link>
@@ -51,10 +50,10 @@ const Footer = async ({lang}:{lang:Locale}) => (
       <p>@2023 NovaCars. All rights reserved</p>
 
       <div className="footer__copyrights-link">
-        <Link href="/" className="text-gray-500">
+        <Link href="/">
           Privacy & Policy
         </Link>
-        <Link href="/" className="text-gray-500">
+        <Link href="/">
           Terms & Condition
         </Link>
       </div>
