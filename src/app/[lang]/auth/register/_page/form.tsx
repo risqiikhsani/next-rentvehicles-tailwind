@@ -44,7 +44,7 @@ const formSchema = z.object({
 
 export default function RegisterForm() {
 
-    const [loading, setLoading] = React.useState(false);
+
     const [error, setError] = React.useState("");
 
     const form = useForm<z.infer<typeof formSchema>>({
@@ -61,7 +61,6 @@ export default function RegisterForm() {
         // Do something with the form values.
         // ✅ This will be type-safe and validated.
         console.log(values)
-        setLoading(true);
         setError("");
         try {
             const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/register`, {
@@ -77,7 +76,6 @@ export default function RegisterForm() {
             if (!response.ok) {
                 toast.error("Error, please try again");
                 setError(responseData.error);
-                setLoading(false);
                 return;
             }
 
@@ -86,8 +84,6 @@ export default function RegisterForm() {
         } catch (error) {
             toast.error("Error occurred while processing");
             console.error("Error:", error);
-        } finally {
-            setLoading(false); // Set loading to false when the request is done (success or error)
         }
     }
 
@@ -167,9 +163,7 @@ export default function RegisterForm() {
                         type="submit"
                         className="transition duration-300 ease-in-out hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500"
                     >
-                        {loading && (
-                            <Loader />
-                        )}
+                        {form.formState.isSubmitting && <Loader />}
                         Register
                     </Button>
                 </form>

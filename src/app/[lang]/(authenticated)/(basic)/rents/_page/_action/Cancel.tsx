@@ -28,6 +28,7 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import api from "@/lib/axios";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
+import Loader from "@/components/spinner/Loader";
 
 type Inputs = {
   text: string;
@@ -39,7 +40,7 @@ export default function Cancel({data}:{data:RentType}) {
     register,
     handleSubmit,
     watch,
-    formState: { errors },
+    formState: { errors,isSubmitting },
   } = useForm<Inputs>();
 
 
@@ -87,7 +88,9 @@ export default function Cancel({data}:{data:RentType}) {
           </div>
           <DialogFooter>
             <DialogClose asChild className="sm:justify-start">
-              <Button type="submit">Confirm</Button>
+              <Button type="submit">
+                {isSubmitting && <Loader/>}
+                Confirm</Button>
             </DialogClose>
           </DialogFooter>
           </form>

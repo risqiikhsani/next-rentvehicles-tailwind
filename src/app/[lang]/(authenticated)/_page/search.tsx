@@ -18,7 +18,7 @@ export default function Search() {
     register,
     handleSubmit,
     watch,
-    formState: { errors },
+    formState: { errors,isSubmitting },
     reset,
   } = useForm<SearchInput>();
   const router = useRouter()
@@ -37,8 +37,8 @@ export default function Search() {
     [searchParams]
   )
 
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
+
+
 
   const onSubmit: SubmitHandler<SearchInput> = async (data) => {
     console.log("Submitted data:", );
@@ -54,7 +54,7 @@ export default function Search() {
             type="submit"
             className="transition duration-300 ease-in-out hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500"
           >
-            {loading && <Loader />}
+            {isSubmitting && <Loader />}
             Search
           </Button>
         </div>

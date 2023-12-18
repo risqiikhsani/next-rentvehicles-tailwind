@@ -125,28 +125,54 @@ export function AuthHandler({ children }: Props) {
 
 
 
+  // const fetchData = async () => {
+  //   setLoading(true);
+  //   const userDataSuccess = await fetchUserData();
+  //   const accountDataSuccess = await fetchAccountData();
+
+  //   if (userDataSuccess && accountDataSuccess) {
+  //     toast.success("Successfully fetched user data and account data");
+  //     setLoading(false);
+  //     return router.refresh()
+  //   } else {
+  //     toast.error("Error fetching user data / account data");
+  //     // Check if the access token cookie exists before attempting to remove it
+  //     const accessToken = Cookies.get("accesstoken");
+  //     if (accessToken) {
+  //       Cookies.remove("accesstoken");
+  //       setLoading(false); // Move setLoading(false) before the return statement
+  //       return router.push("/auth/login");
+  //     } else {
+  //       setLoading(false); // Set loading to false if there's no access token to remove
+  //     }
+  //   }
+    
+  // };
+
   const fetchData = async () => {
     setLoading(true);
-    const userDataSuccess = await fetchUserData();
-    const accountDataSuccess = await fetchAccountData();
-
-    if (userDataSuccess && accountDataSuccess) {
-      toast.success("Successfully fetched user data and account data");
-      setLoading(false);
-      return router.refresh()
-    } else {
-      toast.error("Error fetching user data / account data");
-      // Check if the access token cookie exists before attempting to remove it
-      const accessToken = Cookies.get("accesstoken");
-      if (accessToken) {
-        Cookies.remove("accesstoken");
-        setLoading(false); // Move setLoading(false) before the return statement
-        return router.push("/auth/login");
+    try {
+      const userDataSuccess = await fetchUserData();
+      const accountDataSuccess = await fetchAccountData();
+  
+      if (userDataSuccess && accountDataSuccess) {
+        toast.success("Successfully fetched user data and account data");
+        setLoading(false);
+        return router.refresh();
       } else {
-        setLoading(false); // Set loading to false if there's no access token to remove
+        toast.error("Error fetching user data / account data");
+        const accessToken = Cookies.get("accesstoken");
+        if (accessToken) {
+          Cookies.remove("accesstoken");
+          return router.push("/auth/login");
+        }
       }
+    } catch (error) {
+      toast.error("An error occurred while fetching data");
+      console.error("Error:", error);
+    } finally {
+      setLoading(false); // Ensure setLoading(false) is called in all cases
     }
-    
   };
 
 

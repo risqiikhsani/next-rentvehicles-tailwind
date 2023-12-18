@@ -16,13 +16,11 @@ import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
 
 import Loader from "@/components/spinner/Loader";
-import { useAuth } from "@/context/Auth";
 import { ExclamationCircleIcon } from "@heroicons/react/24/solid";
 import { SubmitHandler, useForm } from "react-hook-form";
 
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
-import { useSearchParams } from 'next/navigation'
-import { useRouter } from 'next/navigation'
+import { useRouter, useSearchParams } from 'next/navigation';
 
 
 interface ForgotPasswordInput {
@@ -40,17 +38,17 @@ export default function ForgotPasswordForm() {
         register,
         handleSubmit,
         watch,
-        formState: { errors },
+        formState: { errors, isSubmitting },
         reset,
     } = useForm<ForgotPasswordInput>();
 
-    const [loading, setLoading] = React.useState(false);
+
     const [error, setError] = React.useState("");
 
     const onSubmit: SubmitHandler<ForgotPasswordInput> = async (data) => {
         console.log("Submitted data:", data);
         // You can handle login logic here
-        setLoading(true);
+
         setError("");
         try {
             const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/reset-password?token=${token}`, {
@@ -66,7 +64,7 @@ export default function ForgotPasswordForm() {
             if (!response.ok) {
                 toast.error("Error, please try again");
                 setError(responseData.error);
-                setLoading(false);
+
                 return;
             }
 
@@ -78,8 +76,6 @@ export default function ForgotPasswordForm() {
         } catch (error) {
             toast.error("Error occurred while processing");
             console.error("Error:", error);
-        } finally {
-            setLoading(false); // Set loading to false when the request is done (success or error)
         }
     };
 
@@ -137,9 +133,7 @@ export default function ForgotPasswordForm() {
                         type="submit"
                         className="transition duration-300 ease-in-out hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500"
                     >
-                        {loading && (
-                            <Loader />
-                        )}
+                        {isSubmitting && <Loader />}
                         Reset password
                     </Button>
                 </CardFooter>

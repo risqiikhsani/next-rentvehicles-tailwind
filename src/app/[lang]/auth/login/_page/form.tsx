@@ -32,17 +32,15 @@ export default function LoginForm() {
         register,
         handleSubmit,
         watch,
-        formState: { errors },
+        formState: { errors,isSubmitting },
         reset,
     } = useForm<LoginInput>();
 
-    const [loading, setLoading] = React.useState(false);
     const [error, setError] = React.useState("");
 
     const onSubmit: SubmitHandler<LoginInput> = async (data) => {
         console.log("Submitted data:", data);
         // You can handle login logic here
-        setLoading(true);
         setError("");
         try {
             const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/login`, {
@@ -58,7 +56,6 @@ export default function LoginForm() {
             if (!response.ok) {
                 toast.error("Error, please try again");
                 setError(responseData.error);
-                setLoading(false);
                 return;
             }
 
@@ -69,9 +66,7 @@ export default function LoginForm() {
         } catch (error) {
             toast.error("Error occurred while processing");
             console.error("Error:", error);
-        } finally {
-            setLoading(false); // Set loading to false when the request is done (success or error)
-        }
+        } 
     };
 
     return (
@@ -122,7 +117,7 @@ export default function LoginForm() {
                     type="submit"
                     className="transition duration-300 ease-in-out hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500"
                 >
-                    {loading && (
+                    {isSubmitting && (
                         <Loader />
                     )}
                     Login

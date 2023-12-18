@@ -48,6 +48,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { PaymentMethod } from "@/constants"
 import { Locale } from "@/i18n.config"
 import localeCurrency from "@/lib/currency"
+import Loader from "@/components/spinner/Loader"
 
 const FormSchema = z.object({
     payment_method: z.string(),
@@ -281,7 +282,10 @@ export default function FormRentCar({ slug, lang }: { slug: string, lang: Locale
                         </TableBody>
                     </Table>
 
-                    <Button type="submit">Submit</Button>
+                    <Button type="submit">
+                        {form.formState.isSubmitting && <Loader />}
+                        Submit
+                    </Button>
                 </form>
             </Form>
         </>

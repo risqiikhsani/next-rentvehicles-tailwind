@@ -41,6 +41,7 @@ import api from "@/lib/axios";
 import axios from "axios";
 import { redirect } from 'next/navigation'
 import { useRouter } from 'next/navigation'
+import Loader from "@/components/spinner/Loader";
 
 
 const formSchema = z.object({
@@ -596,7 +597,10 @@ export default function Page() {
                 </FormItem>
               )}
             />
-            <Button type="submit">Submit</Button>
+            <Button type="submit">
+              {form.formState.isSubmitting && <Loader/>}
+              Submit
+              </Button>
           </form>
         </Form>
       </div>

@@ -25,6 +25,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { userGender } from "@/constants";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
+import Loader from "@/components/spinner/Loader";
 
 const FormSchema = z.object({
     publicUsername: z.string().regex(/^[a-zA-Z0-9_]{4,16}$/, {
@@ -147,7 +148,10 @@ export default function UpdateProfile({ defaultValue }: { defaultValue: UserType
                     {isDirty && (
                         <div className="flex gap-2">
                             <Button onClick={onReset}>Reset</Button>
-                            <Button type="submit">Save</Button>
+                            <Button type="submit">
+                                {form.formState.isSubmitting && <Loader/>}
+                                Save
+                                </Button>
                         </div>
                     )}
 

@@ -19,6 +19,7 @@ import { useRouter } from "next/navigation"
 import api from "@/lib/axios"
 import { LocationType } from "@/types/types"
 import { useEffect } from "react"
+import Loader from "@/components/spinner/Loader"
 
 
 const formSchema = z.object({
@@ -43,7 +44,7 @@ const formSchema = z.object({
 });
 
 
-export default function Page({params}:{params:{slug: string}}) {
+export default function Page({ params }: { params: { slug: string } }) {
     const router = useRouter()
     // 1. Define your form.
     const form = useForm<z.infer<typeof formSchema>>({
@@ -61,32 +62,32 @@ export default function Page({params}:{params:{slug: string}}) {
 
     const fetchLocation = async () => {
         try {
-          const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/locations/${params.slug}`, {
-            headers: {
-              "Content-Type": "application/json",
-            },
-          });
-    
-          if (!response.ok) {
-            throw new Error("Failed to fetch data");
-          }
-    
-          const data: LocationType = await response.json();
-          console.log("location", data);
-          form.reset({
-            name: data.name,
-            description: data.description,
-            street_name: data.street_name,
-            address: data.address,
-            post_code: data.post_code,
-            city: data.city,
-          });
+            const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/locations/${params.slug}`, {
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            });
+
+            if (!response.ok) {
+                throw new Error("Failed to fetch data");
+            }
+
+            const data: LocationType = await response.json();
+            console.log("location", data);
+            form.reset({
+                name: data.name,
+                description: data.description,
+                street_name: data.street_name,
+                address: data.address,
+                post_code: data.post_code,
+                city: data.city,
+            });
         } catch (error) {
-          // Handle error here, you might want to log it or set an error state
-          console.log("error", error);
-          toast.error("Error fetching post");
+            // Handle error here, you might want to log it or set an error state
+            console.log("error", error);
+            toast.error("Error fetching post");
         }
-      };
+    };
 
     // 2. Define a submit handler.
     async function onSubmit(values: z.infer<typeof formSchema>) {
@@ -109,7 +110,7 @@ export default function Page({params}:{params:{slug: string}}) {
 
     useEffect(() => {
         fetchLocation()
-    },[])
+    }, [])
 
 
     return (
@@ -213,7 +214,10 @@ export default function Page({params}:{params:{slug: string}}) {
                             </FormItem>
                         )}
                     />
-                    <Button type="submit">Submit</Button>
+                    <Button type="submit">
+                        {form.formState.isSubmitting && <Loader />}
+                        Submit
+                    </Button>
                 </form>
             </Form>
         </>
