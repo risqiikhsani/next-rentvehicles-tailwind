@@ -1,31 +1,71 @@
 'use client'
 
-import { Input } from "@/components/ui/input";
 import { AdjustmentsHorizontalIcon } from "@heroicons/react/24/solid";
 
-import {
-    Dialog,
-    DialogContent,
-    DialogDescription,
-    DialogFooter,
-    DialogHeader,
-    DialogTitle,
-    DialogTrigger,
-} from "@/components/ui/dialog";
-import { Label } from "@/components/ui/label";
-import {
-    Select,
-    SelectContent,
-    SelectItem,
-    SelectTrigger,
-    SelectValue,
-} from "@/components/ui/select";
-
-import { carFuelTypes, carTransmission, carTypes, manufacturers } from "@/constants";
 import { Button } from "@/components/ui/button";
+import {
+  Dialog,
+  DialogContent,
+  DialogTrigger
+} from "@/components/ui/dialog";
+import {
+  Form,
+  FormControl,
+  FormDescription,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import * as z from "zod";
+import { carFuelTypes, carTransmission, carTypes, manufacturers } from "@/constants";
+import { usePathname, useRouter, useSearchParams } from "next/navigation"
+import { DialogClose } from "@radix-ui/react-dialog";
 
+
+const FormSchema = z.object({
+  brand: z.string(),
+  vehicle_type: z.string(),
+  fuel_type: z.string(),
+  transmission: z.string(),
+})
 
 export default function Filter() {
+  const { replace } = useRouter()
+  const pathname = usePathname()
+  const searchParams = useSearchParams()
+
+  const form = useForm<z.infer<typeof FormSchema>>({
+    resolver: zodResolver(FormSchema),
+    defaultValues: {
+      brand: "all",
+      vehicle_type: "all",
+      transmission: "all",
+      fuel_type: "all",
+    },
+  })
+
+  function onSubmit(data: z.infer<typeof FormSchema>) {
+
+    const updatedSearchParams = new URLSearchParams(searchParams.toString()); // Create a copy of searchParams
+
+    updatedSearchParams.set('filter_brand', data.brand == "all" ? "" : data.brand);
+    updatedSearchParams.set('filter_vehicle_type', data.vehicle_type == "all" ? "" : data.vehicle_type);
+    updatedSearchParams.set('filter_transmission', data.transmission == "all" ? "" : data.transmission);
+    updatedSearchParams.set('filter_fuel_type', data.fuel_type == "all" ? "" : data.fuel_type);
+
+    replace(`${pathname}?${updatedSearchParams.toString()}`); // Replace URL with updated query parameters
+  }
+
   return (
     <>
       <Dialog>
@@ -34,127 +74,119 @@ export default function Filter() {
           Filter
         </DialogTrigger>
         <DialogContent className="overflow-y-scroll max-h-screen">
-          <DialogHeader>
-            <DialogTitle>Filter</DialogTitle>
-            <DialogDescription className="py-4 text-black flex flex-col gap-4">
-              <div>
-                <Label>Brand</Label>
-                <Select>
-                  <SelectTrigger className="w-[180px]">
-                    <SelectValue placeholder="brand" />
-                  </SelectTrigger>
-                  <SelectContent className="overflow-y-auto max-h-[30rem]">
-                    <SelectItem value="all">All</SelectItem>
-                    {manufacturers.map((a, index) => (
-                      <SelectItem key={index} value={a}>
-                        {a}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-              </div>
+          <Form {...form}>
+            <form onSubmit={form.handleSubmit(onSubmit)} className="w-2/3 space-y-6">
 
-              <div>
-                <Label>Car Types</Label>
-                <Select>
-                  <SelectTrigger className="w-[180px]">
-                    <SelectValue placeholder="car type" />
-                  </SelectTrigger>
-                  <SelectContent className="overflow-y-auto max-h-[30rem]">
-                    <SelectItem value="all">All</SelectItem>
-                    {carTypes.map((a, index) => (
-                      <SelectItem key={index} value={a}>
-                        {a}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-              </div>
+              <FormField
+                control={form.control}
+                name="brand"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>brand</FormLabel>
+                    <Select onValueChange={field.onChange} defaultValue={field.value}>
+                      <FormControl>
+                        <SelectTrigger>
+                          <SelectValue placeholder="Select a brand" />
+                        </SelectTrigger>
+                      </FormControl>
+                      <SelectContent className="overflow-y-auto max-h-[30rem]">
+                        <SelectItem key="all" value="all">
+                          all
+                        </SelectItem>
+                        {manufacturers.map((a, index) => (
+                          <SelectItem key={index} value={a}>
+                            {a}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="vehicle_type"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>vehicle type</FormLabel>
+                    <Select onValueChange={field.onChange} defaultValue={field.value}>
+                      <FormControl>
+                        <SelectTrigger>
+                          <SelectValue placeholder="Select a vehicle type" />
+                        </SelectTrigger>
+                      </FormControl>
+                      <SelectContent className="overflow-y-auto max-h-[30rem]">
+                        <SelectItem key="all" value="all">
+                          all
+                        </SelectItem>
+                        {carTypes.map((a, index) => (
+                          <SelectItem key={index} value={a}>
+                            {a}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="fuel_type"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>fuel type</FormLabel>
+                    <Select onValueChange={field.onChange} defaultValue={field.value}>
+                      <FormControl>
+                        <SelectTrigger>
+                          <SelectValue placeholder="Select a fuel type" />
+                        </SelectTrigger>
+                      </FormControl>
+                      <SelectContent className="overflow-y-auto max-h-[30rem]">
+                        <SelectItem key="all" value="all">
+                          all
+                        </SelectItem>
+                        {carFuelTypes.map((a, index) => (
+                          <SelectItem key={index} value={a}>
+                            {a}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="transmission"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>transmission</FormLabel>
+                    <Select onValueChange={field.onChange} defaultValue={field.value}>
+                      <FormControl>
+                        <SelectTrigger>
+                          <SelectValue placeholder="Select a transmission" />
+                        </SelectTrigger>
+                      </FormControl>
+                      <SelectContent className="overflow-y-auto max-h-[30rem]">
+                        <SelectItem key="all" value="all">
+                          all
+                        </SelectItem>
+                        {carTransmission.map((a, index) => (
+                          <SelectItem key={index} value={a}>
+                            {a}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  </FormItem>
+                )}
+              />
+              <DialogClose asChild>
+                <Button type="submit">Filter</Button>
+              </DialogClose>
 
-              <div className="flex gap-2 items-center">
-                <Label>min.year</Label>
-                <Input id="from_year" placeholder="2000" />
-                <Label>max.year</Label>
-                <Input id="to_year" placeholder="2023" />
-              </div>
-
-              <div className="flex gap-2 items-center">
-                <Label>min.price</Label>
-                <Input id="from_year" />
-                <Label>max.price</Label>
-                <Input id="to_year" />
-              </div>
-
-              <div>
-                <Label>Fuel Type</Label>
-                <Select>
-                  <SelectTrigger className="w-[180px]">
-                    <SelectValue placeholder="fuel type" />
-                  </SelectTrigger>
-                  <SelectContent className="overflow-y-auto max-h-[30rem]">
-                    <SelectItem value="all">All</SelectItem>
-                    {carFuelTypes.map((a, index) => (
-                      <SelectItem key={index} value={a}>
-                        {a}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-              </div>
-
-              <div>
-                <Label>Transmission</Label>
-                <Select>
-                  <SelectTrigger className="w-[180px]">
-                    <SelectValue placeholder="transmission" />
-                  </SelectTrigger>
-                  <SelectContent className="overflow-y-auto max-h-[30rem]">
-                    <SelectItem value="all">All</SelectItem>
-                    {carTransmission.map((a, index) => (
-                      <SelectItem key={index} value={a}>
-                        {a}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-              </div>
-
-              <div>
-                <Label>Available</Label>
-                <Select>
-                  <SelectTrigger className="w-[180px]">
-                    <SelectValue placeholder="available" />
-                  </SelectTrigger>
-                  <SelectContent className="overflow-y-auto max-h-[30rem]">
-                    <SelectItem value="all">All</SelectItem>
-                    <SelectItem value="available">Available only</SelectItem>
-                    <SelectItem value="not_available">
-                      Not available only
-                    </SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
-
-              <div>
-                <Label>Bookable</Label>
-                <Select>
-                  <SelectTrigger className="w-[180px]">
-                    <SelectValue placeholder="bookable" />
-                  </SelectTrigger>
-                  <SelectContent className="overflow-y-auto max-h-[30rem]">
-                    <SelectItem value="all">All</SelectItem>
-                    <SelectItem value="available">Bookable only</SelectItem>
-                    <SelectItem value="not_available">
-                      Not bookable only
-                    </SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
-            </DialogDescription>
-          </DialogHeader>
-          <DialogFooter>
-            <Button type="submit" className="transition duration-300 ease-in-out hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500">Filter</Button>
-          </DialogFooter>
+            </form>
+          </Form>
         </DialogContent>
       </Dialog>
     </>

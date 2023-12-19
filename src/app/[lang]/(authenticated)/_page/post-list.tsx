@@ -1,41 +1,18 @@
 
 
-import { Badge } from "@/components/ui/badge";
-import { Button, buttonVariants } from "@/components/ui/button";
-import Image from "next/image";
-import Link from "next/link";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { AdjustmentsHorizontalIcon } from "@heroicons/react/24/solid";
 
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import { Separator } from "@/components/ui/separator";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
-import Review from "@/components/review";
-import Title from "@/components/typography/Title";
-import { PostType } from "@/types/types";
-import { Suspense } from "react";
-import PostSkeleton from "@/components/spinner/post-skeleton";
-import Search from "./search";
-import Filter from "./filter";
-import Sort from "./sort";
 import { CarCard } from "@/components/CarCard";
+import PostSkeleton from "@/components/spinner/post-skeleton";
+import Title from "@/components/typography/Title";
+import { Separator } from "@/components/ui/separator";
 import { Locale } from "@/i18n.config";
 import { getDictionary } from "@/lib/dictionary";
-import TestSearch from "./test-search";
+import { PostType } from "@/types/types";
+import { Suspense } from "react";
+import Filter from "./filter";
+import Search from "./search";
+import Sort from "./sort";
+import Reset from "./reset";
 
 
 // async function getData(searchParams?:{[key: string]: string | string[] | undefined}) {
@@ -90,6 +67,7 @@ export default async function PostList({ lang, searchParams }: { lang: Locale, s
   const data: PostType[] = await getData(searchParams);
 
   const dict = await getDictionary(lang)
+  
 
   return (
     <>
@@ -102,6 +80,7 @@ export default async function PostList({ lang, searchParams }: { lang: Locale, s
           <div className="gap-2 flex w-full md:w-fit justify-between md:justify-normal">
             <Filter />
             <Sort />
+            <Reset/>
           </div>
         </div>
       </Suspense>

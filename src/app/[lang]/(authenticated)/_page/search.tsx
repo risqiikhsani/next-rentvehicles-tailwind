@@ -21,9 +21,10 @@ export default function Search() {
     formState: { errors,isSubmitting },
     reset,
   } = useForm<SearchInput>();
-  const router = useRouter()
+  const {replace} = useRouter()
   const pathname = usePathname()
-  const searchParams = useSearchParams()!
+  const searchParams = useSearchParams()
+
  
   // Get a new searchParams string by merging the current
   // searchParams with a provided key/value pair
@@ -38,11 +39,11 @@ export default function Search() {
   )
 
 
-
+    
 
   const onSubmit: SubmitHandler<SearchInput> = async (data) => {
     console.log("Submitted data:", );
-    router.push(pathname + '?' + createQueryString('search', data.text))
+    replace(pathname + '?' + createQueryString('search', data.text))
   };
 
   return (
@@ -54,7 +55,6 @@ export default function Search() {
             type="submit"
             className="transition duration-300 ease-in-out hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500"
           >
-            {isSubmitting && <Loader />}
             Search
           </Button>
         </div>
