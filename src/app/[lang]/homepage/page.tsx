@@ -12,6 +12,7 @@ import AnimatedFramerX from "@/components/animatedFramerX";
 import LocaleSwitcher from "@/components/locale-switcher";
 import { getDictionary } from "@/lib/dictionary";
 import { Locale } from "@/i18n.config";
+import CustomLink from "@/components/CustomLink";
 
 
 const reviews = [
@@ -247,6 +248,7 @@ export default async function Page({
         </div>
       </AnimatedFramerY>
       <div className="flex flex-col items-center justify-center p-2 md:h-screen md:bg-green-100 dark:bg-inherit">
+        <CustomLink href="/public/search" lang={lang}>
         <div className="h-fit flex justify-center  md:items-center p-2 md:p-10 rounded-2xl shadow-xl hover:cursor-pointer transition ease-in-out delay-150 bg-blue-500 hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500 duration-300">
           <h1 className="text-lg md:text-6xl font-bold text-center my-5">
             {dict.homepage.button_title}
@@ -266,6 +268,7 @@ export default async function Page({
             />
           </svg>
         </div>
+        </CustomLink>
         <p className="my-10 md:text-3xl font-light">
           {dict.homepage.button_description}
         </p>
