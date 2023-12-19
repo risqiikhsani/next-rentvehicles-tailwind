@@ -13,9 +13,6 @@ export default function Page({ params, searchParams }: Props) {
     const keyString = Object.entries(searchParams || {})
         .map(([key, value]) => `${key}=${value}`)
         .join('&');
-
-
-
     return (
         <div className="container">
             <Suspense key={params.lang + (keyString ? `&${keyString}` : '')} fallback={<CircleLoader />}>

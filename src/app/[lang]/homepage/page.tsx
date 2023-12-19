@@ -176,7 +176,7 @@ export default async function Page({
               </h1>
 
               <p className="hero__subtitle">
-                {dict.homepage.hero2_title}
+                {dict.homepage.hero2_description}
               </p>
             </div>
           </AnimatedFramerX>
@@ -240,7 +240,7 @@ export default async function Page({
               </h1>
 
               <p className="hero__subtitle">
-                {dict.homepage.hero3_title}
+                {dict.homepage.hero3_description}
               </p>
             </div>
           </AnimatedFramerX>
