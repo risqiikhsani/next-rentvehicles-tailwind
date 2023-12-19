@@ -30,6 +30,7 @@ import api from "@/lib/axios";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import { Input } from "@/components/ui/input";
+import Loader from "@/components/spinner/Loader";
 
 type Inputs = {
     status: string;
@@ -41,7 +42,7 @@ export default function ReadyToPickup({text,data}:{text:string,data:RentType}) {
     register,
     handleSubmit,
     watch,
-    formState: { errors },
+    formState: { errors,isSubmitting },
   } = useForm<Inputs>();
 
 
@@ -85,7 +86,9 @@ export default function ReadyToPickup({text,data}:{text:string,data:RentType}) {
             <Input type="hidden" {...register("status")} defaultValue="ReadyToPickup"/>
           <DialogFooter>
             <DialogClose asChild className="sm:justify-start">
-              <Button type="submit">Confirm</Button>
+              <Button type="submit">
+                {isSubmitting && <Loader/>}
+                Confirm</Button>
             </DialogClose>
           </DialogFooter>
           </form>

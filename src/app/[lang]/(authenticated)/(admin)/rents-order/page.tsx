@@ -14,7 +14,7 @@ import { Badge } from "@/components/ui/badge";
 import { Locale } from "@/i18n.config";
 import { getDictionary } from "@/lib/dictionary";
 import { formatTimestamp } from "@/lib/helpers";
-import { cookies } from 'next/headers';
+import { cookies } from "next/headers";
 import ActionNew from "./_page/ActionNew";
 import Detail from "./_page/Detail";
 import { HoverCardPost } from "@/components/hover-card-post";
@@ -26,7 +26,7 @@ async function getData() {
     cache: "no-store",
     headers: {
       "Content-Type": "application/json",
-      "Authorization": `Bearer ${cookies().get("accesstoken")?.value}`,
+      Authorization: `Bearer ${cookies().get("accesstoken")?.value}`,
     },
   });
 
@@ -38,14 +38,16 @@ async function getData() {
   return res.json();
 }
 
-export default async function Page({params}:{params:{lang:Locale}}) {
+export default async function Page({ params }: { params: { lang: Locale } }) {
   const data: RentType[] = await getData();
-  const dict = await getDictionary(params.lang)
-
+  const dict = await getDictionary(params.lang);
 
   return (
     <>
-      <Title title={dict.rent_orders.title} text={dict.rent_orders.description} />
+      <Title
+        title={dict.rent_orders.title}
+        text={dict.rent_orders.description}
+      />
 
       <Table>
         <TableCaption>A list of your recent invoices.</TableCaption>
@@ -55,17 +57,23 @@ export default async function Page({params}:{params:{lang:Locale}}) {
             <TableHead className="hidden md:table-cell">Post</TableHead>
             <TableHead className="hidden md:table-cell">Customer</TableHead>
             <TableHead className="hidden md:table-cell">Rent Date</TableHead>
-            <TableHead >Rent Days</TableHead>
-            <TableHead className="hidden md:table-cell">Remaining Days</TableHead>
-            <TableHead >Total price</TableHead>
-            <TableHead className="hidden md:table-cell">Payment Status</TableHead>
-            <TableHead >Rent Status</TableHead>
-            <TableHead className="hidden md:table-cell">Cancelled by user</TableHead>
+            <TableHead>Rent Days</TableHead>
+            <TableHead className="hidden md:table-cell">
+              Remaining Days
+            </TableHead>
+            <TableHead>Total price</TableHead>
+            <TableHead className="hidden md:table-cell">
+              Payment Status
+            </TableHead>
+            <TableHead>Rent Status</TableHead>
+            <TableHead className="hidden md:table-cell">
+              Cancelled by user
+            </TableHead>
 
-            <TableHead >Action</TableHead>
+            <TableHead>Action</TableHead>
             {/* <TableHead className="hidden md:table-cell">Files</TableHead>
             <TableHead className="hidden md:table-cell">Note (optional)</TableHead> */}
-            <TableHead >Detail</TableHead>
+            <TableHead>Detail</TableHead>
             {/* <TableHead className="table-cell md:hidden">More</TableHead> */}
           </TableRow>
         </TableHeader>
@@ -73,27 +81,47 @@ export default async function Page({params}:{params:{lang:Locale}}) {
           {data &&
             data.map((a: RentType, index: number) => (
               <TableRow key={index}>
-                <TableCell className="font-medium hidden md:table-cell">{a.ID}</TableCell>
-                <TableCell className="hidden md:table-cell">
-                  <HoverCardPost id={a.post_id.toString()}/>
+                <TableCell className="font-medium hidden md:table-cell">
+                  {a.ID}
                 </TableCell>
                 <TableCell className="hidden md:table-cell">
-                  <HoverCardUser id={a.user_id.toString()}/>
+                  <HoverCardPost id={a.post_id.toString()} />
                 </TableCell>
-                <TableCell className="hidden md:table-cell">{`${formatTimestamp(a.start_date)} - ${formatTimestamp(a.end_date)}`}</TableCell>
+                <TableCell className="hidden md:table-cell">
+                  <HoverCardUser id={a.user_id.toString()} />
+                </TableCell>
+                <TableCell className="hidden md:table-cell">{`${formatTimestamp(
+                  a.start_date
+                )} - ${formatTimestamp(a.end_date)}`}</TableCell>
                 <TableCell>{a.RentDetail.rent_days}</TableCell>
 
                 <TableCell className="hidden md:table-cell">-</TableCell>
-                <TableCell >{a.RentDetail.estimated_final_price}</TableCell>
-                <TableCell className="hidden md:table-cell">{a.RentDetail.is_paid ? "paid" : "not paid"}</TableCell>
-                <TableCell>
-                  <Badge className={a.RentDetail.status == "Declined" ? "bg-red-600 hover:bg-red-700" : "bg-green-600 hover:bg-green-700"}>
-                    {a.RentDetail.status}
-                  </Badge>
+                <TableCell>{a.RentDetail.estimated_final_price}</TableCell>
+                <TableCell className="hidden md:table-cell">
+                  {a.RentDetail.is_paid ? "paid" : "not paid"}
                 </TableCell>
-                <TableCell className="text-center hidden md:table-cell">{a.is_cancelled ? "true" : "-"}</TableCell>
                 <TableCell>
-                  <ActionNew data={a}/>
+                  {!a.is_cancelled && (
+                    <Badge
+                      className={
+                        a.RentDetail.status == "Declined"
+                          ? "bg-red-600 hover:bg-red-700"
+                          : "bg-green-600 hover:bg-green-700"
+                      }
+                    >
+                      {a.RentDetail.status}
+                    </Badge>
+                  )}
+                </TableCell>
+                <TableCell className="text-center hidden md:table-cell">
+                  {a.is_cancelled && (
+                    <Badge className="bg-red-600 hover:bg-red-700">
+                      Cancelled
+                    </Badge>
+                  )}
+                </TableCell>
+                <TableCell>
+                  <ActionNew data={a} />
                 </TableCell>
 
                 {/* <TableCell >
@@ -105,7 +133,7 @@ export default async function Page({params}:{params:{lang:Locale}}) {
                 <TableCell className="hidden md:table-cell">
                   <Note data={a} />
                 </TableCell> */}
-                <TableCell >
+                <TableCell>
                   <Detail data={a} />
                 </TableCell>
                 {/* <TableCell className="table-cell md:hidden" >
@@ -128,7 +156,11 @@ export default async function Page({params}:{params:{lang:Locale}}) {
               </TableRow>
             ))}
 
-          {!data && <TableRow><p>no data found.</p></TableRow>}
+          {!data && (
+            <TableRow>
+              <p>no data found.</p>
+            </TableRow>
+          )}
         </TableBody>
       </Table>
     </>
