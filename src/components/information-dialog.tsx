@@ -24,7 +24,7 @@ export default function InformationDialog({
         <DialogContent>
           <DialogHeader>
             <DialogTitle>{title}</DialogTitle>
-            <DialogDescription>{description}</DialogDescription>
+                <p className="whitespace-pre-line">{description}</p>
           </DialogHeader>
         </DialogContent>
       </Dialog>

@@ -20,6 +20,7 @@ import { PostType } from "@/types/types";
 import Buttons from "./_page/Buttons";
 import Images from "./_page/images";
 import { HoverCardUser } from "@/components/hover-card-user";
+import InformationDialog from "@/components/information-dialog";
 
 async function getData(postId: string) {
   // const res = await fetch('http://localhost:8080/api/posts',{ next: { tags: ['posts'] } })
@@ -57,48 +58,48 @@ export default async function Page({
           <div className="relative">
             <div className="md:sticky top-20 left-0 ">
               <div className="block md:hidden my-2">
-              <Table className="border">
-                <TableBody>
-                  <TableRow className="hover:bg-inherit">
-                    <TableCell className="font-medium">
-                      <Badge variant="outline" className="my-2">
-                        {dictionary.post_detail.brand}
-                      </Badge>
-                    </TableCell>
-                    <TableCell className="text-left text-xl">
-                      {data.brand}
-                    </TableCell>
-                  </TableRow>
-                  <TableRow className="hover:bg-inherit">
-                    <TableCell className="font-medium">
-                      <Badge variant="outline" className="my-2">
-                        {dictionary.post_detail.model}
-                      </Badge>
-                    </TableCell>
-                    <TableCell className="text-left text-xl">
-                      {data.brand_model}
-                    </TableCell>
-                  </TableRow>
-                  <TableRow className="hover:bg-inherit">
-                    <TableCell className="font-medium">
-                      <Badge variant="outline" className="my-2">
-                        {dictionary.post_detail.year}
-                      </Badge>
-                    </TableCell>
-                    <TableCell className="text-left">{data.year}</TableCell>
-                  </TableRow>
-                  <TableRow className="hover:bg-inherit">
-                    <TableCell className="font-medium">
-                      <Badge variant="outline" className="my-2">
-                        {dictionary.post_detail.car_type}
-                      </Badge>
-                    </TableCell>
-                    <TableCell className="text-left">
-                      {data.vehicle_type}
-                    </TableCell>
-                  </TableRow>
-                </TableBody>
-              </Table>          
+                <Table className="border">
+                  <TableBody>
+                    <TableRow className="hover:bg-inherit">
+                      <TableCell className="font-medium">
+                        <Badge variant="outline" className="my-2">
+                          {dictionary.post_detail.brand}
+                        </Badge>
+                      </TableCell>
+                      <TableCell className="text-left text-xl">
+                        {data.brand}
+                      </TableCell>
+                    </TableRow>
+                    <TableRow className="hover:bg-inherit">
+                      <TableCell className="font-medium">
+                        <Badge variant="outline" className="my-2">
+                          {dictionary.post_detail.model}
+                        </Badge>
+                      </TableCell>
+                      <TableCell className="text-left text-xl">
+                        {data.brand_model}
+                      </TableCell>
+                    </TableRow>
+                    <TableRow className="hover:bg-inherit">
+                      <TableCell className="font-medium">
+                        <Badge variant="outline" className="my-2">
+                          {dictionary.post_detail.year}
+                        </Badge>
+                      </TableCell>
+                      <TableCell className="text-left">{data.year}</TableCell>
+                    </TableRow>
+                    <TableRow className="hover:bg-inherit">
+                      <TableCell className="font-medium">
+                        <Badge variant="outline" className="my-2">
+                          {dictionary.post_detail.car_type}
+                        </Badge>
+                      </TableCell>
+                      <TableCell className="text-left">
+                        {data.vehicle_type}
+                      </TableCell>
+                    </TableRow>
+                  </TableBody>
+                </Table>
               </div>
               <Image
                 className="rounded-xl"
@@ -133,50 +134,50 @@ export default async function Page({
           <div className="col-span-2 mt-0 overflow-y-auto ">
             <div className="flex flex-col justify-end gap-4">
               <div className="hidden md:block">
-              <Table className="border">
-                <TableBody>
-                  <TableRow className="hover:bg-inherit">
-                    <TableCell className="font-medium">
-                      <Badge variant="outline" className="my-2">
-                        {dictionary.post_detail.brand}
-                      </Badge>
-                    </TableCell>
-                    <TableCell className="text-left text-xl">
-                      {data.brand}
-                    </TableCell>
-                  </TableRow>
-                  <TableRow className="hover:bg-inherit">
-                    <TableCell className="font-medium">
-                      <Badge variant="outline" className="my-2">
-                        {dictionary.post_detail.model}
-                      </Badge>
-                    </TableCell>
-                    <TableCell className="text-left text-xl">
-                      {data.brand_model}
-                    </TableCell>
-                  </TableRow>
-                  <TableRow className="hover:bg-inherit">
-                    <TableCell className="font-medium">
-                      <Badge variant="outline" className="my-2">
-                        {dictionary.post_detail.year}
-                      </Badge>
-                    </TableCell>
-                    <TableCell className="text-left">{data.year}</TableCell>
-                  </TableRow>
-                  <TableRow className="hover:bg-inherit">
-                    <TableCell className="font-medium">
-                      <Badge variant="outline" className="my-2">
-                        {dictionary.post_detail.car_type}
-                      </Badge>
-                    </TableCell>
-                    <TableCell className="text-left">
-                      {data.vehicle_type}
-                    </TableCell>
-                  </TableRow>
-                </TableBody>
-              </Table>
+                <Table className="border">
+                  <TableBody>
+                    <TableRow className="hover:bg-inherit">
+                      <TableCell className="font-medium">
+                        <Badge variant="outline" className="my-2">
+                          {dictionary.post_detail.brand}
+                        </Badge>
+                      </TableCell>
+                      <TableCell className="text-left text-xl">
+                        {data.brand}
+                      </TableCell>
+                    </TableRow>
+                    <TableRow className="hover:bg-inherit">
+                      <TableCell className="font-medium">
+                        <Badge variant="outline" className="my-2">
+                          {dictionary.post_detail.model}
+                        </Badge>
+                      </TableCell>
+                      <TableCell className="text-left text-xl">
+                        {data.brand_model}
+                      </TableCell>
+                    </TableRow>
+                    <TableRow className="hover:bg-inherit">
+                      <TableCell className="font-medium">
+                        <Badge variant="outline" className="my-2">
+                          {dictionary.post_detail.year}
+                        </Badge>
+                      </TableCell>
+                      <TableCell className="text-left">{data.year}</TableCell>
+                    </TableRow>
+                    <TableRow className="hover:bg-inherit">
+                      <TableCell className="font-medium">
+                        <Badge variant="outline" className="my-2">
+                          {dictionary.post_detail.car_type}
+                        </Badge>
+                      </TableCell>
+                      <TableCell className="text-left">
+                        {data.vehicle_type}
+                      </TableCell>
+                    </TableRow>
+                  </TableBody>
+                </Table>
               </div>
-              
+
               <div className="grid gap-4 md:grid-cols-1 lg:grid-cols-3 my-4">
                 <Card>
                   <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
@@ -308,9 +309,11 @@ export default async function Page({
                         <p className="text-sm font-medium leading-none">
                           {dictionary.post_detail.transmission}
                         </p>
-                        <p className="text-sm text-muted-foreground">
-                          Learn more about transmission.
-                        </p>
+
+                        <InformationDialog
+                          title={dictionary.post_detail.transmission_secondary_title}
+                          description={dictionary.post_detail.transmission_secondary_description}
+                        />
                       </div>
                       <div className="ml-auto font-medium">
                         {data.transmission}
@@ -328,9 +331,10 @@ export default async function Page({
                         <p className="text-sm font-medium leading-none">
                           {dictionary.post_detail.fuel_type}
                         </p>
-                        <p className="text-sm text-muted-foreground">
-                          Learn more about fuel types.
-                        </p>
+                        <InformationDialog
+                          title={dictionary.post_detail.fuel_type_secondary_title}
+                          description={dictionary.post_detail.fuel_type_secondary_description}
+                        />
                       </div>
                       <div className="ml-auto font-medium">
                         {data.fuel_type}
