@@ -1,6 +1,3 @@
-
-
-
 import { CarCard } from "@/components/CarCard";
 import PostSkeleton from "@/components/spinner/post-skeleton";
 import Title from "@/components/typography/Title";
@@ -13,7 +10,6 @@ import Filter from "./filter";
 import Search from "./search";
 import Sort from "./sort";
 import Reset from "./reset";
-
 
 // async function getData(searchParams?:{[key: string]: string | string[] | undefined}) {
 //   if(searchParams){
@@ -36,8 +32,11 @@ import Reset from "./reset";
 //   return res.json();
 // }
 
-async function getData(searchParams?: { [key: string]: string | string[] | undefined }) {
-  const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
+async function getData(searchParams?: {
+  [key: string]: string | string[] | undefined;
+}) {
+  const delay = (ms: number) =>
+    new Promise((resolve) => setTimeout(resolve, ms));
 
   await delay(2000); // Introduce a delay of 2 seconds before fetching data
 
@@ -46,7 +45,10 @@ async function getData(searchParams?: { [key: string]: string | string[] | undef
   if (searchParams) {
     for (const [key, value] of Object.entries(searchParams)) {
       if (value) {
-        url.searchParams.append(key, Array.isArray(value) ? value.join(',') : value);
+        url.searchParams.append(
+          key,
+          Array.isArray(value) ? value.join(",") : value
+        );
       }
     }
   }
@@ -63,29 +65,17 @@ async function getData(searchParams?: { [key: string]: string | string[] | undef
   return res.json();
 }
 
-export default async function PostList({ lang, searchParams }: { lang: Locale, searchParams?: { [key: string]: string | string[] | undefined } }) {
+export default async function PostList({
+  lang,
+  searchParams,
+}: {
+  lang: Locale;
+  searchParams?: { [key: string]: string | string[] | undefined };
+}) {
   const data: PostType[] = await getData(searchParams);
-
-  const dict = await getDictionary(lang)
-  
 
   return (
     <>
-
-      <Title title={dict.home.title} text={dict.home.description} />
-
-      <Suspense fallback={<p>Loading...</p>}>
-        <div className="flex flex-col md:flex-row my-5 md:justify-between gap-2">
-          <Search />
-          <div className="gap-2 flex w-full md:w-fit justify-between md:justify-normal">
-            <Filter />
-            <Sort />
-            <Reset/>
-          </div>
-        </div>
-      </Suspense>
-
-      <Separator className="my-6" />
       <div className="grid md:grid-cols-3 gap-4 justify-items-center">
         <Suspense
           fallback={

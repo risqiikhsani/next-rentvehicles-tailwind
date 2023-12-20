@@ -54,11 +54,8 @@ export default async function Page({
         <Badge variant="outline">{data.role}</Badge>
         <h1 className="my-4 text-2xl">{data.name}</h1>
         <h2>public username : {data.publicUsername}</h2>
-        
-
         <Table>
           <TableCaption>User detail</TableCaption>
-
           <TableBody>
             <TableRow>
               <TableCell className="font-medium">About</TableCell>

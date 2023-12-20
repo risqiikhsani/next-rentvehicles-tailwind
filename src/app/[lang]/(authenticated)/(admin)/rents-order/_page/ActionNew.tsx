@@ -53,7 +53,7 @@ export default function ActionNew({ data }: { data: RentType }) {
           <DropdownMenuItem>
             Set time when user returned back the car
             <DropdownMenuShortcut>⌘+T</DropdownMenuShortcut>
-          </DropdownMenuItem>
+          </DropdownMenuItem>   
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
         <DropdownMenuSub>
