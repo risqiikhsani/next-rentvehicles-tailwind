@@ -1,12 +1,7 @@
 import Image from "next/image";
 
 import Title from "@/components/typography/Title";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableRow
-} from "@/components/ui/table";
+import { Table, TableBody, TableCell, TableRow } from "@/components/ui/table";
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
@@ -15,7 +10,7 @@ import {
   CardContent,
   CardDescription,
   CardHeader,
-  CardTitle
+  CardTitle,
 } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { Locale } from "@/i18n.config";
@@ -24,7 +19,7 @@ import { getDictionary } from "@/lib/dictionary";
 import { PostType } from "@/types/types";
 import Buttons from "./_page/Buttons";
 import Images from "./_page/images";
-
+import { HoverCardUser } from "@/components/hover-card-user";
 
 async function getData(postId: string) {
   // const res = await fetch('http://localhost:8080/api/posts',{ next: { tags: ['posts'] } })
@@ -50,9 +45,6 @@ export default async function Page({
 
   const data = await getData(slug);
   const dictionary = await getDictionary(params.lang);
-
-
-
 
   const PostDetail = (data: PostType) => {
     return (
@@ -130,7 +122,7 @@ export default async function Page({
               <Images data={data} />
 
               <div className="hidden md:block">
-                <Separator className="my-4"/>
+                <Separator className="my-4" />
                 <Buttons data={data} />
               </div>
             </div>
@@ -187,11 +179,13 @@ export default async function Page({
                     <CardTitle className="text-sm font-medium">
                       {dictionary.post_detail.price_per_day} (1 day)
                     </CardTitle>
-
                   </CardHeader>
                   <CardContent>
                     <p className="text-2xl font-bold">
-                      {localeCurrency(data.price_per_day_after_discount, params.lang)}
+                      {localeCurrency(
+                        data.price_per_day_after_discount,
+                        params.lang
+                      )}
                     </p>
                     {data.discount_percentage != 0 && (
                       <p className="font-light line-through">
@@ -213,7 +207,10 @@ export default async function Page({
                   </CardHeader>
                   <CardContent>
                     <p className="text-2xl font-bold">
-                      {localeCurrency(data.price_per_week_after_discount, params.lang)}
+                      {localeCurrency(
+                        data.price_per_week_after_discount,
+                        params.lang
+                      )}
                     </p>
                     {data.discount_percentage != 0 && (
                       <p className="font-light line-through">
@@ -235,7 +232,10 @@ export default async function Page({
                   </CardHeader>
                   <CardContent>
                     <p className="text-2xl font-bold">
-                      {localeCurrency(data.price_per_month_after_discount, params.lang)}
+                      {localeCurrency(
+                        data.price_per_month_after_discount,
+                        params.lang
+                      )}
                     </p>
                     {data.discount_percentage != 0 && (
                       <p className="font-light line-through ">
@@ -260,7 +260,14 @@ export default async function Page({
                       </Badge>
                     </TableCell>
                     <TableCell className="text-left">
-                      {data.available ? "true" : "false"}
+                      <Badge variant="secondary">
+                        {data.available ? "available" : "not available"}
+                        {data.available ? (
+                          <div className="w-2 h-2 rounded-full bg-green-600 ml-2"></div>
+                        ) : (
+                          <div className="w-2 h-2 rounded-full ml-2 bg-red-600"></div>
+                        )}
+                      </Badge>
                     </TableCell>
                   </TableRow>
                   <TableRow className="hover:bg-inherit">
@@ -269,16 +276,16 @@ export default async function Page({
                         {dictionary.post_detail.poster}
                       </Badge>
                     </TableCell>
-                    <TableCell className="text-left">{data.UserID}</TableCell>
+                    <TableCell className="text-left">
+                      <HoverCardUser id={data.UserID.toString()}/>
+                    </TableCell>
                   </TableRow>
                 </TableBody>
               </Table>
 
               <Card>
                 <CardHeader>
-                  <CardTitle>
-                    {dictionary.post_detail.specification}
-                  </CardTitle>
+                  <CardTitle>{dictionary.post_detail.specification}</CardTitle>
                   <CardDescription>
                     {dictionary.post_detail.details}
                   </CardDescription>
@@ -371,7 +378,7 @@ export default async function Page({
                       </Avatar>
                       <div className="ml-4 space-y-1">
                         <p className="text-sm font-medium leading-none">
-                          {dictionary['post_detail'].available_color}
+                          {dictionary["post_detail"].available_color}
                         </p>
                         <p className="text-sm text-muted-foreground">
                           Available colors to pick from
