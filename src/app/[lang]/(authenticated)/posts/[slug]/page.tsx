@@ -56,7 +56,84 @@ export default async function Page({
         <div className="grid md:grid-cols-3 gap-4 ">
           <div className="relative">
             <div className="md:sticky top-20 left-0 ">
-              <Table className="block md:hidden w-full my-2">
+              <div className="block md:hidden my-2">
+              <Table className="border">
+                <TableBody>
+                  <TableRow className="hover:bg-inherit">
+                    <TableCell className="font-medium">
+                      <Badge variant="outline" className="my-2">
+                        {dictionary.post_detail.brand}
+                      </Badge>
+                    </TableCell>
+                    <TableCell className="text-left text-xl">
+                      {data.brand}
+                    </TableCell>
+                  </TableRow>
+                  <TableRow className="hover:bg-inherit">
+                    <TableCell className="font-medium">
+                      <Badge variant="outline" className="my-2">
+                        {dictionary.post_detail.model}
+                      </Badge>
+                    </TableCell>
+                    <TableCell className="text-left text-xl">
+                      {data.brand_model}
+                    </TableCell>
+                  </TableRow>
+                  <TableRow className="hover:bg-inherit">
+                    <TableCell className="font-medium">
+                      <Badge variant="outline" className="my-2">
+                        {dictionary.post_detail.year}
+                      </Badge>
+                    </TableCell>
+                    <TableCell className="text-left">{data.year}</TableCell>
+                  </TableRow>
+                  <TableRow className="hover:bg-inherit">
+                    <TableCell className="font-medium">
+                      <Badge variant="outline" className="my-2">
+                        {dictionary.post_detail.car_type}
+                      </Badge>
+                    </TableCell>
+                    <TableCell className="text-left">
+                      {data.vehicle_type}
+                    </TableCell>
+                  </TableRow>
+                </TableBody>
+              </Table>          
+              </div>
+              <Image
+                className="rounded-xl"
+                src={data.MainImage.url}
+                alt="pic"
+                width={500}
+                height={500}
+              />
+
+              {/* <div className="flex overflow-x-auto w-fit">
+              {data.Images && data.Images.map((a,i) => (
+                <Image
+                  key={i}
+                  className="rounded-xl m-4 w-20 h-20"
+                  src={a.url}
+                  alt="pic"
+                  width={500}
+                  height={500}
+                />
+              ))}
+              </div> */}
+
+              <Images data={data} />
+
+              <div className="hidden md:block">
+                <Separator className="my-4" />
+                <Buttons data={data} />
+              </div>
+            </div>
+          </div>
+
+          <div className="col-span-2 mt-0 overflow-y-auto ">
+            <div className="flex flex-col justify-end gap-4">
+              <div className="hidden md:block">
+              <Table className="border">
                 <TableBody>
                   <TableRow className="hover:bg-inherit">
                     <TableCell className="font-medium">
@@ -98,81 +175,8 @@ export default async function Page({
                   </TableRow>
                 </TableBody>
               </Table>
-              <Image
-                className="rounded-xl"
-                src={data.MainImage.url}
-                alt="pic"
-                width={500}
-                height={500}
-              />
-
-              {/* <div className="flex overflow-x-auto w-fit">
-              {data.Images && data.Images.map((a,i) => (
-                <Image
-                  key={i}
-                  className="rounded-xl m-4 w-20 h-20"
-                  src={a.url}
-                  alt="pic"
-                  width={500}
-                  height={500}
-                />
-              ))}
-              </div> */}
-
-              <Images data={data} />
-
-              <div className="hidden md:block">
-                <Separator className="my-4" />
-                <Buttons data={data} />
               </div>
-            </div>
-          </div>
-
-          <div className="col-span-2 mt-0 overflow-y-auto ">
-            <Table className="max-w-sm hidden md:block">
-              <TableBody>
-                <TableRow className="hover:bg-inherit">
-                  <TableCell className="font-medium">
-                    <Badge variant="outline" className="my-2">
-                      {dictionary.post_detail.brand}
-                    </Badge>
-                  </TableCell>
-                  <TableCell className="text-left text-xl">
-                    {data.brand}
-                  </TableCell>
-                </TableRow>
-                <TableRow className="hover:bg-inherit">
-                  <TableCell className="font-medium">
-                    <Badge variant="outline" className="my-2">
-                      {dictionary.post_detail.model}
-                    </Badge>
-                  </TableCell>
-                  <TableCell className="text-left text-xl">
-                    {data.brand_model}
-                  </TableCell>
-                </TableRow>
-                <TableRow className="hover:bg-inherit">
-                  <TableCell className="font-medium">
-                    <Badge variant="outline" className="my-2">
-                      {dictionary.post_detail.year}
-                    </Badge>
-                  </TableCell>
-                  <TableCell className="text-left">{data.year}</TableCell>
-                </TableRow>
-                <TableRow className="hover:bg-inherit">
-                  <TableCell className="font-medium">
-                    <Badge variant="outline" className="my-2">
-                      {dictionary.post_detail.car_type}
-                    </Badge>
-                  </TableCell>
-                  <TableCell className="text-left">
-                    {data.vehicle_type}
-                  </TableCell>
-                </TableRow>
-              </TableBody>
-            </Table>
-
-            <div className="flex flex-col justify-end gap-4">
+              
               <div className="grid gap-4 md:grid-cols-1 lg:grid-cols-3 my-4">
                 <Card>
                   <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
@@ -251,7 +255,7 @@ export default async function Page({
                 </Card>
               </div>
 
-              <Table className="max-w-sm">
+              <Table className="border">
                 <TableBody>
                   <TableRow className="hover:bg-inherit">
                     <TableCell className="font-medium">
@@ -277,7 +281,7 @@ export default async function Page({
                       </Badge>
                     </TableCell>
                     <TableCell className="text-left">
-                      <HoverCardUser id={data.UserID.toString()}/>
+                      <HoverCardUser id={data.UserID.toString()} />
                     </TableCell>
                   </TableRow>
                 </TableBody>
@@ -348,7 +352,7 @@ export default async function Page({
                           How many seats inside
                         </p>
                       </div>
-                      <div className="ml-auto font-medium">2</div>
+                      <div className="ml-auto font-medium">unknown</div>
                     </div>
                     <div className="flex items-center">
                       <Avatar className="h-9 w-9 items-center justify-center space-y-0 border dark:bg-slate-400">
@@ -366,7 +370,7 @@ export default async function Page({
                           Max number of people fits in
                         </p>
                       </div>
-                      <div className="ml-auto font-medium">2</div>
+                      <div className="ml-auto font-medium">unknown</div>
                     </div>
                     <div className="flex items-center">
                       <Avatar className="h-9 w-9 items-center justify-center space-y-0 border dark:bg-slate-400">
