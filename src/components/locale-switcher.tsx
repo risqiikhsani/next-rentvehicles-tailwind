@@ -23,6 +23,17 @@ export default function LocaleSwitcher() {
     return segments.join('/')
   }
 
+  const convertLocaleName = (locale: string) => {
+    switch (locale) {
+      case 'en':
+        return 'English'
+      case 'id':
+        return 'Indonesia'
+      default:
+        return locale
+    }
+  }
+
   return (
 
     <DropdownMenu>
@@ -36,7 +47,7 @@ export default function LocaleSwitcher() {
         {i18n.locales.map((locale) => {
           return (
             <DropdownMenuItem asChild key={locale}>
-              <Link href={redirectedPathName(locale)}>{locale}</Link>
+              <Link href={redirectedPathName(locale)}>{convertLocaleName(locale)}</Link>
             </DropdownMenuItem>
           )
         })}
