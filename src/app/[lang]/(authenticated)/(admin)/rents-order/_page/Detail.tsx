@@ -20,9 +20,11 @@ import {
     TableRow,
 } from "@/components/ui/table"
 import { formatTimestamp } from "@/lib/helpers";
+import { Locale } from "@/i18n.config";
+import localeCurrency from "@/lib/currency";
 
 
-export default function Detail({ data }: { data: RentType }) {
+export default function Detail({ data,lang }: { data: RentType,lang:Locale }) {
     return (
         <>
             <Dialog>
@@ -34,7 +36,7 @@ export default function Detail({ data }: { data: RentType }) {
                 <DialogContent className="lg:max-w-screen-lg overflow-y-scroll max-h-screen">
                     <DialogHeader>
                         <DialogTitle>Rent</DialogTitle>
-                        <DialogDescription>
+                        
                             <Table>
                                 <TableHeader className="text-left">
                                     <TableRow className="bg-cyan-300">
@@ -89,11 +91,11 @@ export default function Detail({ data }: { data: RentType }) {
                                     </TableRow>
                                 </TableBody>
                             </Table>
-                        </DialogDescription>
+                        
                     </DialogHeader>
                     <DialogHeader>
                         <DialogTitle>Rent Detail</DialogTitle>
-                        <DialogDescription>
+                        
                             <Table>
                                 <TableHeader className="text-left">
                                     <TableRow className="bg-cyan-300">
@@ -136,19 +138,19 @@ export default function Detail({ data }: { data: RentType }) {
                                     </TableRow>
                                     <TableRow>
                                         <TableCell className="font-medium">Estimated final price</TableCell>
-                                        <TableCell>{data.RentDetail.estimated_final_price}</TableCell>
+                                        <TableCell>{localeCurrency(data.RentDetail.estimated_final_price,lang)}</TableCell>
                                     </TableRow>
                                     <TableRow>
                                         <TableCell className="font-medium">Estimated normal price</TableCell>
-                                        <TableCell>{data.RentDetail.estimated_normal_price}</TableCell>
+                                        <TableCell>{localeCurrency(data.RentDetail.estimated_normal_price,lang)}</TableCell>
                                     </TableRow>
                                     <TableRow>
                                         <TableCell className="font-medium">Estimated saved price</TableCell>
-                                        <TableCell>{data.RentDetail.estimated_saved_price}</TableCell>
+                                        <TableCell>{localeCurrency(data.RentDetail.estimated_saved_price,lang)}</TableCell>
                                     </TableRow>
                                 </TableBody>
                             </Table>
-                        </DialogDescription>
+                        
                     </DialogHeader>
                 </DialogContent>
             </Dialog>

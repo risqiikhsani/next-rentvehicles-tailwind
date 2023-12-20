@@ -134,7 +134,7 @@ export default async function Page({ params }: { params: { lang: Locale } }) {
                   <Note data={a} />
                 </TableCell> */}
                 <TableCell>
-                  <Detail data={a} />
+                  <Detail data={a} lang={params.lang}/>
                 </TableCell>
                 {/* <TableCell className="table-cell md:hidden" >
                   <DropdownMenu >
