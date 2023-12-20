@@ -15,7 +15,7 @@ export default function Images({ data }: { data: PostType }) {
           data.Images.map((a, i) => (
             <Image
               key={i}
-              className="rounded-xl m-4 w-20 h-20 hover:border-4 hover:border-indigo-600 hover:cursor-pointer"
+              className="rounded-sm m-2 w-24 h-24 hover:border-4 hover:border-indigo-600 hover:cursor-pointer "
               src={a.url}
               alt="pic"
               width={500}
