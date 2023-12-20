@@ -93,6 +93,8 @@ export default async function PostList({
             data.map((a: PostType, index: number) => (
               <CarCard data={a} key={index} lang={lang} />
             ))}
+
+          {data.length === 0 && <p>No posts found</p>}
         </Suspense>
       </div>
     </>

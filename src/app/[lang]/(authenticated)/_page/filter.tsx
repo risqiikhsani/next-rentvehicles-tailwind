@@ -1,13 +1,9 @@
-'use client'
+"use client";
 
 import { AdjustmentsHorizontalIcon } from "@heroicons/react/24/solid";
 
 import { Button } from "@/components/ui/button";
-import {
-  Dialog,
-  DialogContent,
-  DialogTrigger
-} from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import {
   Form,
   FormControl,
@@ -27,22 +23,26 @@ import {
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
-import { carFuelTypes, carTransmission, carTypes, manufacturers } from "@/constants";
-import { usePathname, useRouter, useSearchParams } from "next/navigation"
+import {
+  carFuelTypes,
+  carTransmission,
+  carTypes,
+  manufacturers,
+} from "@/constants";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { DialogClose } from "@radix-ui/react-dialog";
-
 
 const FormSchema = z.object({
   brand: z.string(),
   vehicle_type: z.string(),
   fuel_type: z.string(),
   transmission: z.string(),
-})
+});
 
 export default function Filter() {
-  const { replace } = useRouter()
-  const pathname = usePathname()
-  const searchParams = useSearchParams()
+  const { replace } = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
 
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
@@ -52,17 +52,17 @@ export default function Filter() {
       transmission: "all",
       fuel_type: "all",
     },
-  })
+  });
 
   function onSubmit(data: z.infer<typeof FormSchema>) {
-
     const updatedSearchParams = new URLSearchParams(searchParams.toString()); // Create a copy of searchParams
-
-    updatedSearchParams.set('filter_brand', data.brand == "all" ? "" : data.brand);
-    updatedSearchParams.set('filter_vehicle_type', data.vehicle_type == "all" ? "" : data.vehicle_type);
-    updatedSearchParams.set('filter_transmission', data.transmission == "all" ? "" : data.transmission);
-    updatedSearchParams.set('filter_fuel_type', data.fuel_type == "all" ? "" : data.fuel_type);
-
+    data.brand != "all" && updatedSearchParams.set("filter_brand", data.brand);
+    data.vehicle_type != "all" &&
+      updatedSearchParams.set("filter_vehicle_type", data.vehicle_type);
+    data.transmission != "all" &&
+      updatedSearchParams.set("filter_transmission", data.transmission);
+    data.fuel_type != "all" &&
+      updatedSearchParams.set("filter_fuel_type", data.fuel_type);
     replace(`${pathname}?${updatedSearchParams.toString()}`); // Replace URL with updated query parameters
   }
 
@@ -75,15 +75,20 @@ export default function Filter() {
         </DialogTrigger>
         <DialogContent className="overflow-y-scroll max-h-screen">
           <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="w-2/3 space-y-6">
-
+            <form
+              onSubmit={form.handleSubmit(onSubmit)}
+              className="w-2/3 space-y-6"
+            >
               <FormField
                 control={form.control}
                 name="brand"
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>brand</FormLabel>
-                    <Select onValueChange={field.onChange} defaultValue={field.value}>
+                    <Select
+                      onValueChange={field.onChange}
+                      defaultValue={field.value}
+                    >
                       <FormControl>
                         <SelectTrigger>
                           <SelectValue placeholder="Select a brand" />
@@ -109,7 +114,10 @@ export default function Filter() {
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>vehicle type</FormLabel>
-                    <Select onValueChange={field.onChange} defaultValue={field.value}>
+                    <Select
+                      onValueChange={field.onChange}
+                      defaultValue={field.value}
+                    >
                       <FormControl>
                         <SelectTrigger>
                           <SelectValue placeholder="Select a vehicle type" />
@@ -135,7 +143,10 @@ export default function Filter() {
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>fuel type</FormLabel>
-                    <Select onValueChange={field.onChange} defaultValue={field.value}>
+                    <Select
+                      onValueChange={field.onChange}
+                      defaultValue={field.value}
+                    >
                       <FormControl>
                         <SelectTrigger>
                           <SelectValue placeholder="Select a fuel type" />
@@ -161,7 +172,10 @@ export default function Filter() {
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>transmission</FormLabel>
-                    <Select onValueChange={field.onChange} defaultValue={field.value}>
+                    <Select
+                      onValueChange={field.onChange}
+                      defaultValue={field.value}
+                    >
                       <FormControl>
                         <SelectTrigger>
                           <SelectValue placeholder="Select a transmission" />
@@ -184,7 +198,6 @@ export default function Filter() {
               <DialogClose asChild>
                 <Button type="submit">Filter</Button>
               </DialogClose>
-
             </form>
           </Form>
         </DialogContent>
